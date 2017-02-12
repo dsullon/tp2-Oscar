@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b876d528aa3c4e28962e374fde51b0f1" Name="Diagram1" DisplayType="true">
+        <EntityTypeShape EntityType="TP2Model.T_GCT_PROGRAMACION_MEDICA" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GDA_ESPECIALIDAD__MEDICA" Width="1.5" PointX="5.25" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GDA_HISTORIA_CLINICA" Width="1.5" PointX="9.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GDA_PACIENTE" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_BIEN" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_EMPLEADO" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_EMPRESA" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_INMUEBLE" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_MODELO" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_MUEBLE" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_PERSONA" Width="1.5" PointX="1.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GG_TIPO_PERSONA" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GMP_BITACORA_INCIDENCIA" Width="1.5" PointX="9.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GMP_RESERVA_SERVICIO" Width="1.5" PointX="12.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GMP_SERVICIO_SALUD" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_CAMA" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_CONSOLIDADO_PRESUPUESTO" Width="1.5" PointX="10.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_ESTADÍSTICA_RECURSOS" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_INGRESO_SALIDA_PACIENTE" Width="1.5" PointX="7.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_PARTIDA" Width="1.5" PointX="15" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_PRESUPUESTO" Width="1.5" PointX="12.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" Width="1.5" PointX="9.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_SOLICITUD_UCI" Width="1.5" PointX="12" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_TIPO_OPERACIÓN" Width="1.5" PointX="7.5" PointY="19.25" IsExpanded="true" />
+        <AssociationConnector Association="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA42" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GDA_ESPECIALIDAD__MEDICA10" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GDA_HISTORIA_CLINICA28" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_SOLICITUD_UCI30" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GDA_PACIENTE47" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_RESERVA_SERVICIO27" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN29" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_INMUEBLE44" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_MUEBLE40" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_EMPLEADO46" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_BITACORA_INCIDENCIA26" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_RESERVA_SERVICIO21" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_EMPRESA45" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_MUEBLE20" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_RESERVA_SERVICIO19" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_CAMA43" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN41" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_MUEBLE15" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GG_PERSONA13" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_RESERVA_SERVICIO9" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_SERVICIO_SALUD11" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GMP_SERVICIO_SALUD12" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_INGRESO_SALIDA_PACIENTE38" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_PRESUPUESTO7" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_INGRESO_SALIDA_PACIENTE5" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_PRESUPUESTO6" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN4" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_SOLICITUD_UCI3" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.FK_T_GUQ_PARTIDA2" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.T_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.T_1" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.T_2" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.T_3" ManuallyRouted="false" />
+        <AssociationConnector Association="TP2Model.T_4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
