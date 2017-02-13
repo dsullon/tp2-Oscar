@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="TGGBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TGUQTipoOperacion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TP2.Datos.EF\TP2.Datos.EF.csproj">

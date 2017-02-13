@@ -12,7 +12,7 @@ namespace TP2.Test
         [TestMethod]
         public void ListarBienes()
         {
-            List<T_GG_BIEN> listado = TGGBien.GetAll();
+            List<T_GG_EMPLEADO> listado = TGGBien.GetAll();
             Assert.IsTrue(listado.Count > 0);
         }
     }

@@ -7,10 +7,10 @@ namespace TP2.Negocio
 {
     public class TGGBien
     {
-        public static List<T_GG_BIEN> GetAll()
+        public static List<T_GG_EMPLEADO> GetAll()
         {
             RicardoPalmaEntities db = new RicardoPalmaEntities();
-            return db.T_GG_BIEN.ToList();
+            return db.T_GG_EMPLEADO.ToList();
         }
     }
 }

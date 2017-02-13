@@ -5,794 +5,470 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TP2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="T_0">
-          <Key>
-            <PropertyRef Name="idOperación" />
-            <PropertyRef Name="idReserva" />
-          </Key>
-          <Property Name="idOperación" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idReserva" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_1">
-          <Key>
-            <PropertyRef Name="idEmpleado" />
-            <PropertyRef Name="nroHistoriaClinica" />
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="nroHistoriaClinica" Type="int" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_2">
-          <Key>
-            <PropertyRef Name="idEmpleado" />
-            <PropertyRef Name="idReserva" />
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idReserva" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_3">
-          <Key>
-            <PropertyRef Name="idEspecialidad" />
-            <PropertyRef Name="idEmpleado" />
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idEspecialidad" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_4">
-          <Key>
-            <PropertyRef Name="idProgramcacion" />
-            <PropertyRef Name="idEmpleado" />
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idProgramcacion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
         <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
           <Key>
             <PropertyRef Name="idProgramcacion" />
           </Key>
-          <Property Name="idProgramcacion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="prestaciones" Type="int" Nullable="false" />
-          <Property Name="disPrestaciones" Type="int" Nullable="false" />
+          <Property Name="idProgramcacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEmpleado" Type="int" Nullable="false" />
+          <Property Name="idInmueble" Type="int" Nullable="false" />
+          <Property Name="prestaciones" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="disPrestaciones" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="horaInicio" Type="datetime" Nullable="false" />
           <Property Name="horaFin" Type="datetime" Nullable="false" />
           <Property Name="anotaciones" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="codBien" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GDA_ESPECIALIDAD__MEDICA">
           <Key>
             <PropertyRef Name="idEspecialidad" />
           </Key>
-          <Property Name="idEspecialidad" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idEspecialidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nomEspecialidad" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idServicio" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GDA_HISTORIA_CLINICA">
           <Key>
             <PropertyRef Name="nroHistoriaClinica" />
           </Key>
-          <Property Name="nroHistoriaClinica" Type="int" Nullable="false" />
+          <Property Name="nroHistoriaClinica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="diagnóstico" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPaciente" Type="smallint" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idPaciente" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GDA_PACIENTE">
           <Key>
             <PropertyRef Name="idPaciente" />
-            <PropertyRef Name="idPersona" />
           </Key>
-          <Property Name="idPaciente" Type="smallint" Nullable="false" />
-          <Property Name="nomPaciente" Type="smallint" Nullable="false" />
-          <Property Name="edad" Type="smallint" Nullable="false" />
+          <Property Name="idPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomPaciente" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="numDNI" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="dirPaciente" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="telPaciente" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="mailPaciente" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="edad" Type="int" Nullable="false" />
           <Property Name="fecNacimiento" Type="datetime" Nullable="false" />
-          <Property Name="segmentacion" Type="smallint" Nullable="false" />
+          <Property Name="segmentacion" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_GG_BIEN">
-          <Key>
-            <PropertyRef Name="codBien" />
-          </Key>
-          <Property Name="codBien" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="dscBien" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="fecAdquision" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GG_EMPLEADO">
           <Key>
             <PropertyRef Name="idEmpleado" />
-            <PropertyRef Name="idPersona" />
           </Key>
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="nroDni" Type="int" Nullable="false" />
+          <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nroDni" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="nomEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="fecIngreso" Type="datetime" Nullable="false" />
-          <Property Name="stdEmplead" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="dscCargo" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="dscProfesion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="dscArea" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_GG_EMPRESA">
-          <Key>
-            <PropertyRef Name="idEmpresa" />
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idEmpresa" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="nroRuc" Type="int" Nullable="false" />
-          <Property Name="razonsocial" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idEspecialidad" Type="int" Nullable="false" />
+          <Property Name="idArea" Type="int" Nullable="false" />
+          <Property Name="costoHora" Type="float" Nullable="false" />
+          <Property Name="stdEmplead" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GG_INMUEBLE">
           <Key>
-            <PropertyRef Name="codBien" />
+            <PropertyRef Name="idInmueble" />
           </Key>
+          <Property Name="idInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idArea" Type="int" Nullable="false" />
           <Property Name="dscTipoInmueble" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="estado" Type="bit" Nullable="false" />
-          <Property Name="codBien" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GG_MODELO">
           <Key>
             <PropertyRef Name="idModelo" />
           </Key>
-          <Property Name="idModelo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idModelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nomModelo" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="dscMarca" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="T_GG_MUEBLE_idModelo" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <EntityType Name="T_GG_MUEBLE">
+        <EntityType Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
           <Key>
-            <PropertyRef Name="codBien" />
+            <PropertyRef Name="idConsolidadoPresupuesto" />
+            <PropertyRef Name="idPresupuesto" />
           </Key>
-          <Property Name="dscFunción" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="dscAplicacionMedica" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="garantia" Type="smallint" Nullable="false" />
-          <Property Name="tipoMueble" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idModelo" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idEmpresa" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="codBien" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idConsolidadoPresupuesto" Type="int" Nullable="false" />
+          <Property Name="idPresupuesto" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="T_GG_PERSONA">
+        <EntityType Name="T_GUQ_AREA">
           <Key>
-            <PropertyRef Name="idPersona" />
+            <PropertyRef Name="idArea" />
           </Key>
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="dirPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="telPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="emailPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idTipoPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_GG_TIPO_PERSONA">
-          <Key>
-            <PropertyRef Name="idTipoPersona" />
-          </Key>
-          <Property Name="idTipoPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="dscTipoPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_GMP_BITACORA_INCIDENCIA">
-          <Key>
-            <PropertyRef Name="idBitacora" />
-          </Key>
-          <Property Name="idBitacora" Type="int" Nullable="false" />
-          <Property Name="tipoIncidencia" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="fechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="idArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_GMP_RESERVA_SERVICIO">
-          <Key>
-            <PropertyRef Name="idReserva" />
-          </Key>
-          <Property Name="idReserva" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="fecReserva" Type="datetime" Nullable="false" />
-          <Property Name="horReserva" Type="datetime" Nullable="false" />
-          <Property Name="tipoAtencion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="tipoCliente" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idServicio" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idEmpresa" Type="varchar" MaxLength="255" />
-          <Property Name="idEmpleado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPaciente" Type="smallint" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="T_GG_EMPLEADO_idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="T_GDA_PACIENTE_idPersona" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_GMP_SERVICIO_SALUD">
-          <Key>
-            <PropertyRef Name="idServicio" />
-          </Key>
-          <Property Name="idServicio" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="tipoServicio" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="nomServicio" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="T_GMP_SERVICIO_SALUD_idServicio" Type="varchar" MaxLength="255" />
-          <Property Name="COL_0" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="T_GUQ_CAMA">
           <Key>
-            <PropertyRef Name="idModelo" />
+            <PropertyRef Name="idCama" />
           </Key>
-          <Property Name="marca" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="modelo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idCama" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idModelo" Type="int" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idModelo" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="codBien" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
           <Key>
             <PropertyRef Name="idConsolidadoPresupuesto" />
           </Key>
-          <Property Name="idConsolidadoPresupuesto" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="periodo" Type="datetime" Nullable="false" />
-          <Property Name="montoTotal" Type="real" Nullable="false" />
+          <Property Name="idConsolidadoPresupuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="anio" Type="int" Nullable="false" />
+          <Property Name="montoTotal" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_ESTADÍSTICA_RECURSOS">
           <Key>
-            <PropertyRef Name="mes" />
+            <PropertyRef Name="idEstadisticaRecurso" />
           </Key>
-          <Property Name="mes" Type="datetime" Nullable="false" />
-          <Property Name="área" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="montoHistórico" Type="real" Nullable="false" />
+          <Property Name="idEstadisticaRecurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mes" Type="int" Nullable="false" />
+          <Property Name="anio" Type="int" Nullable="false" />
+          <Property Name="idArea" Type="int" Nullable="false" />
+          <Property Name="montoHistórico" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_INGRESO_SALIDA_PACIENTE">
           <Key>
             <PropertyRef Name="idRegistro" />
           </Key>
-          <Property Name="idRegistro" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idRegistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaIngreso" Type="datetime" Nullable="false" />
           <Property Name="fechaTraslado" Type="datetime" Nullable="false" />
           <Property Name="motivo" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="mes" Type="datetime" Nullable="false" />
-          <Property Name="idModelo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idSolicitud" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_GUQ_INMUEBLE_TIPO_OPERACION">
+          <Key>
+            <PropertyRef Name="idInmueble" />
+            <PropertyRef Name="idOperación" />
+          </Key>
+          <Property Name="idInmueble" Type="int" Nullable="false" />
+          <Property Name="idOperación" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_GUQ_INSUMO">
+          <Key>
+            <PropertyRef Name="idInsumo" />
+          </Key>
+          <Property Name="idInsumo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dscInsumo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="costoInsumo" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_GUQ_INSUMO_TIPOOPERACION">
+          <Key>
+            <PropertyRef Name="idOperación" />
+            <PropertyRef Name="idInsumo" />
+          </Key>
+          <Property Name="idOperación" Type="int" Nullable="false" />
+          <Property Name="idInsumo" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_PARTIDA">
           <Key>
             <PropertyRef Name="idPartida" />
           </Key>
-          <Property Name="idPartida" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dscPartida" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="tipoPartida" Type="bit" Nullable="false" />
-          <Property Name="año" Type="datetime" />
+          <Property Name="tipoPartida" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_PRESUPUESTO">
           <Key>
-            <PropertyRef Name="año" />
+            <PropertyRef Name="idPresupuesto" />
           </Key>
-          <Property Name="año" Type="datetime" Nullable="false" />
-          <Property Name="mes" Type="datetime" Nullable="false" />
-          <Property Name="área" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="monto" Type="real" Nullable="false" />
-          <Property Name="estado" Type="bit" Nullable="false" />
-          <Property Name="T_GUQ_ESTADÍSTICA_RECURSOS_mes" Type="datetime" Nullable="false" />
-          <Property Name="idConsolidadoPresupuesto" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idPresupuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="anio" Type="int" Nullable="false" />
+          <Property Name="idArea" Type="int" Nullable="false" />
+          <Property Name="monto" Type="float" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_GUQ_PRESUPUESTO_PARTIDA">
+          <Key>
+            <PropertyRef Name="idPresupuesto" />
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idPresupuesto" Type="int" Nullable="false" />
+          <Property Name="idPartida" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
           <Key>
             <PropertyRef Name="idReserva" />
           </Key>
-          <Property Name="idReserva" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idOperación" Type="int" Nullable="false" />
           <Property Name="duración" Type="int" Nullable="false" />
-          <Property Name="día" Type="datetime" Nullable="false" />
-          <Property Name="hora" Type="datetime" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="horaInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idPaciente" Type="int" Nullable="false" />
+          <Property Name="idInmueble" Type="int" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="mes" Type="datetime" Nullable="false" />
-          <Property Name="idPaciente" Type="smallint" Nullable="false" />
-          <Property Name="codBien" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_SOLICITUD_UCI">
           <Key>
             <PropertyRef Name="idSolicitud" />
           </Key>
-          <Property Name="idSolicitud" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaSolicitud" Type="datetime" Nullable="false" />
           <Property Name="motivo" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="idRegistro" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="nroHistoriaClinica" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_TIPO_OPERACIÓN">
           <Key>
             <PropertyRef Name="idOperación" />
           </Key>
-          <Property Name="idOperación" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idOperación" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dscTipoOperación" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="insumos" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="costoTipoOperacion" Type="float" Nullable="false" />
         </EntityType>
-        <Association Name="FK_T_00">
-          <End Role="T_GUQ_TIPO_OPERACIÓN" Type="Self.T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
-          <End Role="T_0" Type="Self.T_0" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_TIPO_OPERACIÓN">
-              <PropertyRef Name="idOperación" />
-            </Principal>
-            <Dependent Role="T_0">
-              <PropertyRef Name="idOperación" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_01">
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="1" />
-          <End Role="T_0" Type="Self.T_0" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="idReserva" />
-            </Principal>
-            <Dependent Role="T_0">
-              <PropertyRef Name="idReserva" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_122">
+        <Association Name="FK_T_GCT_PROGRAMACION_MEDICA1">
           <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_1" Type="Self.T_1" Multiplicity="*" />
+          <End Role="T_GCT_PROGRAMACION_MEDICA" Type="Self.T_GCT_PROGRAMACION_MEDICA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idEmpleado" />
             </Principal>
-            <Dependent Role="T_1">
-              <PropertyRef Name="idPersona" />
+            <Dependent Role="T_GCT_PROGRAMACION_MEDICA">
               <PropertyRef Name="idEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_123">
-          <End Role="T_GDA_HISTORIA_CLINICA" Type="Self.T_GDA_HISTORIA_CLINICA" Multiplicity="1" />
-          <End Role="T_1" Type="Self.T_1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GDA_HISTORIA_CLINICA">
-              <PropertyRef Name="nroHistoriaClinica" />
-            </Principal>
-            <Dependent Role="T_1">
-              <PropertyRef Name="nroHistoriaClinica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_224">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_2" Type="Self.T_2" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Principal>
-            <Dependent Role="T_2">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_225">
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="1" />
-          <End Role="T_2" Type="Self.T_2" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="idReserva" />
-            </Principal>
-            <Dependent Role="T_2">
-              <PropertyRef Name="idReserva" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_331">
-          <End Role="T_GDA_ESPECIALIDAD__MEDICA" Type="Self.T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="1" />
-          <End Role="T_3" Type="Self.T_3" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GDA_ESPECIALIDAD__MEDICA">
-              <PropertyRef Name="idEspecialidad" />
-            </Principal>
-            <Dependent Role="T_3">
-              <PropertyRef Name="idEspecialidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_332">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_3" Type="Self.T_3" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Principal>
-            <Dependent Role="T_3">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_433">
-          <End Role="T_GCT_PROGRAMACION_MEDICA" Type="Self.T_GCT_PROGRAMACION_MEDICA" Multiplicity="1" />
-          <End Role="T_4" Type="Self.T_4" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GCT_PROGRAMACION_MEDICA">
-              <PropertyRef Name="idProgramcacion" />
-            </Principal>
-            <Dependent Role="T_4">
-              <PropertyRef Name="idProgramcacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_434">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_4" Type="Self.T_4" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Principal>
-            <Dependent Role="T_4">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GCT_PROGRAMACION_MEDICA42">
+        <Association Name="FK_T_GCT_PROGRAMACION_MEDICA2">
           <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
           <End Role="T_GCT_PROGRAMACION_MEDICA" Type="Self.T_GCT_PROGRAMACION_MEDICA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idInmueble" />
             </Principal>
             <Dependent Role="T_GCT_PROGRAMACION_MEDICA">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idInmueble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GDA_ESPECIALIDAD__MEDICA10">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="1" />
-          <End Role="T_GDA_ESPECIALIDAD__MEDICA" Type="Self.T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GDA_ESPECIALIDAD__MEDICA">
-              <PropertyRef Name="idServicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GDA_HISTORIA_CLINICA28">
+        <Association Name="FK_T_GDA_HISTORIA_CLINICA4">
           <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="1" />
           <End Role="T_GDA_HISTORIA_CLINICA" Type="Self.T_GDA_HISTORIA_CLINICA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Principal>
             <Dependent Role="T_GDA_HISTORIA_CLINICA">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GDA_PACIENTE47">
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="1" />
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_PERSONA">
-              <PropertyRef Name="idPersona" />
-            </Principal>
-            <Dependent Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_EMPLEADO46">
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="1" />
+        <Association Name="FK_T_GG_EMPLEADO1">
+          <End Role="T_GDA_ESPECIALIDAD__MEDICA" Type="Self.T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="1" />
           <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_PERSONA">
-              <PropertyRef Name="idPersona" />
+            <Principal Role="T_GDA_ESPECIALIDAD__MEDICA">
+              <PropertyRef Name="idEspecialidad" />
             </Principal>
             <Dependent Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
+              <PropertyRef Name="idEspecialidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GG_EMPRESA45">
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="1" />
-          <End Role="T_GG_EMPRESA" Type="Self.T_GG_EMPRESA" Multiplicity="*" />
+        <Association Name="FK_T_GG_EMPLEADO2">
+          <End Role="T_GUQ_AREA" Type="Self.T_GUQ_AREA" Multiplicity="1" />
+          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_PERSONA">
-              <PropertyRef Name="idPersona" />
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
             </Principal>
-            <Dependent Role="T_GG_EMPRESA">
-              <PropertyRef Name="idPersona" />
+            <Dependent Role="T_GG_EMPLEADO">
+              <PropertyRef Name="idArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GG_INMUEBLE44">
-          <End Role="T_GG_BIEN" Type="Self.T_GG_BIEN" Multiplicity="1" />
-          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="0..1" />
+        <Association Name="FK_T_GG_INMUEBLE1">
+          <End Role="T_GUQ_AREA" Type="Self.T_GUQ_AREA" Multiplicity="1" />
+          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_BIEN">
-              <PropertyRef Name="codBien" />
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
             </Principal>
             <Dependent Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_T_GG_MODELO37' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_T_GG_MODELO37" />-->
-        <Association Name="FK_T_GG_MUEBLE15">
-          <End Role="T_GG_MODELO" Type="Self.T_GG_MODELO" Multiplicity="1" />
-          <End Role="T_GG_MUEBLE" Type="Self.T_GG_MUEBLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_MODELO">
-              <PropertyRef Name="idModelo" />
-            </Principal>
-            <Dependent Role="T_GG_MUEBLE">
-              <PropertyRef Name="idModelo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_MUEBLE20">
-          <End Role="T_GG_EMPRESA" Type="Self.T_GG_EMPRESA" Multiplicity="1" />
-          <End Role="T_GG_MUEBLE" Type="Self.T_GG_MUEBLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPRESA">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="T_GG_MUEBLE">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_MUEBLE40">
-          <End Role="T_GG_BIEN" Type="Self.T_GG_BIEN" Multiplicity="1" />
-          <End Role="T_GG_MUEBLE" Type="Self.T_GG_MUEBLE" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_BIEN">
-              <PropertyRef Name="codBien" />
-            </Principal>
-            <Dependent Role="T_GG_MUEBLE">
-              <PropertyRef Name="codBien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_PERSONA13">
-          <End Role="T_GG_TIPO_PERSONA" Type="Self.T_GG_TIPO_PERSONA" Multiplicity="1" />
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_TIPO_PERSONA">
-              <PropertyRef Name="idTipoPersona" />
-            </Principal>
-            <Dependent Role="T_GG_PERSONA">
-              <PropertyRef Name="idTipoPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_BITACORA_INCIDENCIA26">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_GMP_BITACORA_INCIDENCIA" Type="Self.T_GMP_BITACORA_INCIDENCIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Principal>
-            <Dependent Role="T_GMP_BITACORA_INCIDENCIA">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO19">
-          <End Role="T_GG_EMPRESA" Type="Self.T_GG_EMPRESA" Multiplicity="0..1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPRESA">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO21">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="T_GG_EMPLEADO_idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO27">
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idPaciente" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="T_GDA_PACIENTE_idPersona" />
-              <PropertyRef Name="idPaciente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO9">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="idServicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_SERVICIO_SALUD11">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="0..1" />
-          <End Role="T_GMP_SERVICIO_SALUD1" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GMP_SERVICIO_SALUD1">
-              <PropertyRef Name="T_GMP_SERVICIO_SALUD_idServicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_SERVICIO_SALUD12">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="0..1" />
-          <End Role="T_GMP_SERVICIO_SALUD1" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GMP_SERVICIO_SALUD1">
-              <PropertyRef Name="COL_0" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_T_GUQ_CAMA39' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_T_GUQ_CAMA39" />-->
-        <Association Name="FK_T_GUQ_CAMA43">
-          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
-          <End Role="T_GUQ_CAMA" Type="Self.T_GUQ_CAMA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
-            </Principal>
-            <Dependent Role="T_GUQ_CAMA">
-              <PropertyRef Name="codBien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE38">
-          <End Role="T_GUQ_CAMA" Type="Self.T_GUQ_CAMA" Multiplicity="1" />
-          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_CAMA">
-              <PropertyRef Name="idModelo" />
-            </Principal>
-            <Dependent Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
-              <PropertyRef Name="idModelo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE5">
-          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="1" />
-          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_ESTADÍSTICA_RECURSOS">
-              <PropertyRef Name="mes" />
-            </Principal>
-            <Dependent Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
-              <PropertyRef Name="mes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_PARTIDA2">
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="0..1" />
-          <End Role="T_GUQ_PARTIDA" Type="Self.T_GUQ_PARTIDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_PRESUPUESTO">
-              <PropertyRef Name="año" />
-            </Principal>
-            <Dependent Role="T_GUQ_PARTIDA">
-              <PropertyRef Name="año" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_PRESUPUESTO6">
-          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="1" />
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_ESTADÍSTICA_RECURSOS">
-              <PropertyRef Name="mes" />
-            </Principal>
-            <Dependent Role="T_GUQ_PRESUPUESTO">
-              <PropertyRef Name="T_GUQ_ESTADÍSTICA_RECURSOS_mes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_PRESUPUESTO7">
+        <Association Name="FK_T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO1">
           <End Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" Type="Self.T_GUQ_CONSOLIDADO_PRESUPUESTO" Multiplicity="1" />
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="*" />
+          <End Role="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Type="Self.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GUQ_CONSOLIDADO_PRESUPUESTO">
               <PropertyRef Name="idConsolidadoPresupuesto" />
             </Principal>
-            <Dependent Role="T_GUQ_PRESUPUESTO">
+            <Dependent Role="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
               <PropertyRef Name="idConsolidadoPresupuesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN29">
+        <Association Name="FK_T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO2">
+          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="1" />
+          <End Role="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Type="Self.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_PRESUPUESTO">
+              <PropertyRef Name="idPresupuesto" />
+            </Principal>
+            <Dependent Role="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
+              <PropertyRef Name="idPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_CAM1">
+          <End Role="T_GG_MODELO" Type="Self.T_GG_MODELO" Multiplicity="1" />
+          <End Role="T_GUQ_CAMA" Type="Self.T_GUQ_CAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GG_MODELO">
+              <PropertyRef Name="idModelo" />
+            </Principal>
+            <Dependent Role="T_GUQ_CAMA">
+              <PropertyRef Name="idModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_ESTADÍSTICA_RECURSOS1">
+          <End Role="T_GUQ_AREA" Type="Self.T_GUQ_AREA" Multiplicity="1" />
+          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
+            </Principal>
+            <Dependent Role="T_GUQ_ESTADÍSTICA_RECURSOS">
+              <PropertyRef Name="idArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE1">
+          <End Role="T_GUQ_SOLICITUD_UCI" Type="Self.T_GUQ_SOLICITUD_UCI" Multiplicity="1" />
+          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_SOLICITUD_UCI">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
+              <PropertyRef Name="idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_INMUEBLE_TIPO_OPERACION1">
+          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
+          <End Role="T_GUQ_INMUEBLE_TIPO_OPERACION" Type="Self.T_GUQ_INMUEBLE_TIPO_OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GG_INMUEBLE">
+              <PropertyRef Name="idInmueble" />
+            </Principal>
+            <Dependent Role="T_GUQ_INMUEBLE_TIPO_OPERACION">
+              <PropertyRef Name="idInmueble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_INMUEBLE_TIPO_OPERACION2">
+          <End Role="T_GUQ_TIPO_OPERACIÓN" Type="Self.T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
+          <End Role="T_GUQ_INMUEBLE_TIPO_OPERACION" Type="Self.T_GUQ_INMUEBLE_TIPO_OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_TIPO_OPERACIÓN">
+              <PropertyRef Name="idOperación" />
+            </Principal>
+            <Dependent Role="T_GUQ_INMUEBLE_TIPO_OPERACION">
+              <PropertyRef Name="idOperación" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_INSUMO_TIPOOPERACION20">
+          <End Role="T_GUQ_TIPO_OPERACIÓN" Type="Self.T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
+          <End Role="T_GUQ_INSUMO_TIPOOPERACION" Type="Self.T_GUQ_INSUMO_TIPOOPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_TIPO_OPERACIÓN">
+              <PropertyRef Name="idOperación" />
+            </Principal>
+            <Dependent Role="T_GUQ_INSUMO_TIPOOPERACION">
+              <PropertyRef Name="idOperación" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_INSUMO_TIPOOPERACION21">
+          <End Role="T_GUQ_INSUMO" Type="Self.T_GUQ_INSUMO" Multiplicity="1" />
+          <End Role="T_GUQ_INSUMO_TIPOOPERACION" Type="Self.T_GUQ_INSUMO_TIPOOPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_INSUMO">
+              <PropertyRef Name="idInsumo" />
+            </Principal>
+            <Dependent Role="T_GUQ_INSUMO_TIPOOPERACION">
+              <PropertyRef Name="idInsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA1">
+          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="1" />
+          <End Role="T_GUQ_PRESUPUESTO_PARTIDA" Type="Self.T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_PRESUPUESTO">
+              <PropertyRef Name="idPresupuesto" />
+            </Principal>
+            <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
+              <PropertyRef Name="idPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA2">
+          <End Role="T_GUQ_PARTIDA" Type="Self.T_GUQ_PARTIDA" Multiplicity="1" />
+          <End Role="T_GUQ_PRESUPUESTO_PARTIDA" Type="Self.T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_PARTIDA">
+              <PropertyRef Name="idPartida" />
+            </Principal>
+            <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
+              <PropertyRef Name="idPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_PRESUPUESTO1">
+          <End Role="T_GUQ_AREA" Type="Self.T_GUQ_AREA" Multiplicity="1" />
+          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
+            </Principal>
+            <Dependent Role="T_GUQ_PRESUPUESTO">
+              <PropertyRef Name="idArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN1">
+          <End Role="T_GUQ_TIPO_OPERACIÓN" Type="Self.T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
+          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_TIPO_OPERACIÓN">
+              <PropertyRef Name="idOperación" />
+            </Principal>
+            <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
+              <PropertyRef Name="idOperación" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN2">
           <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="1" />
           <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Principal>
             <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN4">
-          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="1" />
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_ESTADÍSTICA_RECURSOS">
-              <PropertyRef Name="mes" />
-            </Principal>
-            <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="mes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN41">
+        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN3">
           <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
           <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idInmueble" />
             </Principal>
             <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idInmueble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_SOLICITUD_UCI3">
-          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="1" />
-          <End Role="T_GUQ_SOLICITUD_UCI" Type="Self.T_GUQ_SOLICITUD_UCI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
-              <PropertyRef Name="idRegistro" />
-            </Principal>
-            <Dependent Role="T_GUQ_SOLICITUD_UCI">
-              <PropertyRef Name="idRegistro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_SOLICITUD_UCI30">
+        <Association Name="FK_T_GUQ_SOLICITUD_UCI1">
           <End Role="T_GDA_HISTORIA_CLINICA" Type="Self.T_GDA_HISTORIA_CLINICA" Multiplicity="1" />
           <End Role="T_GUQ_SOLICITUD_UCI" Type="Self.T_GUQ_SOLICITUD_UCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -805,188 +481,113 @@ warning 6035: The relationship 'FK_T_GUQ_CAMA39' has columns that are not part o
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TP2ModelStoreContainer">
-          <EntitySet Name="T_0" EntityType="Self.T_0" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_1" EntityType="Self.T_1" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_2" EntityType="Self.T_2" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_3" EntityType="Self.T_3" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_4" EntityType="Self.T_4" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GCT_PROGRAMACION_MEDICA" EntityType="Self.T_GCT_PROGRAMACION_MEDICA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GDA_ESPECIALIDAD__MEDICA" EntityType="Self.T_GDA_ESPECIALIDAD__MEDICA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GDA_HISTORIA_CLINICA" EntityType="Self.T_GDA_HISTORIA_CLINICA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GDA_PACIENTE" EntityType="Self.T_GDA_PACIENTE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GG_BIEN" EntityType="Self.T_GG_BIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GG_EMPLEADO" EntityType="Self.T_GG_EMPLEADO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GG_EMPRESA" EntityType="Self.T_GG_EMPRESA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GG_INMUEBLE" EntityType="Self.T_GG_INMUEBLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GG_MODELO" EntityType="Self.T_GG_MODELO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GG_MUEBLE" EntityType="Self.T_GG_MUEBLE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GG_PERSONA" EntityType="Self.T_GG_PERSONA" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GG_TIPO_PERSONA" EntityType="Self.T_GG_TIPO_PERSONA" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GMP_BITACORA_INCIDENCIA" EntityType="Self.T_GMP_BITACORA_INCIDENCIA" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GMP_RESERVA_SERVICIO" EntityType="Self.T_GMP_RESERVA_SERVICIO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GMP_SERVICIO_SALUD" EntityType="Self.T_GMP_SERVICIO_SALUD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" EntityType="Self.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_AREA" EntityType="Self.T_GUQ_AREA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_CAMA" EntityType="Self.T_GUQ_CAMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntityType="Self.T_GUQ_CONSOLIDADO_PRESUPUESTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_ESTADÍSTICA_RECURSOS" EntityType="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_INGRESO_SALIDA_PACIENTE" EntityType="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_INMUEBLE_TIPO_OPERACION" EntityType="Self.T_GUQ_INMUEBLE_TIPO_OPERACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_INSUMO" EntityType="Self.T_GUQ_INSUMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_INSUMO_TIPOOPERACION" EntityType="Self.T_GUQ_INSUMO_TIPOOPERACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_PARTIDA" EntityType="Self.T_GUQ_PARTIDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_PRESUPUESTO" EntityType="Self.T_GUQ_PRESUPUESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_PRESUPUESTO_PARTIDA" EntityType="Self.T_GUQ_PRESUPUESTO_PARTIDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_RESERVA_SALA_OPERACIÓN" EntityType="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_SOLICITUD_UCI" EntityType="Self.T_GUQ_SOLICITUD_UCI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_TIPO_OPERACIÓN" EntityType="Self.T_GUQ_TIPO_OPERACIÓN" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_T_00" Association="Self.FK_T_00">
-            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
-            <End Role="T_0" EntitySet="T_0" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_01" Association="Self.FK_T_01">
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-            <End Role="T_0" EntitySet="T_0" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_122" Association="Self.FK_T_122">
+          <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA1" Association="Self.FK_T_GCT_PROGRAMACION_MEDICA1">
             <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_1" EntitySet="T_1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_123" Association="Self.FK_T_123">
-            <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
-            <End Role="T_1" EntitySet="T_1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_224" Association="Self.FK_T_224">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_2" EntitySet="T_2" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_225" Association="Self.FK_T_225">
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-            <End Role="T_2" EntitySet="T_2" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_331" Association="Self.FK_T_331">
-            <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
-            <End Role="T_3" EntitySet="T_3" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_332" Association="Self.FK_T_332">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_3" EntitySet="T_3" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_433" Association="Self.FK_T_433">
             <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
-            <End Role="T_4" EntitySet="T_4" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_434" Association="Self.FK_T_434">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_4" EntitySet="T_4" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA42" Association="Self.FK_T_GCT_PROGRAMACION_MEDICA42">
+          <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA2" Association="Self.FK_T_GCT_PROGRAMACION_MEDICA2">
             <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
             <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GDA_ESPECIALIDAD__MEDICA10" Association="Self.FK_T_GDA_ESPECIALIDAD__MEDICA10">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GDA_HISTORIA_CLINICA28" Association="Self.FK_T_GDA_HISTORIA_CLINICA28">
+          <AssociationSet Name="FK_T_GDA_HISTORIA_CLINICA4" Association="Self.FK_T_GDA_HISTORIA_CLINICA4">
             <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
             <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GDA_PACIENTE47" Association="Self.FK_T_GDA_PACIENTE47">
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_EMPLEADO46" Association="Self.FK_T_GG_EMPLEADO46">
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
+          <AssociationSet Name="FK_T_GG_EMPLEADO1" Association="Self.FK_T_GG_EMPLEADO1">
+            <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
             <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GG_EMPRESA45" Association="Self.FK_T_GG_EMPRESA45">
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-            <End Role="T_GG_EMPRESA" EntitySet="T_GG_EMPRESA" />
+          <AssociationSet Name="FK_T_GG_EMPLEADO2" Association="Self.FK_T_GG_EMPLEADO2">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
+            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GG_INMUEBLE44" Association="Self.FK_T_GG_INMUEBLE44">
-            <End Role="T_GG_BIEN" EntitySet="T_GG_BIEN" />
+          <AssociationSet Name="FK_T_GG_INMUEBLE1" Association="Self.FK_T_GG_INMUEBLE1">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
             <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GG_MUEBLE15" Association="Self.FK_T_GG_MUEBLE15">
-            <End Role="T_GG_MODELO" EntitySet="T_GG_MODELO" />
-            <End Role="T_GG_MUEBLE" EntitySet="T_GG_MUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_MUEBLE20" Association="Self.FK_T_GG_MUEBLE20">
-            <End Role="T_GG_EMPRESA" EntitySet="T_GG_EMPRESA" />
-            <End Role="T_GG_MUEBLE" EntitySet="T_GG_MUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_MUEBLE40" Association="Self.FK_T_GG_MUEBLE40">
-            <End Role="T_GG_BIEN" EntitySet="T_GG_BIEN" />
-            <End Role="T_GG_MUEBLE" EntitySet="T_GG_MUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_PERSONA13" Association="Self.FK_T_GG_PERSONA13">
-            <End Role="T_GG_TIPO_PERSONA" EntitySet="T_GG_TIPO_PERSONA" />
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_BITACORA_INCIDENCIA26" Association="Self.FK_T_GMP_BITACORA_INCIDENCIA26">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_GMP_BITACORA_INCIDENCIA" EntitySet="T_GMP_BITACORA_INCIDENCIA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO19" Association="Self.FK_T_GMP_RESERVA_SERVICIO19">
-            <End Role="T_GG_EMPRESA" EntitySet="T_GG_EMPRESA" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO21" Association="Self.FK_T_GMP_RESERVA_SERVICIO21">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO27" Association="Self.FK_T_GMP_RESERVA_SERVICIO27">
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO9" Association="Self.FK_T_GMP_RESERVA_SERVICIO9">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_SERVICIO_SALUD11" Association="Self.FK_T_GMP_SERVICIO_SALUD11">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GMP_SERVICIO_SALUD1" EntitySet="T_GMP_SERVICIO_SALUD" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_SERVICIO_SALUD12" Association="Self.FK_T_GMP_SERVICIO_SALUD12">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GMP_SERVICIO_SALUD1" EntitySet="T_GMP_SERVICIO_SALUD" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_CAMA43" Association="Self.FK_T_GUQ_CAMA43">
-            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
-            <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE38" Association="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE38">
-            <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
-            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE5" Association="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE5">
-            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PARTIDA2" Association="Self.FK_T_GUQ_PARTIDA2">
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
-            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO6" Association="Self.FK_T_GUQ_PRESUPUESTO6">
-            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO7" Association="Self.FK_T_GUQ_PRESUPUESTO7">
+          <AssociationSet Name="FK_T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO1" Association="Self.FK_T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO1">
             <End Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntitySet="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
+            <End Role="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" EntitySet="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO2" Association="Self.FK_T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO2">
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+            <End Role="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" EntitySet="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_CAM1" Association="Self.FK_T_GUQ_CAM1">
+            <End Role="T_GG_MODELO" EntitySet="T_GG_MODELO" />
+            <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_ESTADÍSTICA_RECURSOS1" Association="Self.FK_T_GUQ_ESTADÍSTICA_RECURSOS1">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
+            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE1" Association="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE1">
+            <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
+            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INMUEBLE_TIPO_OPERACION1" Association="Self.FK_T_GUQ_INMUEBLE_TIPO_OPERACION1">
+            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
+            <End Role="T_GUQ_INMUEBLE_TIPO_OPERACION" EntitySet="T_GUQ_INMUEBLE_TIPO_OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INMUEBLE_TIPO_OPERACION2" Association="Self.FK_T_GUQ_INMUEBLE_TIPO_OPERACION2">
+            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
+            <End Role="T_GUQ_INMUEBLE_TIPO_OPERACION" EntitySet="T_GUQ_INMUEBLE_TIPO_OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INSUMO_TIPOOPERACION20" Association="Self.FK_T_GUQ_INSUMO_TIPOOPERACION20">
+            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
+            <End Role="T_GUQ_INSUMO_TIPOOPERACION" EntitySet="T_GUQ_INSUMO_TIPOOPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INSUMO_TIPOOPERACION21" Association="Self.FK_T_GUQ_INSUMO_TIPOOPERACION21">
+            <End Role="T_GUQ_INSUMO" EntitySet="T_GUQ_INSUMO" />
+            <End Role="T_GUQ_INSUMO_TIPOOPERACION" EntitySet="T_GUQ_INSUMO_TIPOOPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA1" Association="Self.FK_T_GUQ_PRESUPUESTO_PARTIDA1">
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+            <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA2" Association="Self.FK_T_GUQ_PRESUPUESTO_PARTIDA2">
+            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
+            <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO1" Association="Self.FK_T_GUQ_PRESUPUESTO1">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
             <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN29" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN29">
+          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1">
+            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
+            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN2" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN2">
             <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
             <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN4" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN4">
-            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN41" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN41">
+          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN3" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN3">
             <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
             <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_SOLICITUD_UCI3" Association="Self.FK_T_GUQ_SOLICITUD_UCI3">
-            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-            <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_SOLICITUD_UCI30" Association="Self.FK_T_GUQ_SOLICITUD_UCI30">
+          <AssociationSet Name="FK_T_GUQ_SOLICITUD_UCI1" Association="Self.FK_T_GUQ_SOLICITUD_UCI1">
             <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
             <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
           </AssociationSet>
@@ -995,370 +596,379 @@ warning 6035: The relationship 'FK_T_GUQ_CAMA39' has columns that are not part o
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TP2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RicardoPalmaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_GCT_PROGRAMACION_MEDICA" EntityType="TP2Model.T_GCT_PROGRAMACION_MEDICA" />
+          <EntitySet Name="T_GDA_ESPECIALIDAD__MEDICA" EntityType="TP2Model.T_GDA_ESPECIALIDAD__MEDICA" />
+          <EntitySet Name="T_GDA_HISTORIA_CLINICA" EntityType="TP2Model.T_GDA_HISTORIA_CLINICA" />
+          <EntitySet Name="T_GDA_PACIENTE" EntityType="TP2Model.T_GDA_PACIENTE" />
+          <EntitySet Name="T_GG_EMPLEADO" EntityType="TP2Model.T_GG_EMPLEADO" />
+          <EntitySet Name="T_GG_INMUEBLE" EntityType="TP2Model.T_GG_INMUEBLE" />
+          <EntitySet Name="T_GG_MODELO" EntityType="TP2Model.T_GG_MODELO" />
+          <EntitySet Name="T_GUQ_AREA" EntityType="TP2Model.T_GUQ_AREA" />
+          <EntitySet Name="T_GUQ_CAMA" EntityType="TP2Model.T_GUQ_CAMA" />
+          <EntitySet Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntityType="TP2Model.T_GUQ_CONSOLIDADO_PRESUPUESTO" />
+          <EntitySet Name="T_GUQ_ESTADÍSTICA_RECURSOS" EntityType="TP2Model.T_GUQ_ESTADÍSTICA_RECURSOS" />
+          <EntitySet Name="T_GUQ_INGRESO_SALIDA_PACIENTE" EntityType="TP2Model.T_GUQ_INGRESO_SALIDA_PACIENTE" />
+          <EntitySet Name="T_GUQ_INSUMO" EntityType="TP2Model.T_GUQ_INSUMO" />
+          <EntitySet Name="T_GUQ_INSUMO_TIPOOPERACION" EntityType="TP2Model.T_GUQ_INSUMO_TIPOOPERACION" />
+          <EntitySet Name="T_GUQ_PARTIDA" EntityType="TP2Model.T_GUQ_PARTIDA" />
+          <EntitySet Name="T_GUQ_PRESUPUESTO" EntityType="TP2Model.T_GUQ_PRESUPUESTO" />
+          <EntitySet Name="T_GUQ_RESERVA_SALA_OPERACIÓN" EntityType="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          <EntitySet Name="T_GUQ_SOLICITUD_UCI" EntityType="TP2Model.T_GUQ_SOLICITUD_UCI" />
+          <EntitySet Name="T_GUQ_TIPO_OPERACIÓN" EntityType="TP2Model.T_GUQ_TIPO_OPERACIÓN" />
+          <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA1" Association="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA1">
+            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
+            <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA2" Association="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA2">
+            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
+            <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GG_EMPLEADO1" Association="TP2Model.FK_T_GG_EMPLEADO1">
+            <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
+            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GDA_HISTORIA_CLINICA4" Association="TP2Model.FK_T_GDA_HISTORIA_CLINICA4">
+            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
+            <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_SOLICITUD_UCI1" Association="TP2Model.FK_T_GUQ_SOLICITUD_UCI1">
+            <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
+            <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN2" Association="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN2">
+            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
+            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GG_EMPLEADO2" Association="TP2Model.FK_T_GG_EMPLEADO2">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
+            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GG_INMUEBLE1" Association="TP2Model.FK_T_GG_INMUEBLE1">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
+            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN3" Association="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN3">
+            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
+            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_CAM1" Association="TP2Model.FK_T_GUQ_CAM1">
+            <End Role="T_GG_MODELO" EntitySet="T_GG_MODELO" />
+            <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_ESTADÍSTICA_RECURSOS1" Association="TP2Model.FK_T_GUQ_ESTADÍSTICA_RECURSOS1">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
+            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO1" Association="TP2Model.FK_T_GUQ_PRESUPUESTO1">
+            <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE1" Association="TP2Model.FK_T_GUQ_INGRESO_SALIDA_PACIENTE1">
+            <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
+            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INSUMO_TIPOOPERACION21" Association="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION21">
+            <End Role="T_GUQ_INSUMO" EntitySet="T_GUQ_INSUMO" />
+            <End Role="T_GUQ_INSUMO_TIPOOPERACION" EntitySet="T_GUQ_INSUMO_TIPOOPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_INSUMO_TIPOOPERACION20" Association="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION20">
+            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
+            <End Role="T_GUQ_INSUMO_TIPOOPERACION" EntitySet="T_GUQ_INSUMO_TIPOOPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" Association="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1">
+            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
+            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          </AssociationSet>
+          <AssociationSet Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Association="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
+            <End Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntitySet="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="T_GUQ_INMUEBLE_TIPO_OPERACION" Association="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION">
+            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
+            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
+          </AssociationSet>
+          <AssociationSet Name="T_GUQ_PRESUPUESTO_PARTIDA" Association="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA">
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
           <Key>
             <PropertyRef Name="idProgramcacion" />
           </Key>
-          <Property Name="idProgramcacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prestaciones" Type="Int32" Nullable="false" />
-          <Property Name="disPrestaciones" Type="Int32" Nullable="false" />
+          <Property Name="idProgramcacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="idInmueble" Type="Int32" Nullable="false" />
+          <Property Name="prestaciones" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="disPrestaciones" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="horaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="horaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="anotaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="Self.FK_T_GCT_PROGRAMACION_MEDICA42" FromRole="T_GCT_PROGRAMACION_MEDICA" ToRole="T_GG_INMUEBLE" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.T_4" FromRole="T_GCT_PROGRAMACION_MEDICA" ToRole="T_GG_EMPLEADO" />
+          <Property Name="anotaciones" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA1" FromRole="T_GCT_PROGRAMACION_MEDICA" ToRole="T_GG_EMPLEADO" />
+          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA2" FromRole="T_GCT_PROGRAMACION_MEDICA" ToRole="T_GG_INMUEBLE" />
         </EntityType>
         <EntityType Name="T_GDA_ESPECIALIDAD__MEDICA">
           <Key>
             <PropertyRef Name="idEspecialidad" />
           </Key>
-          <Property Name="idEspecialidad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomEspecialidad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idServicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GMP_SERVICIO_SALUD" Relationship="Self.FK_T_GDA_ESPECIALIDAD__MEDICA10" FromRole="T_GDA_ESPECIALIDAD__MEDICA" ToRole="T_GMP_SERVICIO_SALUD" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.T_3" FromRole="T_GDA_ESPECIALIDAD__MEDICA" ToRole="T_GG_EMPLEADO" />
+          <Property Name="idEspecialidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomEspecialidad" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="TP2Model.FK_T_GG_EMPLEADO1" FromRole="T_GDA_ESPECIALIDAD__MEDICA" ToRole="T_GG_EMPLEADO" />
         </EntityType>
         <EntityType Name="T_GDA_HISTORIA_CLINICA">
           <Key>
             <PropertyRef Name="nroHistoriaClinica" />
           </Key>
-          <Property Name="nroHistoriaClinica" Type="Int32" Nullable="false" />
-          <Property Name="diagnóstico" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPaciente" Type="Int16" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="Self.FK_T_GDA_HISTORIA_CLINICA28" FromRole="T_GDA_HISTORIA_CLINICA" ToRole="T_GDA_PACIENTE" />
-          <NavigationProperty Name="T_GUQ_SOLICITUD_UCI" Relationship="Self.FK_T_GUQ_SOLICITUD_UCI30" FromRole="T_GDA_HISTORIA_CLINICA" ToRole="T_GUQ_SOLICITUD_UCI" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.T_1" FromRole="T_GDA_HISTORIA_CLINICA" ToRole="T_GG_EMPLEADO" />
+          <Property Name="nroHistoriaClinica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diagnóstico" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idPaciente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="TP2Model.FK_T_GDA_HISTORIA_CLINICA4" FromRole="T_GDA_HISTORIA_CLINICA" ToRole="T_GDA_PACIENTE" />
+          <NavigationProperty Name="T_GUQ_SOLICITUD_UCI" Relationship="TP2Model.FK_T_GUQ_SOLICITUD_UCI1" FromRole="T_GDA_HISTORIA_CLINICA" ToRole="T_GUQ_SOLICITUD_UCI" />
         </EntityType>
         <EntityType Name="T_GDA_PACIENTE">
           <Key>
             <PropertyRef Name="idPaciente" />
-            <PropertyRef Name="idPersona" />
           </Key>
-          <Property Name="idPaciente" Type="Int16" Nullable="false" />
-          <Property Name="nomPaciente" Type="Int16" Nullable="false" />
-          <Property Name="edad" Type="Int16" Nullable="false" />
+          <Property Name="idPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomPaciente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="numDNI" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="dirPaciente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="telPaciente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="mailPaciente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" Nullable="false" />
           <Property Name="fecNacimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="segmentacion" Type="Int16" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="Self.FK_T_GDA_HISTORIA_CLINICA28" FromRole="T_GDA_PACIENTE" ToRole="T_GDA_HISTORIA_CLINICA" />
-          <NavigationProperty Name="T_GG_PERSONA" Relationship="Self.FK_T_GDA_PACIENTE47" FromRole="T_GDA_PACIENTE" ToRole="T_GG_PERSONA" />
-          <NavigationProperty Name="T_GMP_RESERVA_SERVICIO" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO27" FromRole="T_GDA_PACIENTE" ToRole="T_GMP_RESERVA_SERVICIO" />
-          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN29" FromRole="T_GDA_PACIENTE" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-        </EntityType>
-        <EntityType Name="T_GG_BIEN">
-          <Key>
-            <PropertyRef Name="codBien" />
-          </Key>
-          <Property Name="codBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fecAdquision" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="Self.FK_T_GG_INMUEBLE44" FromRole="T_GG_BIEN" ToRole="T_GG_INMUEBLE" />
-          <NavigationProperty Name="T_GG_MUEBLE" Relationship="Self.FK_T_GG_MUEBLE40" FromRole="T_GG_BIEN" ToRole="T_GG_MUEBLE" />
+          <Property Name="segmentacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="TP2Model.FK_T_GDA_HISTORIA_CLINICA4" FromRole="T_GDA_PACIENTE" ToRole="T_GDA_HISTORIA_CLINICA" />
+          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN2" FromRole="T_GDA_PACIENTE" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
         </EntityType>
         <EntityType Name="T_GG_EMPLEADO">
           <Key>
             <PropertyRef Name="idEmpleado" />
-            <PropertyRef Name="idPersona" />
           </Key>
-          <Property Name="idEmpleado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nroDni" Type="Int32" Nullable="false" />
-          <Property Name="nomEmpleado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nroDni" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="nomEmpleado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="fecIngreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="stdEmplead" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscCargo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscProfesion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscArea" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_PERSONA" Relationship="Self.FK_T_GG_EMPLEADO46" FromRole="T_GG_EMPLEADO" ToRole="T_GG_PERSONA" />
-          <NavigationProperty Name="T_GMP_BITACORA_INCIDENCIA" Relationship="Self.FK_T_GMP_BITACORA_INCIDENCIA26" FromRole="T_GG_EMPLEADO" ToRole="T_GMP_BITACORA_INCIDENCIA" />
-          <NavigationProperty Name="T_GMP_RESERVA_SERVICIO" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO21" FromRole="T_GG_EMPLEADO" ToRole="T_GMP_RESERVA_SERVICIO" />
-          <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="Self.T_1" FromRole="T_GG_EMPLEADO" ToRole="T_GDA_HISTORIA_CLINICA" />
-          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="Self.T_2" FromRole="T_GG_EMPLEADO" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          <NavigationProperty Name="T_GDA_ESPECIALIDAD__MEDICA" Relationship="Self.T_3" FromRole="T_GG_EMPLEADO" ToRole="T_GDA_ESPECIALIDAD__MEDICA" />
-          <NavigationProperty Name="T_GCT_PROGRAMACION_MEDICA" Relationship="Self.T_4" FromRole="T_GG_EMPLEADO" ToRole="T_GCT_PROGRAMACION_MEDICA" />
-        </EntityType>
-        <EntityType Name="T_GG_EMPRESA">
-          <Key>
-            <PropertyRef Name="idEmpresa" />
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idEmpresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nroRuc" Type="Int32" Nullable="false" />
-          <Property Name="razonsocial" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_PERSONA" Relationship="Self.FK_T_GG_EMPRESA45" FromRole="T_GG_EMPRESA" ToRole="T_GG_PERSONA" />
-          <NavigationProperty Name="T_GG_MUEBLE" Relationship="Self.FK_T_GG_MUEBLE20" FromRole="T_GG_EMPRESA" ToRole="T_GG_MUEBLE" />
-          <NavigationProperty Name="T_GMP_RESERVA_SERVICIO" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO19" FromRole="T_GG_EMPRESA" ToRole="T_GMP_RESERVA_SERVICIO" />
+          <Property Name="dscCargo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dscProfesion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idEspecialidad" Type="Int32" Nullable="false" />
+          <Property Name="idArea" Type="Int32" Nullable="false" />
+          <Property Name="costoHora" Type="Double" Nullable="false" />
+          <Property Name="stdEmplead" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GCT_PROGRAMACION_MEDICA" Relationship="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA1" FromRole="T_GG_EMPLEADO" ToRole="T_GCT_PROGRAMACION_MEDICA" />
+          <NavigationProperty Name="T_GDA_ESPECIALIDAD__MEDICA" Relationship="TP2Model.FK_T_GG_EMPLEADO1" FromRole="T_GG_EMPLEADO" ToRole="T_GDA_ESPECIALIDAD__MEDICA" />
+          <NavigationProperty Name="T_GUQ_AREA" Relationship="TP2Model.FK_T_GG_EMPLEADO2" FromRole="T_GG_EMPLEADO" ToRole="T_GUQ_AREA" />
         </EntityType>
         <EntityType Name="T_GG_INMUEBLE">
           <Key>
-            <PropertyRef Name="codBien" />
+            <PropertyRef Name="idInmueble" />
           </Key>
-          <Property Name="dscTipoInmueble" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="codBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GCT_PROGRAMACION_MEDICA" Relationship="Self.FK_T_GCT_PROGRAMACION_MEDICA42" FromRole="T_GG_INMUEBLE" ToRole="T_GCT_PROGRAMACION_MEDICA" />
-          <NavigationProperty Name="T_GG_BIEN" Relationship="Self.FK_T_GG_INMUEBLE44" FromRole="T_GG_INMUEBLE" ToRole="T_GG_BIEN" />
-          <NavigationProperty Name="T_GUQ_CAMA" Relationship="Self.FK_T_GUQ_CAMA43" FromRole="T_GG_INMUEBLE" ToRole="T_GUQ_CAMA" />
-          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN41" FromRole="T_GG_INMUEBLE" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          <Property Name="idInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idArea" Type="Int32" Nullable="false" />
+          <Property Name="dscTipoInmueble" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GCT_PROGRAMACION_MEDICA" Relationship="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA2" FromRole="T_GG_INMUEBLE" ToRole="T_GCT_PROGRAMACION_MEDICA" />
+          <NavigationProperty Name="T_GUQ_AREA" Relationship="TP2Model.FK_T_GG_INMUEBLE1" FromRole="T_GG_INMUEBLE" ToRole="T_GUQ_AREA" />
+          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN3" FromRole="T_GG_INMUEBLE" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          <NavigationProperty Name="T_GUQ_TIPO_OPERACIÓN" Relationship="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" FromRole="T_GG_INMUEBLE" ToRole="T_GUQ_TIPO_OPERACIÓN" />
         </EntityType>
         <EntityType Name="T_GG_MODELO">
           <Key>
             <PropertyRef Name="idModelo" />
           </Key>
-          <Property Name="idModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscMarca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="T_GG_MUEBLE_idModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_MUEBLE" Relationship="Self.FK_T_GG_MUEBLE15" FromRole="T_GG_MODELO" ToRole="T_GG_MUEBLE" />
+          <Property Name="idModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomModelo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dscMarca" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GUQ_CAMA" Relationship="TP2Model.FK_T_GUQ_CAM1" FromRole="T_GG_MODELO" ToRole="T_GUQ_CAMA" />
         </EntityType>
-        <EntityType Name="T_GG_MUEBLE">
+        <EntityType Name="T_GUQ_AREA">
           <Key>
-            <PropertyRef Name="codBien" />
+            <PropertyRef Name="idArea" />
           </Key>
-          <Property Name="dscFunción" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscAplicacionMedica" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="garantia" Type="Int16" Nullable="false" />
-          <Property Name="tipoMueble" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idEmpresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_BIEN" Relationship="Self.FK_T_GG_MUEBLE40" FromRole="T_GG_MUEBLE" ToRole="T_GG_BIEN" />
-          <NavigationProperty Name="T_GG_EMPRESA" Relationship="Self.FK_T_GG_MUEBLE20" FromRole="T_GG_MUEBLE" ToRole="T_GG_EMPRESA" />
-          <NavigationProperty Name="T_GG_MODELO" Relationship="Self.FK_T_GG_MUEBLE15" FromRole="T_GG_MUEBLE" ToRole="T_GG_MODELO" />
-        </EntityType>
-        <EntityType Name="T_GG_PERSONA">
-          <Key>
-            <PropertyRef Name="idPersona" />
-          </Key>
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dirPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="telPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="emailPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idTipoPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="Self.FK_T_GDA_PACIENTE47" FromRole="T_GG_PERSONA" ToRole="T_GDA_PACIENTE" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.FK_T_GG_EMPLEADO46" FromRole="T_GG_PERSONA" ToRole="T_GG_EMPLEADO" />
-          <NavigationProperty Name="T_GG_EMPRESA" Relationship="Self.FK_T_GG_EMPRESA45" FromRole="T_GG_PERSONA" ToRole="T_GG_EMPRESA" />
-          <NavigationProperty Name="T_GG_TIPO_PERSONA" Relationship="Self.FK_T_GG_PERSONA13" FromRole="T_GG_PERSONA" ToRole="T_GG_TIPO_PERSONA" />
-        </EntityType>
-        <EntityType Name="T_GG_TIPO_PERSONA">
-          <Key>
-            <PropertyRef Name="idTipoPersona" />
-          </Key>
-          <Property Name="idTipoPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscTipoPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_PERSONA" Relationship="Self.FK_T_GG_PERSONA13" FromRole="T_GG_TIPO_PERSONA" ToRole="T_GG_PERSONA" />
-        </EntityType>
-        <EntityType Name="T_GMP_BITACORA_INCIDENCIA">
-          <Key>
-            <PropertyRef Name="idBitacora" />
-          </Key>
-          <Property Name="idBitacora" Type="Int32" Nullable="false" />
-          <Property Name="tipoIncidencia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idEmpleado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.FK_T_GMP_BITACORA_INCIDENCIA26" FromRole="T_GMP_BITACORA_INCIDENCIA" ToRole="T_GG_EMPLEADO" />
-        </EntityType>
-        <EntityType Name="T_GMP_RESERVA_SERVICIO">
-          <Key>
-            <PropertyRef Name="idReserva" />
-          </Key>
-          <Property Name="idReserva" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fecReserva" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="horReserva" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="tipoAtencion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipoCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idServicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idEmpresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="idEmpleado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPaciente" Type="Int16" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="T_GG_EMPLEADO_idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="T_GDA_PACIENTE_idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO27" FromRole="T_GMP_RESERVA_SERVICIO" ToRole="T_GDA_PACIENTE" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO21" FromRole="T_GMP_RESERVA_SERVICIO" ToRole="T_GG_EMPLEADO" />
-          <NavigationProperty Name="T_GG_EMPRESA" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO19" FromRole="T_GMP_RESERVA_SERVICIO" ToRole="T_GG_EMPRESA" />
-          <NavigationProperty Name="T_GMP_SERVICIO_SALUD" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO9" FromRole="T_GMP_RESERVA_SERVICIO" ToRole="T_GMP_SERVICIO_SALUD" />
-        </EntityType>
-        <EntityType Name="T_GMP_SERVICIO_SALUD">
-          <Key>
-            <PropertyRef Name="idServicio" />
-          </Key>
-          <Property Name="idServicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipoServicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomServicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="T_GMP_SERVICIO_SALUD_idServicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="COL_0" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="T_GDA_ESPECIALIDAD__MEDICA" Relationship="Self.FK_T_GDA_ESPECIALIDAD__MEDICA10" FromRole="T_GMP_SERVICIO_SALUD" ToRole="T_GDA_ESPECIALIDAD__MEDICA" />
-          <NavigationProperty Name="T_GMP_RESERVA_SERVICIO" Relationship="Self.FK_T_GMP_RESERVA_SERVICIO9" FromRole="T_GMP_SERVICIO_SALUD" ToRole="T_GMP_RESERVA_SERVICIO" />
-          <NavigationProperty Name="T_GMP_SERVICIO_SALUD1" Relationship="Self.FK_T_GMP_SERVICIO_SALUD11" FromRole="T_GMP_SERVICIO_SALUD" ToRole="T_GMP_SERVICIO_SALUD1" />
-          <NavigationProperty Name="T_GMP_SERVICIO_SALUD2" Relationship="Self.FK_T_GMP_SERVICIO_SALUD11" FromRole="T_GMP_SERVICIO_SALUD1" ToRole="T_GMP_SERVICIO_SALUD" />
-          <NavigationProperty Name="T_GMP_SERVICIO_SALUD11" Relationship="Self.FK_T_GMP_SERVICIO_SALUD12" FromRole="T_GMP_SERVICIO_SALUD" ToRole="T_GMP_SERVICIO_SALUD1" />
-          <NavigationProperty Name="T_GMP_SERVICIO_SALUD3" Relationship="Self.FK_T_GMP_SERVICIO_SALUD12" FromRole="T_GMP_SERVICIO_SALUD1" ToRole="T_GMP_SERVICIO_SALUD" />
+          <Property Name="idArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="TP2Model.FK_T_GG_EMPLEADO2" FromRole="T_GUQ_AREA" ToRole="T_GG_EMPLEADO" />
+          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.FK_T_GG_INMUEBLE1" FromRole="T_GUQ_AREA" ToRole="T_GG_INMUEBLE" />
+          <NavigationProperty Name="T_GUQ_ESTADÍSTICA_RECURSOS" Relationship="TP2Model.FK_T_GUQ_ESTADÍSTICA_RECURSOS1" FromRole="T_GUQ_AREA" ToRole="T_GUQ_ESTADÍSTICA_RECURSOS" />
+          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO1" FromRole="T_GUQ_AREA" ToRole="T_GUQ_PRESUPUESTO" />
         </EntityType>
         <EntityType Name="T_GUQ_CAMA">
           <Key>
-            <PropertyRef Name="idModelo" />
+            <PropertyRef Name="idCama" />
           </Key>
-          <Property Name="marca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="modelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="Self.FK_T_GUQ_CAMA43" FromRole="T_GUQ_CAMA" ToRole="T_GG_INMUEBLE" />
-          <NavigationProperty Name="T_GUQ_INGRESO_SALIDA_PACIENTE" Relationship="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE38" FromRole="T_GUQ_CAMA" ToRole="T_GUQ_INGRESO_SALIDA_PACIENTE" />
+          <Property Name="idCama" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idModelo" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GG_MODELO" Relationship="TP2Model.FK_T_GUQ_CAM1" FromRole="T_GUQ_CAMA" ToRole="T_GG_MODELO" />
         </EntityType>
         <EntityType Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
           <Key>
             <PropertyRef Name="idConsolidadoPresupuesto" />
           </Key>
-          <Property Name="idConsolidadoPresupuesto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="periodo" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="montoTotal" Type="Single" Nullable="false" />
-          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="Self.FK_T_GUQ_PRESUPUESTO7" FromRole="T_GUQ_CONSOLIDADO_PRESUPUESTO" ToRole="T_GUQ_PRESUPUESTO" />
+          <Property Name="idConsolidadoPresupuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anio" Type="Int32" Nullable="false" />
+          <Property Name="montoTotal" Type="Double" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" FromRole="T_GUQ_CONSOLIDADO_PRESUPUESTO" ToRole="T_GUQ_PRESUPUESTO" />
         </EntityType>
         <EntityType Name="T_GUQ_ESTADÍSTICA_RECURSOS">
           <Key>
-            <PropertyRef Name="mes" />
+            <PropertyRef Name="idEstadisticaRecurso" />
           </Key>
-          <Property Name="mes" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="área" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="montoHistórico" Type="Single" Nullable="false" />
-          <NavigationProperty Name="T_GUQ_INGRESO_SALIDA_PACIENTE" Relationship="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE5" FromRole="T_GUQ_ESTADÍSTICA_RECURSOS" ToRole="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="Self.FK_T_GUQ_PRESUPUESTO6" FromRole="T_GUQ_ESTADÍSTICA_RECURSOS" ToRole="T_GUQ_PRESUPUESTO" />
-          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN4" FromRole="T_GUQ_ESTADÍSTICA_RECURSOS" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          <Property Name="idEstadisticaRecurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mes" Type="Int32" Nullable="false" />
+          <Property Name="anio" Type="Int32" Nullable="false" />
+          <Property Name="idArea" Type="Int32" Nullable="false" />
+          <Property Name="montoHistórico" Type="Double" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_AREA" Relationship="TP2Model.FK_T_GUQ_ESTADÍSTICA_RECURSOS1" FromRole="T_GUQ_ESTADÍSTICA_RECURSOS" ToRole="T_GUQ_AREA" />
         </EntityType>
         <EntityType Name="T_GUQ_INGRESO_SALIDA_PACIENTE">
           <Key>
             <PropertyRef Name="idRegistro" />
           </Key>
-          <Property Name="idRegistro" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idRegistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fechaTraslado" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="mes" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GUQ_CAMA" Relationship="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE38" FromRole="T_GUQ_INGRESO_SALIDA_PACIENTE" ToRole="T_GUQ_CAMA" />
-          <NavigationProperty Name="T_GUQ_ESTADÍSTICA_RECURSOS" Relationship="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE5" FromRole="T_GUQ_INGRESO_SALIDA_PACIENTE" ToRole="T_GUQ_ESTADÍSTICA_RECURSOS" />
-          <NavigationProperty Name="T_GUQ_SOLICITUD_UCI" Relationship="Self.FK_T_GUQ_SOLICITUD_UCI3" FromRole="T_GUQ_INGRESO_SALIDA_PACIENTE" ToRole="T_GUQ_SOLICITUD_UCI" />
+          <Property Name="motivo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idSolicitud" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_SOLICITUD_UCI" Relationship="TP2Model.FK_T_GUQ_INGRESO_SALIDA_PACIENTE1" FromRole="T_GUQ_INGRESO_SALIDA_PACIENTE" ToRole="T_GUQ_SOLICITUD_UCI" />
+        </EntityType>
+        <EntityType Name="T_GUQ_INSUMO">
+          <Key>
+            <PropertyRef Name="idInsumo" />
+          </Key>
+          <Property Name="idInsumo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dscInsumo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="costoInsumo" Type="Double" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_INSUMO_TIPOOPERACION" Relationship="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION21" FromRole="T_GUQ_INSUMO" ToRole="T_GUQ_INSUMO_TIPOOPERACION" />
+        </EntityType>
+        <EntityType Name="T_GUQ_INSUMO_TIPOOPERACION">
+          <Key>
+            <PropertyRef Name="idOperación" />
+            <PropertyRef Name="idInsumo" />
+          </Key>
+          <Property Name="idOperación" Type="Int32" Nullable="false" />
+          <Property Name="idInsumo" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_INSUMO" Relationship="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION21" FromRole="T_GUQ_INSUMO_TIPOOPERACION" ToRole="T_GUQ_INSUMO" />
+          <NavigationProperty Name="T_GUQ_TIPO_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION20" FromRole="T_GUQ_INSUMO_TIPOOPERACION" ToRole="T_GUQ_TIPO_OPERACIÓN" />
         </EntityType>
         <EntityType Name="T_GUQ_PARTIDA">
           <Key>
             <PropertyRef Name="idPartida" />
           </Key>
-          <Property Name="idPartida" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscPartida" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipoPartida" Type="Boolean" Nullable="false" />
-          <Property Name="año" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="Self.FK_T_GUQ_PARTIDA2" FromRole="T_GUQ_PARTIDA" ToRole="T_GUQ_PRESUPUESTO" />
+          <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dscPartida" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tipoPartida" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" FromRole="T_GUQ_PARTIDA" ToRole="T_GUQ_PRESUPUESTO" />
         </EntityType>
         <EntityType Name="T_GUQ_PRESUPUESTO">
           <Key>
-            <PropertyRef Name="año" />
+            <PropertyRef Name="idPresupuesto" />
           </Key>
-          <Property Name="año" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="mes" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="área" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="monto" Type="Single" Nullable="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="T_GUQ_ESTADÍSTICA_RECURSOS_mes" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idConsolidadoPresupuesto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" Relationship="Self.FK_T_GUQ_PRESUPUESTO7" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
-          <NavigationProperty Name="T_GUQ_ESTADÍSTICA_RECURSOS" Relationship="Self.FK_T_GUQ_PRESUPUESTO6" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_ESTADÍSTICA_RECURSOS" />
-          <NavigationProperty Name="T_GUQ_PARTIDA" Relationship="Self.FK_T_GUQ_PARTIDA2" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_PARTIDA" />
+          <Property Name="idPresupuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anio" Type="Int32" Nullable="false" />
+          <Property Name="idArea" Type="Int32" Nullable="false" />
+          <Property Name="monto" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GUQ_AREA" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO1" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_AREA" />
+          <NavigationProperty Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" Relationship="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
+          <NavigationProperty Name="T_GUQ_PARTIDA" Relationship="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_PARTIDA" />
         </EntityType>
         <EntityType Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
           <Key>
             <PropertyRef Name="idReserva" />
           </Key>
-          <Property Name="idReserva" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idOperación" Type="Int32" Nullable="false" />
           <Property Name="duración" Type="Int32" Nullable="false" />
-          <Property Name="día" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hora" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="mes" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idPaciente" Type="Int16" Nullable="false" />
-          <Property Name="codBien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN29" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GDA_PACIENTE" />
-          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN41" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GG_INMUEBLE" />
-          <NavigationProperty Name="T_GUQ_ESTADÍSTICA_RECURSOS" Relationship="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN4" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GUQ_ESTADÍSTICA_RECURSOS" />
-          <NavigationProperty Name="T_GUQ_TIPO_OPERACIÓN" Relationship="Self.T_0" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GUQ_TIPO_OPERACIÓN" />
-          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="Self.T_2" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GG_EMPLEADO" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="horaInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idPaciente" Type="Int32" Nullable="false" />
+          <Property Name="idInmueble" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN2" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GDA_PACIENTE" />
+          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN3" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GG_INMUEBLE" />
+          <NavigationProperty Name="T_GUQ_TIPO_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GUQ_TIPO_OPERACIÓN" />
         </EntityType>
         <EntityType Name="T_GUQ_SOLICITUD_UCI">
           <Key>
             <PropertyRef Name="idSolicitud" />
           </Key>
-          <Property Name="idSolicitud" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idRegistro" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="motivo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="nroHistoriaClinica" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="Self.FK_T_GUQ_SOLICITUD_UCI30" FromRole="T_GUQ_SOLICITUD_UCI" ToRole="T_GDA_HISTORIA_CLINICA" />
-          <NavigationProperty Name="T_GUQ_INGRESO_SALIDA_PACIENTE" Relationship="Self.FK_T_GUQ_SOLICITUD_UCI3" FromRole="T_GUQ_SOLICITUD_UCI" ToRole="T_GUQ_INGRESO_SALIDA_PACIENTE" />
+          <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="TP2Model.FK_T_GUQ_SOLICITUD_UCI1" FromRole="T_GUQ_SOLICITUD_UCI" ToRole="T_GDA_HISTORIA_CLINICA" />
+          <NavigationProperty Name="T_GUQ_INGRESO_SALIDA_PACIENTE" Relationship="TP2Model.FK_T_GUQ_INGRESO_SALIDA_PACIENTE1" FromRole="T_GUQ_SOLICITUD_UCI" ToRole="T_GUQ_INGRESO_SALIDA_PACIENTE" />
         </EntityType>
         <EntityType Name="T_GUQ_TIPO_OPERACIÓN">
           <Key>
             <PropertyRef Name="idOperación" />
           </Key>
-          <Property Name="idOperación" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dscTipoOperación" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="insumos" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="Self.T_0" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          <Property Name="idOperación" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dscTipoOperación" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="costoTipoOperacion" Type="Double" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_INSUMO_TIPOOPERACION" Relationship="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION20" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GUQ_INSUMO_TIPOOPERACION" />
+          <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
+          <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GG_INMUEBLE" />
         </EntityType>
-        <Association Name="FK_T_GCT_PROGRAMACION_MEDICA42">
-          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
-          <End Role="T_GCT_PROGRAMACION_MEDICA" Type="Self.T_GCT_PROGRAMACION_MEDICA" Multiplicity="*" />
+        <Association Name="FK_T_GCT_PROGRAMACION_MEDICA1">
+          <End Type="TP2Model.T_GG_EMPLEADO" Role="T_GG_EMPLEADO" Multiplicity="1" />
+          <End Type="TP2Model.T_GCT_PROGRAMACION_MEDICA" Role="T_GCT_PROGRAMACION_MEDICA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
+            <Principal Role="T_GG_EMPLEADO">
+              <PropertyRef Name="idEmpleado" />
             </Principal>
             <Dependent Role="T_GCT_PROGRAMACION_MEDICA">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GDA_ESPECIALIDAD__MEDICA10">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="1" />
-          <End Role="T_GDA_ESPECIALIDAD__MEDICA" Type="Self.T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="*" />
+        <Association Name="FK_T_GCT_PROGRAMACION_MEDICA2">
+          <End Type="TP2Model.T_GG_INMUEBLE" Role="T_GG_INMUEBLE" Multiplicity="1" />
+          <End Type="TP2Model.T_GCT_PROGRAMACION_MEDICA" Role="T_GCT_PROGRAMACION_MEDICA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
+            <Principal Role="T_GG_INMUEBLE">
+              <PropertyRef Name="idInmueble" />
             </Principal>
-            <Dependent Role="T_GDA_ESPECIALIDAD__MEDICA">
-              <PropertyRef Name="idServicio" />
+            <Dependent Role="T_GCT_PROGRAMACION_MEDICA">
+              <PropertyRef Name="idInmueble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GDA_HISTORIA_CLINICA28">
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="1" />
-          <End Role="T_GDA_HISTORIA_CLINICA" Type="Self.T_GDA_HISTORIA_CLINICA" Multiplicity="*" />
+        <Association Name="FK_T_GG_EMPLEADO1">
+          <End Type="TP2Model.T_GDA_ESPECIALIDAD__MEDICA" Role="T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="1" />
+          <End Type="TP2Model.T_GG_EMPLEADO" Role="T_GG_EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GDA_ESPECIALIDAD__MEDICA">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="T_GG_EMPLEADO">
+              <PropertyRef Name="idEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GDA_HISTORIA_CLINICA4">
+          <End Type="TP2Model.T_GDA_PACIENTE" Role="T_GDA_PACIENTE" Multiplicity="1" />
+          <End Type="TP2Model.T_GDA_HISTORIA_CLINICA" Role="T_GDA_HISTORIA_CLINICA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Principal>
             <Dependent Role="T_GDA_HISTORIA_CLINICA">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_SOLICITUD_UCI30">
-          <End Role="T_GDA_HISTORIA_CLINICA" Type="Self.T_GDA_HISTORIA_CLINICA" Multiplicity="1" />
-          <End Role="T_GUQ_SOLICITUD_UCI" Type="Self.T_GUQ_SOLICITUD_UCI" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_SOLICITUD_UCI1">
+          <End Type="TP2Model.T_GDA_HISTORIA_CLINICA" Role="T_GDA_HISTORIA_CLINICA" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_SOLICITUD_UCI" Role="T_GUQ_SOLICITUD_UCI" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GDA_HISTORIA_CLINICA">
               <PropertyRef Name="nroHistoriaClinica" />
@@ -1368,501 +978,151 @@ warning 6035: The relationship 'FK_T_GUQ_CAMA39' has columns that are not part o
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GDA_PACIENTE47">
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="1" />
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_PERSONA">
-              <PropertyRef Name="idPersona" />
-            </Principal>
-            <Dependent Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO27">
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN2">
+          <End Type="TP2Model.T_GDA_PACIENTE" Role="T_GDA_PACIENTE" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idPaciente" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="T_GDA_PACIENTE_idPersona" />
-              <PropertyRef Name="idPaciente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN29">
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="1" />
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Principal>
             <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="idPersona" />
               <PropertyRef Name="idPaciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GG_INMUEBLE44">
-          <End Role="T_GG_BIEN" Type="Self.T_GG_BIEN" Multiplicity="1" />
-          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="0..1" />
+        <Association Name="FK_T_GG_EMPLEADO2">
+          <End Type="TP2Model.T_GUQ_AREA" Role="T_GUQ_AREA" Multiplicity="1" />
+          <End Type="TP2Model.T_GG_EMPLEADO" Role="T_GG_EMPLEADO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_BIEN">
-              <PropertyRef Name="codBien" />
-            </Principal>
-            <Dependent Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_MUEBLE40">
-          <End Role="T_GG_BIEN" Type="Self.T_GG_BIEN" Multiplicity="1" />
-          <End Role="T_GG_MUEBLE" Type="Self.T_GG_MUEBLE" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_BIEN">
-              <PropertyRef Name="codBien" />
-            </Principal>
-            <Dependent Role="T_GG_MUEBLE">
-              <PropertyRef Name="codBien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_EMPLEADO46">
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="1" />
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_PERSONA">
-              <PropertyRef Name="idPersona" />
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
             </Principal>
             <Dependent Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
+              <PropertyRef Name="idArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GMP_BITACORA_INCIDENCIA26">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_GMP_BITACORA_INCIDENCIA" Type="Self.T_GMP_BITACORA_INCIDENCIA" Multiplicity="*" />
+        <Association Name="FK_T_GG_INMUEBLE1">
+          <End Type="TP2Model.T_GUQ_AREA" Role="T_GUQ_AREA" Multiplicity="1" />
+          <End Type="TP2Model.T_GG_INMUEBLE" Role="T_GG_INMUEBLE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
             </Principal>
-            <Dependent Role="T_GMP_BITACORA_INCIDENCIA">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
+            <Dependent Role="T_GG_INMUEBLE">
+              <PropertyRef Name="idArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO21">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPLEADO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="T_GG_EMPLEADO_idPersona" />
-              <PropertyRef Name="idEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_EMPRESA45">
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="1" />
-          <End Role="T_GG_EMPRESA" Type="Self.T_GG_EMPRESA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_PERSONA">
-              <PropertyRef Name="idPersona" />
-            </Principal>
-            <Dependent Role="T_GG_EMPRESA">
-              <PropertyRef Name="idPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GG_MUEBLE20">
-          <End Role="T_GG_EMPRESA" Type="Self.T_GG_EMPRESA" Multiplicity="1" />
-          <End Role="T_GG_MUEBLE" Type="Self.T_GG_MUEBLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPRESA">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="T_GG_MUEBLE">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO19">
-          <End Role="T_GG_EMPRESA" Type="Self.T_GG_EMPRESA" Multiplicity="0..1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_EMPRESA">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="idPersona" />
-              <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_CAMA43">
-          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
-          <End Role="T_GUQ_CAMA" Type="Self.T_GUQ_CAMA" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN3">
+          <End Type="TP2Model.T_GG_INMUEBLE" Role="T_GG_INMUEBLE" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
-            </Principal>
-            <Dependent Role="T_GUQ_CAMA">
-              <PropertyRef Name="codBien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN41">
-          <End Role="T_GG_INMUEBLE" Type="Self.T_GG_INMUEBLE" Multiplicity="1" />
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GG_INMUEBLE">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idInmueble" />
             </Principal>
             <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="codBien" />
+              <PropertyRef Name="idInmueble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GG_MUEBLE15">
-          <End Role="T_GG_MODELO" Type="Self.T_GG_MODELO" Multiplicity="1" />
-          <End Role="T_GG_MUEBLE" Type="Self.T_GG_MUEBLE" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_CAM1">
+          <End Type="TP2Model.T_GG_MODELO" Role="T_GG_MODELO" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_CAMA" Role="T_GUQ_CAMA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_GG_MODELO">
               <PropertyRef Name="idModelo" />
             </Principal>
-            <Dependent Role="T_GG_MUEBLE">
+            <Dependent Role="T_GUQ_CAMA">
               <PropertyRef Name="idModelo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GG_PERSONA13">
-          <End Role="T_GG_TIPO_PERSONA" Type="Self.T_GG_TIPO_PERSONA" Multiplicity="1" />
-          <End Role="T_GG_PERSONA" Type="Self.T_GG_PERSONA" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_ESTADÍSTICA_RECURSOS1">
+          <End Type="TP2Model.T_GUQ_AREA" Role="T_GUQ_AREA" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_ESTADÍSTICA_RECURSOS" Role="T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GG_TIPO_PERSONA">
-              <PropertyRef Name="idTipoPersona" />
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
             </Principal>
-            <Dependent Role="T_GG_PERSONA">
-              <PropertyRef Name="idTipoPersona" />
+            <Dependent Role="T_GUQ_ESTADÍSTICA_RECURSOS">
+              <PropertyRef Name="idArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GMP_RESERVA_SERVICIO9">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="1" />
-          <End Role="T_GMP_RESERVA_SERVICIO" Type="Self.T_GMP_RESERVA_SERVICIO" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_PRESUPUESTO1">
+          <End Type="TP2Model.T_GUQ_AREA" Role="T_GUQ_AREA" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_PRESUPUESTO" Role="T_GUQ_PRESUPUESTO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GMP_RESERVA_SERVICIO">
-              <PropertyRef Name="idServicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_SERVICIO_SALUD11">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="0..1" />
-          <End Role="T_GMP_SERVICIO_SALUD1" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GMP_SERVICIO_SALUD1">
-              <PropertyRef Name="T_GMP_SERVICIO_SALUD_idServicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GMP_SERVICIO_SALUD12">
-          <End Role="T_GMP_SERVICIO_SALUD" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="0..1" />
-          <End Role="T_GMP_SERVICIO_SALUD1" Type="Self.T_GMP_SERVICIO_SALUD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GMP_SERVICIO_SALUD">
-              <PropertyRef Name="idServicio" />
-            </Principal>
-            <Dependent Role="T_GMP_SERVICIO_SALUD1">
-              <PropertyRef Name="COL_0" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE38">
-          <End Role="T_GUQ_CAMA" Type="Self.T_GUQ_CAMA" Multiplicity="1" />
-          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_CAMA">
-              <PropertyRef Name="idModelo" />
-            </Principal>
-            <Dependent Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
-              <PropertyRef Name="idModelo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_PRESUPUESTO7">
-          <End Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" Type="Self.T_GUQ_CONSOLIDADO_PRESUPUESTO" Multiplicity="1" />
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_CONSOLIDADO_PRESUPUESTO">
-              <PropertyRef Name="idConsolidadoPresupuesto" />
+            <Principal Role="T_GUQ_AREA">
+              <PropertyRef Name="idArea" />
             </Principal>
             <Dependent Role="T_GUQ_PRESUPUESTO">
-              <PropertyRef Name="idConsolidadoPresupuesto" />
+              <PropertyRef Name="idArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE5">
-          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="1" />
-          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE1">
+          <End Type="TP2Model.T_GUQ_SOLICITUD_UCI" Role="T_GUQ_SOLICITUD_UCI" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_INGRESO_SALIDA_PACIENTE" Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GUQ_ESTADÍSTICA_RECURSOS">
-              <PropertyRef Name="mes" />
+            <Principal Role="T_GUQ_SOLICITUD_UCI">
+              <PropertyRef Name="idSolicitud" />
             </Principal>
             <Dependent Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
-              <PropertyRef Name="mes" />
+              <PropertyRef Name="idSolicitud" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_PRESUPUESTO6">
-          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="1" />
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_INSUMO_TIPOOPERACION21">
+          <End Type="TP2Model.T_GUQ_INSUMO" Role="T_GUQ_INSUMO" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_INSUMO_TIPOOPERACION" Role="T_GUQ_INSUMO_TIPOOPERACION" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GUQ_ESTADÍSTICA_RECURSOS">
-              <PropertyRef Name="mes" />
+            <Principal Role="T_GUQ_INSUMO">
+              <PropertyRef Name="idInsumo" />
             </Principal>
-            <Dependent Role="T_GUQ_PRESUPUESTO">
-              <PropertyRef Name="T_GUQ_ESTADÍSTICA_RECURSOS_mes" />
+            <Dependent Role="T_GUQ_INSUMO_TIPOOPERACION">
+              <PropertyRef Name="idInsumo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN4">
-          <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" Type="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Multiplicity="1" />
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
+        <Association Name="FK_T_GUQ_INSUMO_TIPOOPERACION20">
+          <End Type="TP2Model.T_GUQ_TIPO_OPERACIÓN" Role="T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_INSUMO_TIPOOPERACION" Role="T_GUQ_INSUMO_TIPOOPERACION" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="T_GUQ_ESTADÍSTICA_RECURSOS">
-              <PropertyRef Name="mes" />
+            <Principal Role="T_GUQ_TIPO_OPERACIÓN">
+              <PropertyRef Name="idOperación" />
+            </Principal>
+            <Dependent Role="T_GUQ_INSUMO_TIPOOPERACION">
+              <PropertyRef Name="idOperación" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN1">
+          <End Type="TP2Model.T_GUQ_TIPO_OPERACIÓN" Role="T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_TIPO_OPERACIÓN">
+              <PropertyRef Name="idOperación" />
             </Principal>
             <Dependent Role="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <PropertyRef Name="mes" />
+              <PropertyRef Name="idOperación" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_SOLICITUD_UCI3">
-          <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" Type="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Multiplicity="1" />
-          <End Role="T_GUQ_SOLICITUD_UCI" Type="Self.T_GUQ_SOLICITUD_UCI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_INGRESO_SALIDA_PACIENTE">
-              <PropertyRef Name="idRegistro" />
-            </Principal>
-            <Dependent Role="T_GUQ_SOLICITUD_UCI">
-              <PropertyRef Name="idRegistro" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
+          <End Type="TP2Model.T_GUQ_CONSOLIDADO_PRESUPUESTO" Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" Multiplicity="*" />
+          <End Type="TP2Model.T_GUQ_PRESUPUESTO" Role="T_GUQ_PRESUPUESTO" Multiplicity="*" />
         </Association>
-        <Association Name="FK_T_GUQ_PARTIDA2">
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="0..1" />
-          <End Role="T_GUQ_PARTIDA" Type="Self.T_GUQ_PARTIDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_PRESUPUESTO">
-              <PropertyRef Name="año" />
-            </Principal>
-            <Dependent Role="T_GUQ_PARTIDA">
-              <PropertyRef Name="año" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="T_GUQ_INMUEBLE_TIPO_OPERACION">
+          <End Type="TP2Model.T_GG_INMUEBLE" Role="T_GG_INMUEBLE" Multiplicity="*" />
+          <End Type="TP2Model.T_GUQ_TIPO_OPERACIÓN" Role="T_GUQ_TIPO_OPERACIÓN" Multiplicity="*" />
         </Association>
-        <Association Name="T_0">
-          <End Role="T_GUQ_TIPO_OPERACIÓN" Type="Self.T_GUQ_TIPO_OPERACIÓN" Multiplicity="*" />
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
+        <Association Name="T_GUQ_PRESUPUESTO_PARTIDA">
+          <End Type="TP2Model.T_GUQ_PRESUPUESTO" Role="T_GUQ_PRESUPUESTO" Multiplicity="*" />
+          <End Type="TP2Model.T_GUQ_PARTIDA" Role="T_GUQ_PARTIDA" Multiplicity="*" />
         </Association>
-        <Association Name="T_1">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
-          <End Role="T_GDA_HISTORIA_CLINICA" Type="Self.T_GDA_HISTORIA_CLINICA" Multiplicity="*" />
-        </Association>
-        <Association Name="T_2">
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
-          <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" Type="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Multiplicity="*" />
-        </Association>
-        <Association Name="T_3">
-          <End Role="T_GDA_ESPECIALIDAD__MEDICA" Type="Self.T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="*" />
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
-        </Association>
-        <Association Name="T_4">
-          <End Role="T_GCT_PROGRAMACION_MEDICA" Type="Self.T_GCT_PROGRAMACION_MEDICA" Multiplicity="*" />
-          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="RicardoPalmaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="T_GCT_PROGRAMACION_MEDICA" EntityType="Self.T_GCT_PROGRAMACION_MEDICA" />
-          <EntitySet Name="T_GDA_ESPECIALIDAD__MEDICA" EntityType="Self.T_GDA_ESPECIALIDAD__MEDICA" />
-          <EntitySet Name="T_GDA_HISTORIA_CLINICA" EntityType="Self.T_GDA_HISTORIA_CLINICA" />
-          <EntitySet Name="T_GDA_PACIENTE" EntityType="Self.T_GDA_PACIENTE" />
-          <EntitySet Name="T_GG_BIEN" EntityType="Self.T_GG_BIEN" />
-          <EntitySet Name="T_GG_EMPLEADO" EntityType="Self.T_GG_EMPLEADO" />
-          <EntitySet Name="T_GG_EMPRESA" EntityType="Self.T_GG_EMPRESA" />
-          <EntitySet Name="T_GG_INMUEBLE" EntityType="Self.T_GG_INMUEBLE" />
-          <EntitySet Name="T_GG_MODELO" EntityType="Self.T_GG_MODELO" />
-          <EntitySet Name="T_GG_MUEBLE" EntityType="Self.T_GG_MUEBLE" />
-          <EntitySet Name="T_GG_PERSONA" EntityType="Self.T_GG_PERSONA" />
-          <EntitySet Name="T_GG_TIPO_PERSONA" EntityType="Self.T_GG_TIPO_PERSONA" />
-          <EntitySet Name="T_GMP_BITACORA_INCIDENCIA" EntityType="Self.T_GMP_BITACORA_INCIDENCIA" />
-          <EntitySet Name="T_GMP_RESERVA_SERVICIO" EntityType="Self.T_GMP_RESERVA_SERVICIO" />
-          <EntitySet Name="T_GMP_SERVICIO_SALUD" EntityType="Self.T_GMP_SERVICIO_SALUD" />
-          <EntitySet Name="T_GUQ_CAMA" EntityType="Self.T_GUQ_CAMA" />
-          <EntitySet Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntityType="Self.T_GUQ_CONSOLIDADO_PRESUPUESTO" />
-          <EntitySet Name="T_GUQ_ESTADÍSTICA_RECURSOS" EntityType="Self.T_GUQ_ESTADÍSTICA_RECURSOS" />
-          <EntitySet Name="T_GUQ_INGRESO_SALIDA_PACIENTE" EntityType="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" />
-          <EntitySet Name="T_GUQ_PARTIDA" EntityType="Self.T_GUQ_PARTIDA" />
-          <EntitySet Name="T_GUQ_PRESUPUESTO" EntityType="Self.T_GUQ_PRESUPUESTO" />
-          <EntitySet Name="T_GUQ_RESERVA_SALA_OPERACIÓN" EntityType="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          <EntitySet Name="T_GUQ_SOLICITUD_UCI" EntityType="Self.T_GUQ_SOLICITUD_UCI" />
-          <EntitySet Name="T_GUQ_TIPO_OPERACIÓN" EntityType="Self.T_GUQ_TIPO_OPERACIÓN" />
-          <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA42" Association="Self.FK_T_GCT_PROGRAMACION_MEDICA42">
-            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
-            <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GDA_ESPECIALIDAD__MEDICA10" Association="Self.FK_T_GDA_ESPECIALIDAD__MEDICA10">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GDA_HISTORIA_CLINICA28" Association="Self.FK_T_GDA_HISTORIA_CLINICA28">
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-            <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_SOLICITUD_UCI30" Association="Self.FK_T_GUQ_SOLICITUD_UCI30">
-            <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
-            <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GDA_PACIENTE47" Association="Self.FK_T_GDA_PACIENTE47">
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO27" Association="Self.FK_T_GMP_RESERVA_SERVICIO27">
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN29" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN29">
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_INMUEBLE44" Association="Self.FK_T_GG_INMUEBLE44">
-            <End Role="T_GG_BIEN" EntitySet="T_GG_BIEN" />
-            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_MUEBLE40" Association="Self.FK_T_GG_MUEBLE40">
-            <End Role="T_GG_BIEN" EntitySet="T_GG_BIEN" />
-            <End Role="T_GG_MUEBLE" EntitySet="T_GG_MUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_EMPLEADO46" Association="Self.FK_T_GG_EMPLEADO46">
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_BITACORA_INCIDENCIA26" Association="Self.FK_T_GMP_BITACORA_INCIDENCIA26">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_GMP_BITACORA_INCIDENCIA" EntitySet="T_GMP_BITACORA_INCIDENCIA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO21" Association="Self.FK_T_GMP_RESERVA_SERVICIO21">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_EMPRESA45" Association="Self.FK_T_GG_EMPRESA45">
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-            <End Role="T_GG_EMPRESA" EntitySet="T_GG_EMPRESA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_MUEBLE20" Association="Self.FK_T_GG_MUEBLE20">
-            <End Role="T_GG_EMPRESA" EntitySet="T_GG_EMPRESA" />
-            <End Role="T_GG_MUEBLE" EntitySet="T_GG_MUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO19" Association="Self.FK_T_GMP_RESERVA_SERVICIO19">
-            <End Role="T_GG_EMPRESA" EntitySet="T_GG_EMPRESA" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_CAMA43" Association="Self.FK_T_GUQ_CAMA43">
-            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
-            <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN41" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN41">
-            <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_MUEBLE15" Association="Self.FK_T_GG_MUEBLE15">
-            <End Role="T_GG_MODELO" EntitySet="T_GG_MODELO" />
-            <End Role="T_GG_MUEBLE" EntitySet="T_GG_MUEBLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GG_PERSONA13" Association="Self.FK_T_GG_PERSONA13">
-            <End Role="T_GG_TIPO_PERSONA" EntitySet="T_GG_TIPO_PERSONA" />
-            <End Role="T_GG_PERSONA" EntitySet="T_GG_PERSONA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_RESERVA_SERVICIO9" Association="Self.FK_T_GMP_RESERVA_SERVICIO9">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GMP_RESERVA_SERVICIO" EntitySet="T_GMP_RESERVA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_SERVICIO_SALUD11" Association="Self.FK_T_GMP_SERVICIO_SALUD11">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GMP_SERVICIO_SALUD1" EntitySet="T_GMP_SERVICIO_SALUD" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GMP_SERVICIO_SALUD12" Association="Self.FK_T_GMP_SERVICIO_SALUD12">
-            <End Role="T_GMP_SERVICIO_SALUD" EntitySet="T_GMP_SERVICIO_SALUD" />
-            <End Role="T_GMP_SERVICIO_SALUD1" EntitySet="T_GMP_SERVICIO_SALUD" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE38" Association="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE38">
-            <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
-            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO7" Association="Self.FK_T_GUQ_PRESUPUESTO7">
-            <End Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntitySet="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_INGRESO_SALIDA_PACIENTE5" Association="Self.FK_T_GUQ_INGRESO_SALIDA_PACIENTE5">
-            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO6" Association="Self.FK_T_GUQ_PRESUPUESTO6">
-            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_RESERVA_SALA_OPERACIÓN4" Association="Self.FK_T_GUQ_RESERVA_SALA_OPERACIÓN4">
-            <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_SOLICITUD_UCI3" Association="Self.FK_T_GUQ_SOLICITUD_UCI3">
-            <End Role="T_GUQ_INGRESO_SALIDA_PACIENTE" EntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE" />
-            <End Role="T_GUQ_SOLICITUD_UCI" EntitySet="T_GUQ_SOLICITUD_UCI" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PARTIDA2" Association="Self.FK_T_GUQ_PARTIDA2">
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
-            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
-          </AssociationSet>
-          <AssociationSet Name="T_0" Association="Self.T_0">
-            <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          </AssociationSet>
-          <AssociationSet Name="T_1" Association="Self.T_1">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_GDA_HISTORIA_CLINICA" EntitySet="T_GDA_HISTORIA_CLINICA" />
-          </AssociationSet>
-          <AssociationSet Name="T_2" Association="Self.T_2">
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-            <End Role="T_GUQ_RESERVA_SALA_OPERACIÓN" EntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          </AssociationSet>
-          <AssociationSet Name="T_3" Association="Self.T_3">
-            <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-          </AssociationSet>
-          <AssociationSet Name="T_4" Association="Self.T_4">
-            <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
-            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1871,321 +1131,230 @@ warning 6035: The relationship 'FK_T_GUQ_CAMA39' has columns that are not part o
           <EntitySetMapping Name="T_GCT_PROGRAMACION_MEDICA">
             <EntityTypeMapping TypeName="TP2Model.T_GCT_PROGRAMACION_MEDICA">
               <MappingFragment StoreEntitySet="T_GCT_PROGRAMACION_MEDICA">
-                <ScalarProperty Name="idProgramcacion" ColumnName="idProgramcacion" />
-                <ScalarProperty Name="prestaciones" ColumnName="prestaciones" />
-                <ScalarProperty Name="disPrestaciones" ColumnName="disPrestaciones" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
-                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
-                <ScalarProperty Name="anotaciones" ColumnName="anotaciones" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="codBien" ColumnName="codBien" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="anotaciones" ColumnName="anotaciones" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="disPrestaciones" ColumnName="disPrestaciones" />
+                <ScalarProperty Name="prestaciones" ColumnName="prestaciones" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="idProgramcacion" ColumnName="idProgramcacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GDA_ESPECIALIDAD__MEDICA">
             <EntityTypeMapping TypeName="TP2Model.T_GDA_ESPECIALIDAD__MEDICA">
               <MappingFragment StoreEntitySet="T_GDA_ESPECIALIDAD__MEDICA">
-                <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
                 <ScalarProperty Name="nomEspecialidad" ColumnName="nomEspecialidad" />
-                <ScalarProperty Name="idServicio" ColumnName="idServicio" />
+                <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GDA_HISTORIA_CLINICA">
             <EntityTypeMapping TypeName="TP2Model.T_GDA_HISTORIA_CLINICA">
               <MappingFragment StoreEntitySet="T_GDA_HISTORIA_CLINICA">
-                <ScalarProperty Name="nroHistoriaClinica" ColumnName="nroHistoriaClinica" />
-                <ScalarProperty Name="diagnóstico" ColumnName="diagnóstico" />
                 <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="diagnóstico" ColumnName="diagnóstico" />
+                <ScalarProperty Name="nroHistoriaClinica" ColumnName="nroHistoriaClinica" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GDA_PACIENTE">
             <EntityTypeMapping TypeName="TP2Model.T_GDA_PACIENTE">
               <MappingFragment StoreEntitySet="T_GDA_PACIENTE">
-                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
-                <ScalarProperty Name="nomPaciente" ColumnName="nomPaciente" />
-                <ScalarProperty Name="edad" ColumnName="edad" />
-                <ScalarProperty Name="fecNacimiento" ColumnName="fecNacimiento" />
-                <ScalarProperty Name="segmentacion" ColumnName="segmentacion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GG_BIEN">
-            <EntityTypeMapping TypeName="TP2Model.T_GG_BIEN">
-              <MappingFragment StoreEntitySet="T_GG_BIEN">
-                <ScalarProperty Name="codBien" ColumnName="codBien" />
-                <ScalarProperty Name="dscBien" ColumnName="dscBien" />
-                <ScalarProperty Name="fecAdquision" ColumnName="fecAdquision" />
+                <ScalarProperty Name="segmentacion" ColumnName="segmentacion" />
+                <ScalarProperty Name="fecNacimiento" ColumnName="fecNacimiento" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="mailPaciente" ColumnName="mailPaciente" />
+                <ScalarProperty Name="telPaciente" ColumnName="telPaciente" />
+                <ScalarProperty Name="dirPaciente" ColumnName="dirPaciente" />
+                <ScalarProperty Name="numDNI" ColumnName="numDNI" />
+                <ScalarProperty Name="nomPaciente" ColumnName="nomPaciente" />
+                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GG_EMPLEADO">
             <EntityTypeMapping TypeName="TP2Model.T_GG_EMPLEADO">
               <MappingFragment StoreEntitySet="T_GG_EMPLEADO">
-                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-                <ScalarProperty Name="nroDni" ColumnName="nroDni" />
-                <ScalarProperty Name="nomEmpleado" ColumnName="nomEmpleado" />
-                <ScalarProperty Name="fecIngreso" ColumnName="fecIngreso" />
                 <ScalarProperty Name="stdEmplead" ColumnName="stdEmplead" />
-                <ScalarProperty Name="dscCargo" ColumnName="dscCargo" />
+                <ScalarProperty Name="costoHora" ColumnName="costoHora" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
+                <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
                 <ScalarProperty Name="dscProfesion" ColumnName="dscProfesion" />
-                <ScalarProperty Name="dscArea" ColumnName="dscArea" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GG_EMPRESA">
-            <EntityTypeMapping TypeName="TP2Model.T_GG_EMPRESA">
-              <MappingFragment StoreEntitySet="T_GG_EMPRESA">
-                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
-                <ScalarProperty Name="nroRuc" ColumnName="nroRuc" />
-                <ScalarProperty Name="razonsocial" ColumnName="razonsocial" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="dscCargo" ColumnName="dscCargo" />
+                <ScalarProperty Name="fecIngreso" ColumnName="fecIngreso" />
+                <ScalarProperty Name="nomEmpleado" ColumnName="nomEmpleado" />
+                <ScalarProperty Name="nroDni" ColumnName="nroDni" />
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GG_INMUEBLE">
             <EntityTypeMapping TypeName="TP2Model.T_GG_INMUEBLE">
               <MappingFragment StoreEntitySet="T_GG_INMUEBLE">
-                <ScalarProperty Name="dscTipoInmueble" ColumnName="dscTipoInmueble" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="codBien" ColumnName="codBien" />
+                <ScalarProperty Name="dscTipoInmueble" ColumnName="dscTipoInmueble" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GG_MODELO">
             <EntityTypeMapping TypeName="TP2Model.T_GG_MODELO">
               <MappingFragment StoreEntitySet="T_GG_MODELO">
-                <ScalarProperty Name="idModelo" ColumnName="idModelo" />
-                <ScalarProperty Name="nomModelo" ColumnName="nomModelo" />
                 <ScalarProperty Name="dscMarca" ColumnName="dscMarca" />
-                <ScalarProperty Name="T_GG_MUEBLE_idModelo" ColumnName="T_GG_MUEBLE_idModelo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GG_MUEBLE">
-            <EntityTypeMapping TypeName="TP2Model.T_GG_MUEBLE">
-              <MappingFragment StoreEntitySet="T_GG_MUEBLE">
-                <ScalarProperty Name="dscFunción" ColumnName="dscFunción" />
-                <ScalarProperty Name="dscAplicacionMedica" ColumnName="dscAplicacionMedica" />
-                <ScalarProperty Name="garantia" ColumnName="garantia" />
-                <ScalarProperty Name="tipoMueble" ColumnName="tipoMueble" />
+                <ScalarProperty Name="nomModelo" ColumnName="nomModelo" />
                 <ScalarProperty Name="idModelo" ColumnName="idModelo" />
-                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
-                <ScalarProperty Name="codBien" ColumnName="codBien" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="T_GG_PERSONA">
-            <EntityTypeMapping TypeName="TP2Model.T_GG_PERSONA">
-              <MappingFragment StoreEntitySet="T_GG_PERSONA">
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-                <ScalarProperty Name="dirPersona" ColumnName="dirPersona" />
-                <ScalarProperty Name="telPersona" ColumnName="telPersona" />
-                <ScalarProperty Name="emailPersona" ColumnName="emailPersona" />
-                <ScalarProperty Name="idTipoPersona" ColumnName="idTipoPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GG_TIPO_PERSONA">
-            <EntityTypeMapping TypeName="TP2Model.T_GG_TIPO_PERSONA">
-              <MappingFragment StoreEntitySet="T_GG_TIPO_PERSONA">
-                <ScalarProperty Name="idTipoPersona" ColumnName="idTipoPersona" />
-                <ScalarProperty Name="dscTipoPersona" ColumnName="dscTipoPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GMP_BITACORA_INCIDENCIA">
-            <EntityTypeMapping TypeName="TP2Model.T_GMP_BITACORA_INCIDENCIA">
-              <MappingFragment StoreEntitySet="T_GMP_BITACORA_INCIDENCIA">
-                <ScalarProperty Name="idBitacora" ColumnName="idBitacora" />
-                <ScalarProperty Name="tipoIncidencia" ColumnName="tipoIncidencia" />
-                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+          <EntitySetMapping Name="T_GUQ_AREA">
+            <EntityTypeMapping TypeName="TP2Model.T_GUQ_AREA">
+              <MappingFragment StoreEntitySet="T_GUQ_AREA">
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GMP_RESERVA_SERVICIO">
-            <EntityTypeMapping TypeName="TP2Model.T_GMP_RESERVA_SERVICIO">
-              <MappingFragment StoreEntitySet="T_GMP_RESERVA_SERVICIO">
-                <ScalarProperty Name="idReserva" ColumnName="idReserva" />
-                <ScalarProperty Name="fecReserva" ColumnName="fecReserva" />
-                <ScalarProperty Name="horReserva" ColumnName="horReserva" />
-                <ScalarProperty Name="tipoAtencion" ColumnName="tipoAtencion" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idServicio" ColumnName="idServicio" />
-                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
-                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-                <ScalarProperty Name="T_GG_EMPLEADO_idPersona" ColumnName="T_GG_EMPLEADO_idPersona" />
-                <ScalarProperty Name="T_GDA_PACIENTE_idPersona" ColumnName="T_GDA_PACIENTE_idPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GMP_SERVICIO_SALUD">
-            <EntityTypeMapping TypeName="TP2Model.T_GMP_SERVICIO_SALUD">
-              <MappingFragment StoreEntitySet="T_GMP_SERVICIO_SALUD">
-                <ScalarProperty Name="idServicio" ColumnName="idServicio" />
-                <ScalarProperty Name="tipoServicio" ColumnName="tipoServicio" />
-                <ScalarProperty Name="nomServicio" ColumnName="nomServicio" />
-                <ScalarProperty Name="T_GMP_SERVICIO_SALUD_idServicio" ColumnName="T_GMP_SERVICIO_SALUD_idServicio" />
-                <ScalarProperty Name="COL_0" ColumnName="COL_0" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_CAMA">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_CAMA">
               <MappingFragment StoreEntitySet="T_GUQ_CAMA">
-                <ScalarProperty Name="marca" ColumnName="marca" />
-                <ScalarProperty Name="modelo" ColumnName="modelo" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="idModelo" ColumnName="idModelo" />
-                <ScalarProperty Name="codBien" ColumnName="codBien" />
+                <ScalarProperty Name="idCama" ColumnName="idCama" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_CONSOLIDADO_PRESUPUESTO">
               <MappingFragment StoreEntitySet="T_GUQ_CONSOLIDADO_PRESUPUESTO">
-                <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
-                <ScalarProperty Name="periodo" ColumnName="periodo" />
                 <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_ESTADÍSTICA_RECURSOS">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_ESTADÍSTICA_RECURSOS">
               <MappingFragment StoreEntitySet="T_GUQ_ESTADÍSTICA_RECURSOS">
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="área" ColumnName="área" />
                 <ScalarProperty Name="montoHistórico" ColumnName="montoHistórico" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="idEstadisticaRecurso" ColumnName="idEstadisticaRecurso" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_INGRESO_SALIDA_PACIENTE">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_INGRESO_SALIDA_PACIENTE">
               <MappingFragment StoreEntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE">
-                <ScalarProperty Name="idRegistro" ColumnName="idRegistro" />
-                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
-                <ScalarProperty Name="fechaTraslado" ColumnName="fechaTraslado" />
+                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
                 <ScalarProperty Name="motivo" ColumnName="motivo" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="idModelo" ColumnName="idModelo" />
+                <ScalarProperty Name="fechaTraslado" ColumnName="fechaTraslado" />
+                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+                <ScalarProperty Name="idRegistro" ColumnName="idRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_GUQ_INSUMO">
+            <EntityTypeMapping TypeName="TP2Model.T_GUQ_INSUMO">
+              <MappingFragment StoreEntitySet="T_GUQ_INSUMO">
+                <ScalarProperty Name="costoInsumo" ColumnName="costoInsumo" />
+                <ScalarProperty Name="dscInsumo" ColumnName="dscInsumo" />
+                <ScalarProperty Name="idInsumo" ColumnName="idInsumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_GUQ_INSUMO_TIPOOPERACION">
+            <EntityTypeMapping TypeName="TP2Model.T_GUQ_INSUMO_TIPOOPERACION">
+              <MappingFragment StoreEntitySet="T_GUQ_INSUMO_TIPOOPERACION">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idInsumo" ColumnName="idInsumo" />
+                <ScalarProperty Name="idOperación" ColumnName="idOperación" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_PARTIDA">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_PARTIDA">
               <MappingFragment StoreEntitySet="T_GUQ_PARTIDA">
-                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
-                <ScalarProperty Name="dscPartida" ColumnName="dscPartida" />
                 <ScalarProperty Name="tipoPartida" ColumnName="tipoPartida" />
-                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="dscPartida" ColumnName="dscPartida" />
+                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_PRESUPUESTO">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_PRESUPUESTO">
               <MappingFragment StoreEntitySet="T_GUQ_PRESUPUESTO">
-                <ScalarProperty Name="año" ColumnName="año" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="área" ColumnName="área" />
-                <ScalarProperty Name="monto" ColumnName="monto" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="T_GUQ_ESTADÍSTICA_RECURSOS_mes" ColumnName="T_GUQ_ESTADÍSTICA_RECURSOS_mes" />
-                <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN">
               <MappingFragment StoreEntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN">
-                <ScalarProperty Name="idReserva" ColumnName="idReserva" />
-                <ScalarProperty Name="duración" ColumnName="duración" />
-                <ScalarProperty Name="día" ColumnName="día" />
-                <ScalarProperty Name="hora" ColumnName="hora" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
                 <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
-                <ScalarProperty Name="codBien" ColumnName="codBien" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="duración" ColumnName="duración" />
+                <ScalarProperty Name="idOperación" ColumnName="idOperación" />
+                <ScalarProperty Name="idReserva" ColumnName="idReserva" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_SOLICITUD_UCI">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_SOLICITUD_UCI">
               <MappingFragment StoreEntitySet="T_GUQ_SOLICITUD_UCI">
-                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
-                <ScalarProperty Name="fechaSolicitud" ColumnName="fechaSolicitud" />
-                <ScalarProperty Name="motivo" ColumnName="motivo" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idRegistro" ColumnName="idRegistro" />
                 <ScalarProperty Name="nroHistoriaClinica" ColumnName="nroHistoriaClinica" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="fechaSolicitud" ColumnName="fechaSolicitud" />
+                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_GUQ_TIPO_OPERACIÓN">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_TIPO_OPERACIÓN">
               <MappingFragment StoreEntitySet="T_GUQ_TIPO_OPERACIÓN">
-                <ScalarProperty Name="idOperación" ColumnName="idOperación" />
+                <ScalarProperty Name="costoTipoOperacion" ColumnName="costoTipoOperacion" />
                 <ScalarProperty Name="dscTipoOperación" ColumnName="dscTipoOperación" />
-                <ScalarProperty Name="insumos" ColumnName="insumos" />
+                <ScalarProperty Name="idOperación" ColumnName="idOperación" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="T_0" TypeName="TP2Model.T_0" StoreEntitySet="T_0">
+          <AssociationSetMapping Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" TypeName="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" StoreEntitySet="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
+            <EndProperty Name="T_GUQ_PRESUPUESTO">
+              <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
+            </EndProperty>
+            <EndProperty Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
+              <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="T_GUQ_INMUEBLE_TIPO_OPERACION" TypeName="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" StoreEntitySet="T_GUQ_INMUEBLE_TIPO_OPERACION">
             <EndProperty Name="T_GUQ_TIPO_OPERACIÓN">
               <ScalarProperty Name="idOperación" ColumnName="idOperación" />
             </EndProperty>
-            <EndProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <ScalarProperty Name="idReserva" ColumnName="idReserva" />
+            <EndProperty Name="T_GG_INMUEBLE">
+              <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="T_1" TypeName="TP2Model.T_1" StoreEntitySet="T_1">
-            <EndProperty Name="T_GG_EMPLEADO">
-              <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-              <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+          <AssociationSetMapping Name="T_GUQ_PRESUPUESTO_PARTIDA" TypeName="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" StoreEntitySet="T_GUQ_PRESUPUESTO_PARTIDA">
+            <EndProperty Name="T_GUQ_PARTIDA">
+              <ScalarProperty Name="idPartida" ColumnName="idPartida" />
             </EndProperty>
-            <EndProperty Name="T_GDA_HISTORIA_CLINICA">
-              <ScalarProperty Name="nroHistoriaClinica" ColumnName="nroHistoriaClinica" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="T_2" TypeName="TP2Model.T_2" StoreEntitySet="T_2">
-            <EndProperty Name="T_GG_EMPLEADO">
-              <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-              <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-            </EndProperty>
-            <EndProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
-              <ScalarProperty Name="idReserva" ColumnName="idReserva" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="T_3" TypeName="TP2Model.T_3" StoreEntitySet="T_3">
-            <EndProperty Name="T_GDA_ESPECIALIDAD__MEDICA">
-              <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
-            </EndProperty>
-            <EndProperty Name="T_GG_EMPLEADO">
-              <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-              <ScalarProperty Name="idPersona" ColumnName="idPersona" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="T_4" TypeName="TP2Model.T_4" StoreEntitySet="T_4">
-            <EndProperty Name="T_GCT_PROGRAMACION_MEDICA">
-              <ScalarProperty Name="idProgramcacion" ColumnName="idProgramcacion" />
-            </EndProperty>
-            <EndProperty Name="T_GG_EMPLEADO">
-              <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-              <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+            <EndProperty Name="T_GUQ_PRESUPUESTO">
+              <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
@@ -2205,7 +1374,7 @@ warning 6035: The relationship 'FK_T_GUQ_CAMA39' has columns that are not part o
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

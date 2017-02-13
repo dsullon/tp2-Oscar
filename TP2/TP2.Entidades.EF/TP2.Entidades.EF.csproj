@@ -50,93 +50,76 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TP2Entities.cs">
+    <Compile Include="TP2Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GCT_PROGRAMACION_MEDICA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GDA_ESPECIALIDAD__MEDICA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GDA_HISTORIA_CLINICA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GDA_PACIENTE.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GG_BIEN.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GG_EMPLEADO.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GG_EMPRESA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GG_INMUEBLE.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GG_MODELO.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_GG_MUEBLE.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GG_PERSONA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GG_TIPO_PERSONA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GMP_BITACORA_INCIDENCIA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GMP_RESERVA_SERVICIO.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_GMP_SERVICIO_SALUD.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+    <Compile Include="T_GUQ_AREA.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_CAMA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_CONSOLIDADO_PRESUPUESTO.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_ESTADÍSTICA_RECURSOS.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_INGRESO_SALIDA_PACIENTE.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_GUQ_INSUMO.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_GUQ_INSUMO_TIPOOPERACION.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_PARTIDA.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_PRESUPUESTO.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_RESERVA_SALA_OPERACIÓN.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_SOLICITUD_UCI.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GUQ_TIPO_OPERACIÓN.cs">
-      <DependentUpon>TP2Entities.tt</DependentUpon>
+      <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TP2Entities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TP2Entities.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="TP2Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TP2Model.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
