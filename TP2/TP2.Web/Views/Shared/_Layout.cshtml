@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-3">
+            @Html.Partial("_Sidebar")
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+        <div class="text-right">
+            <img src="~/Images/logocrp.gif" style="width:150px;" />
+        </div>
+    </div>
+</body>
+</html>
