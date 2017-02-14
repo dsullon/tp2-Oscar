@@ -114,6 +114,14 @@
           <Property Name="anio" Type="int" Nullable="false" />
           <Property Name="montoTotal" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="T_GUQ_DETALLE_TURNO_MEDICO">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+            <PropertyRef Name="idTurnoMedico" />
+          </Key>
+          <Property Name="idEmpleado" Type="int" Nullable="false" />
+          <Property Name="idTurnoMedico" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="T_GUQ_ESTADÍSTICA_RECURSOS">
           <Key>
             <PropertyRef Name="idEstadisticaRecurso" />
@@ -215,6 +223,15 @@
           <Property Name="idOperación" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dscTipoOperación" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="costoTipoOperacion" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_GUQ_TURNO_MEDICO">
+          <Key>
+            <PropertyRef Name="idTurnoMedico" />
+          </Key>
+          <Property Name="idTurnoMedico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="int" Nullable="false" />
+          <Property Name="horaInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="horaFin" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <Association Name="FK_T_GCT_PROGRAMACION_MEDICA1">
           <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
@@ -321,6 +338,30 @@
             </Principal>
             <Dependent Role="T_GUQ_CAMA">
               <PropertyRef Name="idModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_DETALLE_TURNO_MEDICO1">
+          <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="1" />
+          <End Role="T_GUQ_DETALLE_TURNO_MEDICO" Type="Self.T_GUQ_DETALLE_TURNO_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GG_EMPLEADO">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="T_GUQ_DETALLE_TURNO_MEDICO">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_DETALLE_TURNO_MEDICO2">
+          <End Role="T_GUQ_TURNO_MEDICO" Type="Self.T_GUQ_TURNO_MEDICO" Multiplicity="1" />
+          <End Role="T_GUQ_DETALLE_TURNO_MEDICO" Type="Self.T_GUQ_DETALLE_TURNO_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_TURNO_MEDICO">
+              <PropertyRef Name="idTurnoMedico" />
+            </Principal>
+            <Dependent Role="T_GUQ_DETALLE_TURNO_MEDICO">
+              <PropertyRef Name="idTurnoMedico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -492,6 +533,7 @@
           <EntitySet Name="T_GUQ_AREA" EntityType="Self.T_GUQ_AREA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_CAMA" EntityType="Self.T_GUQ_CAMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntityType="Self.T_GUQ_CONSOLIDADO_PRESUPUESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_DETALLE_TURNO_MEDICO" EntityType="Self.T_GUQ_DETALLE_TURNO_MEDICO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_ESTADÍSTICA_RECURSOS" EntityType="Self.T_GUQ_ESTADÍSTICA_RECURSOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_INGRESO_SALIDA_PACIENTE" EntityType="Self.T_GUQ_INGRESO_SALIDA_PACIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_INMUEBLE_TIPO_OPERACION" EntityType="Self.T_GUQ_INMUEBLE_TIPO_OPERACION" Schema="dbo" store:Type="Tables" />
@@ -503,6 +545,7 @@
           <EntitySet Name="T_GUQ_RESERVA_SALA_OPERACIÓN" EntityType="Self.T_GUQ_RESERVA_SALA_OPERACIÓN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_SOLICITUD_UCI" EntityType="Self.T_GUQ_SOLICITUD_UCI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_TIPO_OPERACIÓN" EntityType="Self.T_GUQ_TIPO_OPERACIÓN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_GUQ_TURNO_MEDICO" EntityType="Self.T_GUQ_TURNO_MEDICO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA1" Association="Self.FK_T_GCT_PROGRAMACION_MEDICA1">
             <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
             <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
@@ -538,6 +581,14 @@
           <AssociationSet Name="FK_T_GUQ_CAM1" Association="Self.FK_T_GUQ_CAM1">
             <End Role="T_GG_MODELO" EntitySet="T_GG_MODELO" />
             <End Role="T_GUQ_CAMA" EntitySet="T_GUQ_CAMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_DETALLE_TURNO_MEDICO1" Association="Self.FK_T_GUQ_DETALLE_TURNO_MEDICO1">
+            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
+            <End Role="T_GUQ_DETALLE_TURNO_MEDICO" EntitySet="T_GUQ_DETALLE_TURNO_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_DETALLE_TURNO_MEDICO2" Association="Self.FK_T_GUQ_DETALLE_TURNO_MEDICO2">
+            <End Role="T_GUQ_TURNO_MEDICO" EntitySet="T_GUQ_TURNO_MEDICO" />
+            <End Role="T_GUQ_DETALLE_TURNO_MEDICO" EntitySet="T_GUQ_DETALLE_TURNO_MEDICO" />
           </AssociationSet>
           <AssociationSet Name="FK_T_GUQ_ESTADÍSTICA_RECURSOS1" Association="Self.FK_T_GUQ_ESTADÍSTICA_RECURSOS1">
             <End Role="T_GUQ_AREA" EntitySet="T_GUQ_AREA" />
@@ -616,6 +667,7 @@
           <EntitySet Name="T_GUQ_RESERVA_SALA_OPERACIÓN" EntityType="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" />
           <EntitySet Name="T_GUQ_SOLICITUD_UCI" EntityType="TP2Model.T_GUQ_SOLICITUD_UCI" />
           <EntitySet Name="T_GUQ_TIPO_OPERACIÓN" EntityType="TP2Model.T_GUQ_TIPO_OPERACIÓN" />
+          <EntitySet Name="T_GUQ_TURNO_MEDICO" EntityType="TP2Model.T_GUQ_TURNO_MEDICO" />
           <AssociationSet Name="FK_T_GCT_PROGRAMACION_MEDICA1" Association="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA1">
             <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
             <End Role="T_GCT_PROGRAMACION_MEDICA" EntitySet="T_GCT_PROGRAMACION_MEDICA" />
@@ -683,6 +735,10 @@
           <AssociationSet Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" Association="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
             <End Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" EntitySet="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
             <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="T_GUQ_DETALLE_TURNO_MEDICO" Association="TP2Model.T_GUQ_DETALLE_TURNO_MEDICO">
+            <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
+            <End Role="T_GUQ_TURNO_MEDICO" EntitySet="T_GUQ_TURNO_MEDICO" />
           </AssociationSet>
           <AssociationSet Name="T_GUQ_INMUEBLE_TIPO_OPERACION" Association="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION">
             <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
@@ -763,6 +819,7 @@
           <NavigationProperty Name="T_GCT_PROGRAMACION_MEDICA" Relationship="TP2Model.FK_T_GCT_PROGRAMACION_MEDICA1" FromRole="T_GG_EMPLEADO" ToRole="T_GCT_PROGRAMACION_MEDICA" />
           <NavigationProperty Name="T_GDA_ESPECIALIDAD__MEDICA" Relationship="TP2Model.FK_T_GG_EMPLEADO1" FromRole="T_GG_EMPLEADO" ToRole="T_GDA_ESPECIALIDAD__MEDICA" />
           <NavigationProperty Name="T_GUQ_AREA" Relationship="TP2Model.FK_T_GG_EMPLEADO2" FromRole="T_GG_EMPLEADO" ToRole="T_GUQ_AREA" />
+          <NavigationProperty Name="T_GUQ_TURNO_MEDICO" Relationship="TP2Model.T_GUQ_DETALLE_TURNO_MEDICO" FromRole="T_GG_EMPLEADO" ToRole="T_GUQ_TURNO_MEDICO" />
         </EntityType>
         <EntityType Name="T_GG_INMUEBLE">
           <Key>
@@ -917,6 +974,16 @@
           <NavigationProperty Name="T_GUQ_INSUMO_TIPOOPERACION" Relationship="TP2Model.FK_T_GUQ_INSUMO_TIPOOPERACION20" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GUQ_INSUMO_TIPOOPERACION" />
           <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
           <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GG_INMUEBLE" />
+        </EntityType>
+        <EntityType Name="T_GUQ_TURNO_MEDICO">
+          <Key>
+            <PropertyRef Name="idTurnoMedico" />
+          </Key>
+          <Property Name="idTurnoMedico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="Int32" Nullable="false" />
+          <Property Name="horaInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="horaFin" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="T_GG_EMPLEADO" Relationship="TP2Model.T_GUQ_DETALLE_TURNO_MEDICO" FromRole="T_GUQ_TURNO_MEDICO" ToRole="T_GG_EMPLEADO" />
         </EntityType>
         <Association Name="FK_T_GCT_PROGRAMACION_MEDICA1">
           <End Type="TP2Model.T_GG_EMPLEADO" Role="T_GG_EMPLEADO" Multiplicity="1" />
@@ -1113,6 +1180,10 @@
         <Association Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
           <End Type="TP2Model.T_GUQ_CONSOLIDADO_PRESUPUESTO" Role="T_GUQ_CONSOLIDADO_PRESUPUESTO" Multiplicity="*" />
           <End Type="TP2Model.T_GUQ_PRESUPUESTO" Role="T_GUQ_PRESUPUESTO" Multiplicity="*" />
+        </Association>
+        <Association Name="T_GUQ_DETALLE_TURNO_MEDICO">
+          <End Type="TP2Model.T_GG_EMPLEADO" Role="T_GG_EMPLEADO" Multiplicity="*" />
+          <End Type="TP2Model.T_GUQ_TURNO_MEDICO" Role="T_GUQ_TURNO_MEDICO" Multiplicity="*" />
         </Association>
         <Association Name="T_GUQ_INMUEBLE_TIPO_OPERACION">
           <End Type="TP2Model.T_GG_INMUEBLE" Role="T_GG_INMUEBLE" Multiplicity="*" />
@@ -1333,12 +1404,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="T_GUQ_TURNO_MEDICO">
+            <EntityTypeMapping TypeName="TP2Model.T_GUQ_TURNO_MEDICO">
+              <MappingFragment StoreEntitySet="T_GUQ_TURNO_MEDICO">
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="idTurnoMedico" ColumnName="idTurnoMedico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" TypeName="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" StoreEntitySet="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
             <EndProperty Name="T_GUQ_PRESUPUESTO">
               <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
             </EndProperty>
             <EndProperty Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
               <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="T_GUQ_DETALLE_TURNO_MEDICO" TypeName="TP2Model.T_GUQ_DETALLE_TURNO_MEDICO" StoreEntitySet="T_GUQ_DETALLE_TURNO_MEDICO">
+            <EndProperty Name="T_GUQ_TURNO_MEDICO">
+              <ScalarProperty Name="idTurnoMedico" ColumnName="idTurnoMedico" />
+            </EndProperty>
+            <EndProperty Name="T_GG_EMPLEADO">
+              <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="T_GUQ_INMUEBLE_TIPO_OPERACION" TypeName="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" StoreEntitySet="T_GUQ_INMUEBLE_TIPO_OPERACION">
@@ -1374,7 +1463,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

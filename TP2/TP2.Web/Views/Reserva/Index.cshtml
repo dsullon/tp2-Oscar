@@ -4,12 +4,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+
+    @Scripts.Render("~/Script/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#datetimepicker1").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}
+
 <h2>Index</h2>
 
 <form>
     <div class="form-group">
         <label for="exampleSelect1">Tipo de operaci&oacute;n</label>
         @Html.DropDownList("TipoOperacionList", new SelectList(ViewBag.TipoOperacionList, "idOperación", "dscTipoOperación"), new { @class = "form-control" })
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <input type='text' class="form-control" id='datetimepicker1'/>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 

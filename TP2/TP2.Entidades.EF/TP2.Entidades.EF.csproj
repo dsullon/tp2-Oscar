@@ -112,6 +112,9 @@
     <Compile Include="T_GUQ_TIPO_OPERACIÓN.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_GUQ_TURNO_MEDICO.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

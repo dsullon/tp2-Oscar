@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>_Layout</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Script/modernizr")
 </head>
 <body>
     <div class="container">
@@ -23,5 +24,7 @@
             <img src="~/Images/logocrp.gif" style="width:150px;" />
         </div>
     </div>
+    @Scripts.Render("~/Script/jquery")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

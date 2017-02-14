@@ -12,20 +12,20 @@ namespace TP2.Entidades.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class T_GDA_HISTORIA_CLINICA
+    public partial class T_GUQ_TURNO_MEDICO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_GDA_HISTORIA_CLINICA()
+        public T_GUQ_TURNO_MEDICO()
         {
-            this.T_GUQ_SOLICITUD_UCI = new HashSet<T_GUQ_SOLICITUD_UCI>();
+            this.T_GG_EMPLEADO = new HashSet<T_GG_EMPLEADO>();
         }
     
-        public int nroHistoriaClinica { get; set; }
-        public string diagnóstico { get; set; }
-        public int idPaciente { get; set; }
+        public int idTurnoMedico { get; set; }
+        public int dia { get; set; }
+        public System.TimeSpan horaInicio { get; set; }
+        public System.TimeSpan horaFin { get; set; }
     
-        public virtual T_GDA_PACIENTE T_GDA_PACIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_GUQ_SOLICITUD_UCI> T_GUQ_SOLICITUD_UCI { get; set; }
+        public virtual ICollection<T_GG_EMPLEADO> T_GG_EMPLEADO { get; set; }
     }
 }
