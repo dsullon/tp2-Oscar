@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,29 +10,101 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#datetimepicker1").datepicker({
+            $("#fecha").datepicker({
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                dateFormat: "dd/mm/yy",
                 changeMonth: true,
                 changeYear: true
             });
+
+            $("#buscar").click(function () {
+                var cbo = document.getElementById("tipo");
+                var tipo = cbo.options[cbo.selectedIndex].value
+                var fecha = document.getElementById("fecha").value;
+                obtenerMedicos(tipo, fecha);
+                $("#data").show();
+            });
+
+            $("#cboSala").change(function (index) {
+                var fecha = document.getElementById("fecha").value;
+                //var selectedEmpCode = $(this).val();
+                obtenerHorarios(fecha);
+            });
         });
+
+
+        function obtenerMedicos(tipo, fecha) {
+            $.ajax({
+                // Get Course PartialView
+                url: "/Reserva/MedicoPartial",
+                type: 'GET',
+                data: { tipo: tipo, fecha: fecha },
+                success: function (data) {
+                    jQuery("#medico").html(data);
+                },
+                error: function (error) {
+                    alert("Error: Please try again.");
+                }
+            });
+        }
+
+        function obtenerHorarios(fecha) {
+            $.ajax({
+                // Get Course PartialView
+                url: "/Reserva/HorarioPartial",
+                type: 'GET',
+                data: { fecha: fecha },
+                success: function (data) {
+                    jQuery("#horario").html(data);
+                },
+                error: function (error) {
+                    alert("Error: Please try again.");
+                }
+            });
+        }
     </script>
 }
 
 <h2>Index</h2>
-
-<form>
-    <div class="form-group">
-        <label for="exampleSelect1">Tipo de operaci&oacute;n</label>
-        @Html.DropDownList("TipoOperacionList", new SelectList(ViewBag.TipoOperacionList, "idOperación", "dscTipoOperación"), new { @class = "form-control" })
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <input type='text' class="form-control" id='datetimepicker1'/>
-                </div>
+<div class="row">
+    <form class="form-inline">
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Tipo de operaci&oacute;n:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("tipo", new SelectList(ViewBag.TipoOperacionList, "idOperación", "dscTipoOperación"),"--Seleccione el tipo--", new { @class = "form-control" })
             </div>
         </div>
+        <div class="col-sm-4">
+            <label class="mr-sm-2" for="fecha">Fecha:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("fecha", null, new { @class = "form-control" })
+                <span class="input-group-btn">
+                    <button type="button" class="btn" id="buscar">Consultar</button>
+                </span>
+            </div>
+        </div>        
+    </form>
+</div>
+<hr>
+<div class="row" style="display:none" id="data">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">M&eacute;dico</div>
+            <div class="panel-body" id="medico"></div>
+        </div>
     </div>
-</form>
-
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                    @Html.DropDownList("cboSala", new SelectList(ViewBag.SalaList, "idInmueble", "dscTipoInmueble"), "--Seleccione la sala--", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="panel-body" id="horario"></div>
+        </div>
+    </div>
+</div>

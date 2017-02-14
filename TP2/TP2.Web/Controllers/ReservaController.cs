@@ -12,11 +12,26 @@ namespace TP2.Web.Controllers
         // GET: Reserva
         public ActionResult Index()
         {
-            var tipoOperacionList = TGUQTipoOperacion.GetAll();
+            var tipoOperacionList = TGUQTipoOperacion.ListarTodos();
             ViewBag.TipoOperacionList = tipoOperacionList;
+
+            var salaList = TGGInmueble.ListarTodos(2);
+            ViewBag.SalaList = salaList;
             ////using viewbag  
             //ViewBag.dropdownVD = new SelectList(DB.tblStuds.ToList(), "studid", "stud_name");
             return View(); 
+        }
+
+        public ActionResult MedicoPartial(int tipo, string fecha)
+        {
+            var empleadoList = TGGEmpleado.ListarDisponibles(tipo);
+            return PartialView("_ReservaMedico", empleadoList);
+        }
+
+        public ActionResult HorarioPartial(string fecha)
+        {
+            var salaList = TGUQReservaSalaOperacion.ListarDisponibles(fecha);
+            return PartialView("_ReservaSala", salaList);
         }
     }
 }

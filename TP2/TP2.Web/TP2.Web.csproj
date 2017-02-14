@@ -156,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReservaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Reserva\Index.cshtml" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Views\Shared\_ReservaMedico.cshtml" />
+    <Content Include="Views\Shared\_ReservaSala.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -177,7 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TP2.Entidades.EF\TP2.Entidades.EF.csproj">
