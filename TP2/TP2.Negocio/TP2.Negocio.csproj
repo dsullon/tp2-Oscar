@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TGDAPaciente.cs" />
     <Compile Include="TGGBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TGGEmpleado.cs" />

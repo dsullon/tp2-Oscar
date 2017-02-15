@@ -17,8 +17,10 @@ namespace TP2.Web.Controllers
 
             var salaList = TGGInmueble.ListarTodos(2);
             ViewBag.SalaList = salaList;
-            ////using viewbag  
-            //ViewBag.dropdownVD = new SelectList(DB.tblStuds.ToList(), "studid", "stud_name");
+
+            var pacienteList = TGDAPaciente.ListarTodos();
+            ViewBag.PacienteList = pacienteList;
+
             return View(); 
         }
 
