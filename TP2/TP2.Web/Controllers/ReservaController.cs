@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using TP2.Entidades.EF;
 using TP2.Negocio;
 
 namespace TP2.Web.Controllers
@@ -34,6 +31,16 @@ namespace TP2.Web.Controllers
         {
             var salaList = TGUQReservaSalaOperacion.ListarDisponibles(fecha);
             return PartialView("_ReservaSala", salaList);
+        }
+
+        [HttpPost]
+        public string Create(T_GUQ_RESERVA_SALA_OPERACIÓN reserva)
+        {
+            string mensaje = "Error al grabar los datos";
+            bool exito = TGUQReservaSalaOperacion.Crear(reserva);
+            if(exito)
+                mensaje = "Los datos se grabaron con exito";
+            return mensaje;
         }
     }
 }

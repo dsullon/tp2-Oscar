@@ -19,37 +19,55 @@
             });
 
             $("#buscar").click(function () {
-                var cbo = document.getElementById("tipo");
-                var tipo = cbo.options[cbo.selectedIndex].value
-                var fecha = document.getElementById("fecha").value;
+                var tipo = $("#tipo").val();
+                var fecha = $('#fecha').val();
                 obtenerMedicos(tipo, fecha);
                 $("#data").show();
             });
 
             $("#cboSala").change(function (index) {
-                var fecha = document.getElementById("fecha").value;
-                //var selectedEmpCode = $(this).val();
+                var fecha = $('#fecha').val();
                 obtenerHorarios(fecha);
             });
 
             $("#btnAceptar").click(function () {
                 var idPaciente = $('input[name="rbPaciente"]:checked').val();
-
                 var nombre = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
                     return $(this).closest('tr').find('td:nth-child(1)').text();
                 }).get();
-
                 var dni = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
                     return $(this).closest('tr').find('td:nth-child(2)').text();
                 }).get();
 
-                var txtPaciente = document.getElementById("txtPaciente");
-                txtPaciente.value = nombre;
-
-                var hfIdPaciente = document.getElementById("hfIdPaciente");
-                hfIdPaciente.value = idPaciente;
+                $('#txtPaciente').val(nombre);
+                $('#hfIdPaciente').val(idPaciente);
 
                 $("#modalbox").modal("hide");
+            });
+
+            $("#btnCrear").click(function () {
+                var tipo = $("#tipo").val();
+                var duracion = $('#hora').val();
+                var fecha = $('#fecha').val();
+                var inicio = $('input[name="rbInmueble"]:checked').val();
+                var paciente = $('#hfIdPaciente').val();
+                var inmueble = $("#cboSala").val();
+                $.ajax({
+                    url: "/Reserva/Create",
+                    type: 'POST',
+                    data: {
+                        idOperación: tipo, duración: duracion, fecha: fecha,
+                        horaInicio: inicio, idPaciente: paciente, idInmueble: inmueble,
+                        estado: 'Activo'
+                    },
+                    success: function (data) {
+                        alert("Exito: Grabado con éxito.");
+                        //jQuery("#medico").html(data);
+                    },
+                    error: function (error) {
+                        alert("Error: Please try again.");
+                    }
+                });
             });
 
         });
@@ -152,7 +170,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <button type="button" class="btn" id="buscar">Registrar</button>
+                <button type="button" class="btn" id="btnCrear">Registrar</button>
             </div>
         </div>
     </div>
@@ -177,7 +195,7 @@
                             <td>@item.nomPaciente</td>
                             <td>@item.numDNI</td>
                             <td>
-                                <input type="radio" value="@item.idPaciente" id="optPaciente" name="rbPaciente">@item.idPaciente
+                                <input type="radio" value="@item.idPaciente" id="optPaciente" name="rbPaciente">
                             </td>
                         </tr>
                     }
