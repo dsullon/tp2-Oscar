@@ -7,7 +7,14 @@ namespace TP2.Web.Controllers
     public class ReservaController : Controller
     {
         // GET: Reserva
+
         public ActionResult Index()
+        {
+            var listado = TGUQReservaSalaOperacion.ListarTodos();
+            return View(listado);
+        }
+
+        public ActionResult Create()
         {
             var tipoOperacionList = TGUQTipoOperacion.ListarTodos();
             ViewBag.TipoOperacionList = tipoOperacionList;
@@ -18,7 +25,7 @@ namespace TP2.Web.Controllers
             var pacienteList = TGDAPaciente.ListarTodos();
             ViewBag.PacienteList = pacienteList;
 
-            return View(); 
+            return View();
         }
 
         public ActionResult MedicoPartial(int tipo, string fecha)
@@ -38,7 +45,7 @@ namespace TP2.Web.Controllers
         {
             string mensaje = "Error al grabar los datos";
             bool exito = TGUQReservaSalaOperacion.Crear(reserva);
-            if(exito)
+            if (exito)
                 mensaje = "Los datos se grabaron con exito";
             return mensaje;
         }

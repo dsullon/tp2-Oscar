@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Script/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#fecha").datepicker({
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true
+            });
+
+            $("#buscar").click(function () {
+                var tipo = $("#tipo").val();
+                var fecha = $('#fecha').val();
+                obtenerMedicos(tipo, fecha);
+                $("#data").show();
+            });
+
+            $("#cboSala").change(function (index) {
+                var fecha = $('#fecha').val();
+                obtenerHorarios(fecha);
+            });
+
+            $("#btnAceptar").click(function () {
+                var idPaciente = $('input[name="rbPaciente"]:checked').val();
+                var nombre = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
+                    return $(this).closest('tr').find('td:nth-child(1)').text();
+                }).get();
+                var dni = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
+                    return $(this).closest('tr').find('td:nth-child(2)').text();
+                }).get();
+
+                $('#txtPaciente').val(nombre);
+                $('#hfIdPaciente').val(idPaciente);
+
+                $("#modalbox").modal("hide");
+            });
+
+            $("#btnCrear").click(function () {
+                var tipo = $("#tipo").val();
+                var duracion = $('#hora').val();
+                var fecha = $('#fecha').val();
+                var inicio = $('input[name="rbInmueble"]:checked').val();
+                var paciente = $('#hfIdPaciente').val();
+                var inmueble = $("#cboSala").val();
+                $.ajax({
+                    url: "/Reserva/Create",
+                    type: 'POST',
+                    data: {
+                        idOperación: tipo, duración: duracion, fecha: fecha,
+                        horaInicio: inicio, idPaciente: paciente, idInmueble: inmueble,
+                        estado: 'RESERVADO'
+                    },
+                    success: function (data) {
+                        alert("Exito: Grabado con éxito.");
+                        window.location.href = '/Reserva';
+                    },
+                    error: function (error) {
+                        alert("Error: Please try again.");
+                    }
+                });
+            });
+
+        });
+
+        function obtenerMedicos(tipo, fecha) {
+            $.ajax({
+                // Get Course PartialView
+                url: "/Reserva/MedicoPartial",
+                type: 'GET',
+                data: { tipo: tipo, fecha: fecha },
+                success: function (data) {
+                    jQuery("#medico").html(data);
+                },
+                error: function (error) {
+                    alert("Error: No se pudo obtener datos de los médicos.");
+                }
+            });
+        }
+
+        function obtenerHorarios(fecha) {
+            $.ajax({
+                // Get Course PartialView
+                url: "/Reserva/HorarioPartial",
+                type: 'GET',
+                data: { fecha: fecha },
+                success: function (data) {
+                    jQuery("#horario").html(data);
+                },
+                error: function (error) {
+                    alert("Error: No se pudo obtener los datos de los horarios.");
+                }
+            });
+        }
+    </script>
+}
+
+<h2>Nueva Reserva</h2>
+<div class="row">
+    <form class="form-inline">
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Tipo de operaci&oacute;n:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("tipo", new SelectList(ViewBag.TipoOperacionList, "idOperación", "dscTipoOperación"), "--Seleccione el tipo--", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <label class="mr-sm-2" for="fecha">Fecha:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("fecha", null, new { @class = "form-control" })
+                <span class="input-group-btn">
+                    <button type="button" class="btn" id="buscar">Consultar</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+<hr>
+<div class="row" style="display:none" id="data">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">M&eacute;dico</div>
+                    <div class="panel-body" id="medico"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                            @Html.DropDownList("cboSala", new SelectList(ViewBag.SalaList, "idInmueble", "dscTipoInmueble"), "--Seleccione la sala--", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="panel-body" id="horario"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="mr-sm-2" for="fecha">Paciente:</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <span class="input-group-addon"><span class=" glyphicon glyphicon-user"></span></span>
+                    @Html.Hidden("hfIdPaciente")
+                    @Html.TextBox("txtPaciente", null, new { @class = "form-control", disabled = "disabled" })
+                    <span class="input-group-btn">
+                        <a type="button" class="btn btn-default" href="#modalbox" data-toggle="modal">...</a>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label class="mr-sm-2" for="fecha">N° horas:</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    @Html.TextBox("hora", null, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn" id="btnCrear">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalbox" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Paciente</h1>
+            </div>
+            <div class="modal-body">
+                <table class="table table-condensed table-striped table-bordered" id="tblPaciente">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Direcci&oacute;n</td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in ViewBag.PacienteList)
+                    {
+                        <tr>
+                            <td>@item.nomPaciente</td>
+                            <td>@item.numDNI</td>
+                            <td>
+                                <input type="radio" value="@item.idPaciente" id="optPaciente" name="rbPaciente">
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btnAceptar" data-bind="click:save">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

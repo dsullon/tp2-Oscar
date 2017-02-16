@@ -8,6 +8,12 @@ namespace TP2.Negocio
 {
     public class TGUQReservaSalaOperacion
     {
+        public static List<T_GUQ_RESERVA_SALA_OPERACIÓN> ListarTodos()
+        {
+            RicardoPalmaEntities db = new RicardoPalmaEntities();
+            return db.T_GUQ_RESERVA_SALA_OPERACIÓN.ToList();
+        }
+
         public static List<string> ListarDisponibles(string fecha)
         {
             List<String> horario = new List<string>();

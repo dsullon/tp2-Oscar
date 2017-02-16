@@ -167,10 +167,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Reserva\Index.cshtml" />
+    <Content Include="Views\Reserva\Create.cshtml" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Views\Shared\_ReservaMedico.cshtml" />
     <Content Include="Views\Shared\_ReservaSala.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Reserva\Index.cshtml" />
+    <Content Include="Views\Shared\ShortDateTime.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
