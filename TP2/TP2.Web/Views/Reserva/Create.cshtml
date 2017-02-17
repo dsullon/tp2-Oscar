@@ -21,13 +21,16 @@
             $("#buscar").click(function () {
                 var tipo = $("#tipo").val();
                 var fecha = $('#fecha').val();
+                $("#cboSala").val('1')
                 obtenerMedicos(tipo, fecha);
                 $("#data").show();
             });
 
             $("#cboSala").change(function (index) {
                 var fecha = $('#fecha').val();
-                obtenerHorarios(fecha);
+                var tipo = $("#tipo").val();
+                var sala = $("#cboSala").val();
+                obtenerHorarios(fecha, tipo, sala);
             });
 
             $("#btnAceptar").click(function () {
@@ -87,12 +90,12 @@
             });
         }
 
-        function obtenerHorarios(fecha) {
+        function obtenerHorarios(fecha, tipo, sala) {
             $.ajax({
                 // Get Course PartialView
                 url: "/Reserva/HorarioPartial",
                 type: 'GET',
-                data: { fecha: fecha },
+                data: { fecha: fecha, tipo: tipo, inmueble: sala },
                 success: function (data) {
                     jQuery("#horario").html(data);
                 },

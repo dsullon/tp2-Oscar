@@ -14,19 +14,25 @@ namespace TP2.Negocio
             return db.T_GUQ_RESERVA_SALA_OPERACIÓN.ToList();
         }
 
-        public static List<string> ListarDisponibles(string fecha)
+        public static List<string> ListarDisponibles(string fecha, int tipo, int inmueble)
         {
             List<String> horario = new List<string>();
             TimeSpan result;
             string timeString;
             DateTime nuevaFecha = Convert.ToDateTime(fecha);
             RicardoPalmaEntities db = new RicardoPalmaEntities();
-            var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(nuevaFecha) == 0).ToList();
+            T_GUQ_RESERVA_SALA_OPERACIÓN reserva = null;
+            var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(nuevaFecha) == 0 &&
+             x.idInmueble == inmueble && x.T_GG_INMUEBLE.T_GUQ_TIPO_OPERACIÓN.Where(y=> y.idOperación == tipo).Any()).ToList();
             for (int i = 0; i < 24; i++)
             {
-                result = TimeSpan.FromHours(i);
-                timeString = result.ToString("hh':'mm");
-                horario.Add(timeString);
+                reserva = reservas.Where(x=> x.horaInicio.Hours==i).FirstOrDefault();
+                if (reserva == null)
+                {
+                    result = TimeSpan.FromHours(i);
+                    timeString = result.ToString("hh':'mm");
+                    horario.Add(timeString);
+                }
             }
             return horario;
         }

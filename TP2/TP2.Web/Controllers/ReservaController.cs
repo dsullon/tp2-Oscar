@@ -34,9 +34,9 @@ namespace TP2.Web.Controllers
             return PartialView("_ReservaMedico", empleadoList);
         }
 
-        public ActionResult HorarioPartial(string fecha)
+        public ActionResult HorarioPartial(string fecha, int tipo, int inmueble)
         {
-            var salaList = TGUQReservaSalaOperacion.ListarDisponibles(fecha);
+            var salaList = TGUQReservaSalaOperacion.ListarDisponibles(fecha, tipo, inmueble);
             return PartialView("_ReservaSala", salaList);
         }
 
