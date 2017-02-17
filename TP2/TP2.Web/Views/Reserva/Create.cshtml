@@ -21,7 +21,8 @@
             $("#buscar").click(function () {
                 var tipo = $("#tipo").val();
                 var fecha = $('#fecha').val();
-                $("#cboSala").val('1')
+                $("#cboSala").val('')
+                $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
                 obtenerMedicos(tipo, fecha);
                 $("#data").show();
             });

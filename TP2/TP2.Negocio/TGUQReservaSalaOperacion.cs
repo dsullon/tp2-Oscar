@@ -20,6 +20,8 @@ namespace TP2.Negocio
             TimeSpan result;
             string timeString;
             DateTime nuevaFecha = Convert.ToDateTime(fecha);
+            if (nuevaFecha.CompareTo(new DateTime(1900, 1, 1)) == 0)
+                return horario;
             RicardoPalmaEntities db = new RicardoPalmaEntities();
             T_GUQ_RESERVA_SALA_OPERACIÓN reserva = null;
             var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(nuevaFecha) == 0 &&
