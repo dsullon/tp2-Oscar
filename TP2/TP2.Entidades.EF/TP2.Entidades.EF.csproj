@@ -67,6 +67,9 @@
     <Compile Include="T_GDA_PACIENTE.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_GG_DETALLE_TIPO_OPERACION_ESPECIALIDAD.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_GG_EMPLEADO.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>

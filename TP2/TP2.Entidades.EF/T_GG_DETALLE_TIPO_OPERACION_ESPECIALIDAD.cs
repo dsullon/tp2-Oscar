@@ -12,18 +12,9 @@ namespace TP2.Entidades.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class T_GDA_ESPECIALIDAD__MEDICA
+    public partial class T_GG_DETALLE_TIPO_OPERACION_ESPECIALIDAD
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_GDA_ESPECIALIDAD__MEDICA()
-        {
-            this.T_GG_EMPLEADO = new HashSet<T_GG_EMPLEADO>();
-        }
-    
+        public int idOperacion { get; set; }
         public int idEspecialidad { get; set; }
-        public string nomEspecialidad { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_GG_EMPLEADO> T_GG_EMPLEADO { get; set; }
     }
 }
