@@ -56,15 +56,17 @@
                 var duracion = $('#hora').val();
                 var fecha = $('#fecha').val();
                 var inicio = $('input[name="rbInmueble"]:checked').val();
+                var medico = $('input[name="rbMedico"]:checked').val();
                 var paciente = $('#hfIdPaciente').val();
                 var inmueble = $("#cboSala").val();
+                console.log(medico);
                 $.ajax({
                     url: "/Reserva/Create",
                     type: 'POST',
                     data: {
                         idOperación: tipo, duración: duracion, fecha: fecha,
                         horaInicio: inicio, idPaciente: paciente, idInmueble: inmueble,
-                        estado: 'RESERVADO'
+                        estado: 'RESERVADO', idEmpleado: medico
                     },
                     success: function (data) {
                         alert(data);
