@@ -48,6 +48,7 @@
         <AssociationConnector Association="TP2Model.T_GUQ_DETALLE_TURNO_MEDICO" />
         <AssociationConnector Association="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" />
         <AssociationConnector Association="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" />
+        <AssociationConnector Association="TP2Model.FK_Especialidad__Medica_idOperacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

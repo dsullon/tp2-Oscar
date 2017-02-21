@@ -25,6 +25,7 @@
                 $("#cboSala").val('')
                 $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
                 obtenerMedicos(tipo, fecha);
+                obtenerSalas(tipo);
                 $("#data").show();
             });
 
@@ -66,11 +67,13 @@
                         estado: 'RESERVADO'
                     },
                     success: function (data) {
-                        alert("Exito: Grabado con éxito.");
-                        window.location.href = '/Reserva';
+                        alert(data);
+                        if (data.indexOf("Error") == -1) {
+                            window.location.href = '/Reserva';
+                        }
                     },
                     error: function (error) {
-                        alert("Error: Please try again.");
+                        alert("Error: Intente de nuevo.");
                     }
                 });
             });
@@ -79,7 +82,6 @@
 
         function obtenerMedicos(tipo, fecha) {
             $.ajax({
-                // Get Course PartialView
                 url: "/Reserva/MedicoPartial",
                 type: 'GET',
                 data: { tipo: tipo, fecha: fecha },
@@ -88,6 +90,26 @@
                 },
                 error: function (error) {
                     alert("Error: No se pudo obtener datos de los médicos.");
+                }
+            });
+        }
+
+        function obtenerSalas(tipo) {
+            $('#cboSala').empty();
+            $('#cboSala').append('<option value="">--Seleccione la sala--</option>').val('')
+            $.ajax({
+                url: "/Reserva/ObtenerSalas",
+                type: 'GET',
+                data: { tipo: tipo },
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
+                        $('#cboSala').append(opt);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Error: No se pudo obtener datos de las salas.");
                 }
             });
         }
@@ -146,7 +168,7 @@
                     <div class="panel-heading">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
-                            @Html.DropDownList("cboSala", new SelectList(ViewBag.SalaList, "idInmueble", "dscTipoInmueble"), "--Seleccione la sala--", new { @class = "form-control" })
+                            <select id="cboSala" class="form-control"></select>
                         </div>
                     </div>
                     <div class="panel-body" id="horario"></div>

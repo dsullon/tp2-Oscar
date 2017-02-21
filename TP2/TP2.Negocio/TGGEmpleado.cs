@@ -16,7 +16,10 @@ namespace TP2.Negocio
         public static List<T_GG_EMPLEADO> ListarDisponibles(int tipoOperacion)
         {
             RicardoPalmaEntities db = new RicardoPalmaEntities();
-            return db.T_GG_EMPLEADO.ToList();
+            var listaEspecialidad = db.T_GDA_ESPECIALIDAD__MEDICA.Where(x => x.idOperacion == tipoOperacion).ToList();
+            var listaEmpleados = db.T_GG_EMPLEADO.ToList();
+            listaEmpleados = listaEmpleados.Where(x => listaEspecialidad.Any(y => y.idEspecialidad == x.idEspecialidad)).ToList();
+            return listaEmpleados;
         }
     }
 }

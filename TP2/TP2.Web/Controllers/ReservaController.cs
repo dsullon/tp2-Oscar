@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Linq;
 using TP2.Entidades.EF;
 using TP2.Negocio;
 
@@ -19,9 +20,6 @@ namespace TP2.Web.Controllers
             var tipoOperacionList = TGUQTipoOperacion.ListarTodos();
             ViewBag.TipoOperacionList = tipoOperacionList;
 
-            var salaList = TGGInmueble.ListarTodos(2);
-            ViewBag.SalaList = salaList;
-
             var pacienteList = TGDAPaciente.ListarTodos();
             ViewBag.PacienteList = pacienteList;
 
@@ -38,6 +36,13 @@ namespace TP2.Web.Controllers
         {
             var salaList = TGUQReservaSalaOperacion.ListarDisponibles(fecha, tipo, inmueble);
             return PartialView("_ReservaSala", salaList);
+        }
+
+        public ActionResult ObtenerSalas(int tipo)
+        {
+            var lista = TGGInmueble.ListarDisponibles(tipo).Select(p => new { Id = p.idInmueble, Nombre = p.dscTipoInmueble }).ToList();
+            return Json(lista, JsonRequestBehavior.AllowGet);
+
         }
 
         [HttpPost]

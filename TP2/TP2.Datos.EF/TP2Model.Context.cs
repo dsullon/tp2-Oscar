@@ -30,7 +30,6 @@ namespace TP2.Datos.EF
         public virtual DbSet<T_GDA_ESPECIALIDAD__MEDICA> T_GDA_ESPECIALIDAD__MEDICA { get; set; }
         public virtual DbSet<T_GDA_HISTORIA_CLINICA> T_GDA_HISTORIA_CLINICA { get; set; }
         public virtual DbSet<T_GDA_PACIENTE> T_GDA_PACIENTE { get; set; }
-        public virtual DbSet<T_GG_DETALLE_TIPO_OPERACION_ESPECIALIDAD> T_GG_DETALLE_TIPO_OPERACION_ESPECIALIDAD { get; set; }
         public virtual DbSet<T_GG_EMPLEADO> T_GG_EMPLEADO { get; set; }
         public virtual DbSet<T_GG_INMUEBLE> T_GG_INMUEBLE { get; set; }
         public virtual DbSet<T_GG_MODELO> T_GG_MODELO { get; set; }

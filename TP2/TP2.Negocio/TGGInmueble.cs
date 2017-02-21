@@ -13,10 +13,10 @@ namespace TP2.Negocio
             return db.T_GG_INMUEBLE.Where(x => x.idArea == area).ToList();
         }
 
-        public static List<T_GG_INMUEBLE> ListarDisponibles(string fecha)
+        public static List<T_GG_INMUEBLE> ListarDisponibles(int tipoOperacion)
         {
             RicardoPalmaEntities db = new RicardoPalmaEntities();
-            return db.T_GG_INMUEBLE.Where(x => x.idArea == 2).ToList();
+            return db.T_GG_INMUEBLE.Where(x => x.T_GUQ_TIPO_OPERACIÓN.Where(y => y.idOperación == tipoOperacion).Any()).ToList();
         }
     }
 }
