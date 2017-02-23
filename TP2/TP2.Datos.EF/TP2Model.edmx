@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TP2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TP2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
           <Key>
             <PropertyRef Name="idProgramacion" />
@@ -225,6 +225,7 @@
           <Property Name="idOperación" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dscTipoOperación" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="costoTipoOperacion" Type="float" Nullable="false" />
+          <Property Name="duracion" Type="int" />
         </EntityType>
         <EntityType Name="T_GUQ_TURNO_MEDICO">
           <Key>
@@ -1044,6 +1045,7 @@
           <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
           <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GG_INMUEBLE" />
           <NavigationProperty Name="T_GDA_ESPECIALIDAD__MEDICA" Relationship="TP2Model.FK_Especialidad__Medica_idOperacion" FromRole="T_GUQ_TIPO_OPERACIÓN" ToRole="T_GDA_ESPECIALIDAD__MEDICA" />
+          <Property Name="duracion" Type="Int32" />
         </EntityType>
         <EntityType Name="T_GUQ_TURNO_MEDICO">
           <Key>
@@ -1506,6 +1508,7 @@
           <EntitySetMapping Name="T_GUQ_TIPO_OPERACIÓN">
             <EntityTypeMapping TypeName="TP2Model.T_GUQ_TIPO_OPERACIÓN">
               <MappingFragment StoreEntitySet="T_GUQ_TIPO_OPERACIÓN">
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
                 <ScalarProperty Name="costoTipoOperacion" ColumnName="costoTipoOperacion" />
                 <ScalarProperty Name="dscTipoOperación" ColumnName="dscTipoOperación" />
                 <ScalarProperty Name="idOperación" ColumnName="idOperación" />

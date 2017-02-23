@@ -24,16 +24,14 @@
                 var fecha = $('#fecha').val();
                 $("#cboSala").val('')
                 $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
-                obtenerMedicos(tipo, fecha);
                 obtenerSalas(tipo);
                 $("#data").show();
             });
 
             $("#cboSala").change(function (index) {
                 var fecha = $('#fecha').val();
-                var tipo = $("#tipo").val();
                 var sala = $("#cboSala").val();
-                obtenerHorarios(fecha, tipo, sala);
+                obtenerHorarios(fecha, sala);
             });
 
             $("#btnAceptar").click(function () {
@@ -55,7 +53,7 @@
                 var tipo = $("#tipo").val();
                 var duracion = $('#hora').val();
                 var fecha = $('#fecha').val();
-                var inicio = $('input[name="rbInmueble"]:checked').val();
+                var inicio = $('input[name="rbHorario"]:checked').val();
                 var medico = $('input[name="rbMedico"]:checked').val();
                 var paciente = $('#hfIdPaciente').val();
                 var inmueble = $("#cboSala").val();
@@ -82,11 +80,14 @@
 
         });
 
-        function obtenerMedicos(tipo, fecha) {
+        function obtenerMedicos() {
+            var tipo = $("#tipo").val();
+            var fecha = $('#fecha').val();
+            var hora = $('input[name="rbHorario"]:checked').val();
             $.ajax({
                 url: "/Reserva/MedicoPartial",
                 type: 'GET',
-                data: { tipo: tipo, fecha: fecha },
+                data: { tipo: tipo, fecha: fecha, hora: hora },
                 success: function (data) {
                     jQuery("#medico").html(data);
                 },
@@ -116,14 +117,14 @@
             });
         }
 
-        function obtenerHorarios(fecha, tipo, sala) {
+        function obtenerHorarios(fecha, sala) {
             $.ajax({
                 // Get Course PartialView
                 url: "/Reserva/HorarioPartial",
                 type: 'GET',
-                data: { fecha: fecha, tipo: tipo, inmueble: sala },
+                data: { fecha: fecha, inmueble: sala },
                 success: function (data) {
-                    jQuery("#horario").html(data);
+                    $("#horario").html(data);
                 },
                 error: function (error) {
                     alert("Error: No se pudo obtener los datos de los horarios.");
@@ -161,12 +162,6 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">M&eacute;dico</div>
-                    <div class="panel-body" id="medico"></div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
@@ -174,6 +169,12 @@
                         </div>
                     </div>
                     <div class="panel-body" id="horario"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">M&eacute;dico</div>
+                    <div class="panel-body" id="medico"></div>
                 </div>
             </div>
         </div>

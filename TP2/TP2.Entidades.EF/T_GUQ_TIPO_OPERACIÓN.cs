@@ -26,6 +26,7 @@ namespace TP2.Entidades.EF
         public int idOperación { get; set; }
         public string dscTipoOperación { get; set; }
         public double costoTipoOperacion { get; set; }
+        public Nullable<int> duracion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_GUQ_INSUMO_TIPOOPERACION> T_GUQ_INSUMO_TIPOOPERACION { get; set; }

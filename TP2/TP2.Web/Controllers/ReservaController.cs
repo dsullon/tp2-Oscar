@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Linq;
 using TP2.Entidades.EF;
 using TP2.Negocio;
@@ -26,15 +27,19 @@ namespace TP2.Web.Controllers
             return View();
         }
 
-        public ActionResult MedicoPartial(int tipo, string fecha)
+        public ActionResult MedicoPartial(int tipo, string fecha, string hora)
         {
-            var empleadoList = TGGEmpleado.ListarDisponibles(tipo);
+            hora = hora.Substring(0, 2);
+            var nuevaHora = int.Parse(hora);
+            var nuevaFecha = DateTime.Parse(fecha);
+
+            var empleadoList = TGUQReservaSalaOperacion.ListarMedicos(tipo, nuevaFecha, nuevaHora);
             return PartialView("_ReservaMedico", empleadoList);
         }
 
-        public ActionResult HorarioPartial(string fecha, int tipo, int inmueble)
+        public ActionResult HorarioPartial(string fecha, int inmueble)
         {
-            var salaList = TGUQReservaSalaOperacion.ListarDisponibles(fecha, tipo, inmueble);
+            var salaList = TGUQReservaSalaOperacion.ListarHorarios(fecha, inmueble);
             return PartialView("_ReservaSala", salaList);
         }
 
