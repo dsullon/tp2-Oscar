@@ -1,0 +1,149 @@
+﻿@model TP2.Entidades.EF.T_GUQ_PRESUPUESTO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Script/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(function () {
+            $('#anio').datepicker({
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy',
+                onClose: function (dateText, inst) {
+                    $(this).datepicker('setDate', new Date(inst.selectedYear, 1));
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btnCrear").click(function () {
+                var idPresupuesto = $("#idPresupuesto").val();
+                var anio = $("#anio").val();
+                var partida = $('#PartidaList').val();
+                var idArea = $('#idArea').val();
+                $.ajax({
+                    url: "/Presupuesto/Edit",
+                    type: 'POST',
+                    data: {
+                        anio: anio, partida: partida, idArea: idArea, idPresupuesto: idPresupuesto
+                    },
+                    success: function (data) {
+                        alert(data);
+                        if (data.indexOf("Error") == -1) {
+                            window.location.href = '/Presupuesto';
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: Intente de nuevo.");
+                    }
+                });
+            });
+
+            $("#PartidaList").change(function () {
+                var partida = $("#PartidaList option:selected").val();
+                var idArea = $('#idArea').val();
+                var anio = $("#anio").val();
+                $.ajax({
+                    url: "/EstadisticaRecursos/Index",
+                    type: 'POST',
+                    data: {
+                        anio: anio, partida: partida, idArea: idArea
+                    },
+                    success: function (data) {
+                        $("#monto").val(data);
+
+                    },
+                    error: function (error) {
+
+                    }
+                });
+            });
+
+        });
+    </script>
+
+}
+
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+
+
+
+<div class="form-horizontal">
+    <h4>T_GUQ_PRESUPUESTO</h4>
+    <hr />
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="fecha">Id:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("idPresupuesto", null, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="fecha">Fecha:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("anio", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Partida:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("PartidaList", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Area:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("idArea", new SelectList(ViewBag.AreaList, "idArea", "descripcion"), "--Seleccione un área--", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="fecha">Monto:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("monto", null, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+    </div >
+
+        <div class="row" style="margin-top:10px;">
+            <div class="col-sm-6">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <input type="button" value="Actualizar" class="btn btn-default" id="btnCrear" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+<div>
+    @Html.ActionLink("Regresar atras", "Index")
+</div>
+

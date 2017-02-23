@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="TP2Model.T_GUQ_INGRESO_SALIDA_PACIENTE" Width="1.5" PointX="12" PointY="26.25" />
         <EntityTypeShape EntityType="TP2Model.T_GUQ_INSUMO" Width="1.5" PointX="5.25" PointY="19.5" />
         <EntityTypeShape EntityType="TP2Model.T_GUQ_INSUMO_TIPOOPERACION" Width="1.5" PointX="7.5" PointY="22.375" />
-        <EntityTypeShape EntityType="TP2Model.T_GUQ_PARTIDA" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="TP2Model.T_GUQ_PARTIDA" Width="1.5" PointX="5.375" PointY="7.25" />
         <EntityTypeShape EntityType="TP2Model.T_GUQ_PRESUPUESTO" Width="1.5" PointX="3" PointY="6.75" />
         <EntityTypeShape EntityType="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN" Width="1.5" PointX="7.5" PointY="15.625" />
         <EntityTypeShape EntityType="TP2Model.T_GUQ_SOLICITUD_UCI" Width="1.5" PointX="9.75" PointY="26.125" />

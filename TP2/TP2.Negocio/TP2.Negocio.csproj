@@ -54,6 +54,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TGGEmpleado.cs" />
     <Compile Include="TGGInmueble.cs" />
+    <Compile Include="TGUQArea.cs" />
+    <Compile Include="TGUQEstadisticaRecursos.cs" />
+    <Compile Include="TGUQPartida.cs" />
+    <Compile Include="TGUQPartidaPresupuesto.cs" />
+    <Compile Include="TGUQPresupuesto.cs" />
     <Compile Include="TGUQTipoOperacion.cs" />
     <Compile Include="TGUQReservaSalaOperacion.cs" />
   </ItemGroup>
