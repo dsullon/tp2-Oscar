@@ -10,6 +10,19 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#tipo").change(function () {
+                var tipo = $("#tipo").val();
+                limpiarDatos();
+                $.ajax({
+                    url: "/Reserva/ObtenerDuracion",
+                    type: 'GET',
+                    data: { tipo: tipo },
+                    success: function (data) {
+                        $('#hora').val(data);
+                    }
+                });
+            });
+
             $("#fecha").datepicker({
                 dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
                 monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -23,12 +36,13 @@
                 var tipo = $("#tipo").val();
                 var fecha = $('#fecha').val();
                 $("#cboSala").val('')
-                $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
+                limpiarDatos();
                 obtenerSalas(tipo);
                 $("#data").show();
             });
 
             $("#cboSala").change(function (index) {
+                $("#medico").load('@Url.Action("MedicoPartial", "Reserva")' + '?tipo=0&fecha=01/01/1900&hora=00:00')
                 var fecha = $('#fecha').val();
                 var sala = $("#cboSala").val();
                 obtenerHorarios(fecha, sala);
@@ -98,8 +112,6 @@
         }
 
         function obtenerSalas(tipo) {
-            $('#cboSala').empty();
-            $('#cboSala').append('<option value="">--Seleccione la sala--</option>').val('')
             $.ajax({
                 url: "/Reserva/ObtenerSalas",
                 type: 'GET',
@@ -131,7 +143,14 @@
                 }
             });
         }
-    </script>
+
+        function limpiarDatos() {
+            $('#cboSala').empty();
+            $('#cboSala').append('<option value="">--Seleccione la sala--</option>').val('')
+            $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
+            $("#medico").load('@Url.Action("MedicoPartial", "Reserva")' + '?tipo=0&fecha=01/01/1900&hora=00:00')
+        }
+</script>
 }
 
 <h2>Nueva Reserva</h2>

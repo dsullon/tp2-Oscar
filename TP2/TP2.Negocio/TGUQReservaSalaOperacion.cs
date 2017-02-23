@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TP2.Datos.EF;
@@ -8,6 +9,8 @@ namespace TP2.Negocio
 {
     public class TGUQReservaSalaOperacion
     {
+        protected static readonly ILog log = LogManager.GetLogger("Reservas");
+
         public static List<T_GUQ_RESERVA_SALA_OPERACIÓN> ListarTodos()
         {
             RicardoPalmaEntities db = new RicardoPalmaEntities();
@@ -22,39 +25,58 @@ namespace TP2.Negocio
             DateTime nuevaFecha = Convert.ToDateTime(fecha);
             if (nuevaFecha.CompareTo(new DateTime(1900, 1, 1)) == 0)
                 return horario;
-            RicardoPalmaEntities db = new RicardoPalmaEntities();
-            T_GUQ_RESERVA_SALA_OPERACIÓN reserva = null;
-            var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(nuevaFecha) == 0 &&
-             x.idInmueble == inmueble).ToList();
-            for (int i = 0; i < 24; i++)
-            {
-                reserva = reservas.Where(x => x.horaInicio.Hours == i).FirstOrDefault();
 
-                if (reserva != null)
-                    i += (reserva.duración - 1);
-                else
+            try
+            {
+                RicardoPalmaEntities db = new RicardoPalmaEntities();
+                T_GUQ_RESERVA_SALA_OPERACIÓN reserva = null;
+                var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(nuevaFecha) == 0 &&
+                 x.idInmueble == inmueble).ToList();
+                for (int i = 0; i < 24; i++)
                 {
-                    result = TimeSpan.FromHours(i);
-                    timeString = result.ToString("hh':'mm");
-                    horario.Add(timeString);
+                    reserva = reservas.Where(x => x.horaInicio.Hours == i).FirstOrDefault();
+
+                    if (reserva != null)
+                        i += (reserva.duración - 1);
+                    else
+                    {
+                        result = TimeSpan.FromHours(i);
+                        timeString = result.ToString("hh':'mm");
+                        horario.Add(timeString);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                log.Error("Error al consultar los horarios", ex);
+            }
+            
             return horario;
         }
 
         public static List<T_GG_EMPLEADO> ListarMedicos(int tipoOperacion, DateTime fecha, int hora)
         {
-            RicardoPalmaEntities db = new RicardoPalmaEntities();
+            List<T_GG_EMPLEADO> lista = new List<T_GG_EMPLEADO>();
+            DateTime nuevaFecha = Convert.ToDateTime(fecha);
+            if (nuevaFecha.CompareTo(new DateTime(1900, 1, 1)) == 0)
+                return lista;
+            try
+            {
+                RicardoPalmaEntities db = new RicardoPalmaEntities();
+                var tipo = db.T_GUQ_TIPO_OPERACIÓN.Find(tipoOperacion);
+                var listaEspecialidad = db.T_GDA_ESPECIALIDAD__MEDICA.Where(x => x.idOperacion == tipoOperacion).ToList();
+                var listaEmpleados = db.T_GG_EMPLEADO.ToList();
+                listaEmpleados = listaEmpleados.Where(x => listaEspecialidad.Any(y => y.idEspecialidad == x.idEspecialidad)).ToList();
 
-            var tipo = db.T_GUQ_TIPO_OPERACIÓN.Find(tipoOperacion);
+                var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(fecha) == 0 && (x.horaInicio.Hours <= hora && (x.horaInicio.Hours + x.duración) > hora)).ToList();
 
-            var listaEspecialidad = db.T_GDA_ESPECIALIDAD__MEDICA.Where(x => x.idOperacion == tipoOperacion).ToList();
-            var listaEmpleados = db.T_GG_EMPLEADO.ToList();
-            listaEmpleados = listaEmpleados.Where(x => listaEspecialidad.Any(y => y.idEspecialidad == x.idEspecialidad)).ToList();
-
-            var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(fecha) == 0 && (x.horaInicio.Hours <= hora && (x.horaInicio.Hours + x.duración) > hora)).ToList();
-
-            var lista = listaEmpleados.Where(x => !reservas.Any(y => y.idEmpleado == x.idEmpleado)).ToList();
+                lista = listaEmpleados.Where(x => !reservas.Any(y => y.idEmpleado == x.idEmpleado)).ToList();
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error al consultar los médicos", ex);
+            }
+            
             return lista;
         }
 
@@ -71,6 +93,7 @@ namespace TP2.Negocio
             catch (Exception ex)
             {
                 exito = false;
+                log.Error("Error al crear la reserva", ex);
             }
             return exito;
         }

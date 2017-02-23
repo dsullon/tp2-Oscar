@@ -12,5 +12,11 @@ namespace TP2.Negocio
             RicardoPalmaEntities db = new RicardoPalmaEntities();
             return db.T_GUQ_TIPO_OPERACIÓN.ToList();
         }
+
+        public static T_GUQ_TIPO_OPERACIÓN Obtener(int idOperacion)
+        {
+            RicardoPalmaEntities db = new RicardoPalmaEntities();
+            return db.T_GUQ_TIPO_OPERACIÓN.Find(idOperacion);
+        }
     }
 }

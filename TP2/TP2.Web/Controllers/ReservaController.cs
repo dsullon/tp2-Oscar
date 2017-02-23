@@ -50,6 +50,16 @@ namespace TP2.Web.Controllers
 
         }
 
+        public int ObtenerDuracion(int tipo)
+        {
+            int duracion=0;
+            var tipoOperacion = TGUQTipoOperacion.Obtener(tipo);
+            if (tipoOperacion != null && tipoOperacion.duracion.HasValue)
+                duracion = tipoOperacion.duracion.Value;
+            return duracion;
+
+        }
+
         [HttpPost]
         public string Create(T_GUQ_RESERVA_SALA_OPERACIÓN reserva)
         {
