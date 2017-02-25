@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TP2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TP2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
           <Key>
             <PropertyRef Name="idProgramacion" />
@@ -188,11 +188,12 @@
         </EntityType>
         <EntityType Name="T_GUQ_PRESUPUESTO_PARTIDA">
           <Key>
-            <PropertyRef Name="idPresupuesto" />
-            <PropertyRef Name="idPartida" />
+            <PropertyRef Name="idPresupuestoPartida" />
           </Key>
+          <Property Name="idPresupuestoPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idPresupuesto" Type="int" Nullable="false" />
           <Property Name="idPartida" Type="int" Nullable="false" />
+          <Property Name="montoPartida" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
           <Key>
@@ -476,19 +477,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA1">
-          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="1" />
-          <End Role="T_GUQ_PRESUPUESTO_PARTIDA" Type="Self.T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GUQ_PRESUPUESTO">
-              <PropertyRef Name="idPresupuesto" />
-            </Principal>
-            <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
-              <PropertyRef Name="idPresupuesto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA2">
+        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA">
           <End Role="T_GUQ_PARTIDA" Type="Self.T_GUQ_PARTIDA" Multiplicity="1" />
           <End Role="T_GUQ_PRESUPUESTO_PARTIDA" Type="Self.T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -497,6 +486,18 @@
             </Principal>
             <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
               <PropertyRef Name="idPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO">
+          <End Role="T_GUQ_PRESUPUESTO" Type="Self.T_GUQ_PRESUPUESTO" Multiplicity="1" />
+          <End Role="T_GUQ_PRESUPUESTO_PARTIDA" Type="Self.T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_PRESUPUESTO">
+              <PropertyRef Name="idPresupuesto" />
+            </Principal>
+            <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
+              <PropertyRef Name="idPresupuesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -665,12 +666,12 @@
             <End Role="T_GUQ_INSUMO" EntitySet="T_GUQ_INSUMO" />
             <End Role="T_GUQ_INSUMO_TIPOOPERACION" EntitySet="T_GUQ_INSUMO_TIPOOPERACION" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA1" Association="Self.FK_T_GUQ_PRESUPUESTO_PARTIDA1">
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA" Association="Self.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA">
+            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
             <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA2" Association="Self.FK_T_GUQ_PRESUPUESTO_PARTIDA2">
-            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO" Association="Self.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO">
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
             <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
           </AssociationSet>
           <AssociationSet Name="FK_T_GUQ_PRESUPUESTO1" Association="Self.FK_T_GUQ_PRESUPUESTO1">
@@ -803,13 +804,18 @@
             <End Role="T_GG_INMUEBLE" EntitySet="T_GG_INMUEBLE" />
             <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
           </AssociationSet>
-          <AssociationSet Name="T_GUQ_PRESUPUESTO_PARTIDA" Association="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA">
-            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
-            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
-          </AssociationSet>
           <AssociationSet Name="FK_Especialidad__Medica_idOperacion" Association="TP2Model.FK_Especialidad__Medica_idOperacion">
             <End Role="T_GUQ_TIPO_OPERACIÓN" EntitySet="T_GUQ_TIPO_OPERACIÓN" />
             <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
+          </AssociationSet>
+          <EntitySet Name="T_GUQ_PRESUPUESTO_PARTIDA" EntityType="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" />
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA" Association="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA">
+            <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
+            <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO" Association="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO">
+            <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
+            <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
@@ -989,7 +995,7 @@
           <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dscPartida" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_GUQ_ESTADÍSTICA_RECURSOS" Relationship="TP2Model.FK_Estadísticas_recursos_idPartidas" FromRole="T_GUQ_PARTIDA" ToRole="T_GUQ_ESTADÍSTICA_RECURSOS" />
-          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" FromRole="T_GUQ_PARTIDA" ToRole="T_GUQ_PRESUPUESTO" />
+          <NavigationProperty Name="T_GUQ_PRESUPUESTO_PARTIDA" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA" FromRole="T_GUQ_PARTIDA" ToRole="T_GUQ_PRESUPUESTO_PARTIDA" />
         </EntityType>
         <EntityType Name="T_GUQ_PRESUPUESTO">
           <Key>
@@ -1002,7 +1008,7 @@
           <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_GUQ_AREA" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO1" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_AREA" />
           <NavigationProperty Name="T_GUQ_CONSOLIDADO_PRESUPUESTO" Relationship="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_CONSOLIDADO_PRESUPUESTO" />
-          <NavigationProperty Name="T_GUQ_PARTIDA" Relationship="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_PARTIDA" />
+          <NavigationProperty Name="T_GUQ_PRESUPUESTO_PARTIDA" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO" FromRole="T_GUQ_PRESUPUESTO" ToRole="T_GUQ_PRESUPUESTO_PARTIDA" />
         </EntityType>
         <EntityType Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
           <Key>
@@ -1019,8 +1025,8 @@
           <NavigationProperty Name="T_GG_EMPLEADO" Relationship="TP2Model.FK_Reserva_sala_operación_IdEmpleado" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GG_EMPLEADO" />
           <NavigationProperty Name="T_GG_INMUEBLE" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN3" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GG_INMUEBLE" />
           <NavigationProperty Name="T_GUQ_TIPO_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN1" FromRole="T_GUQ_RESERVA_SALA_OPERACIÓN" ToRole="T_GUQ_TIPO_OPERACIÓN" />
-          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="fechaFin" Type="DateTime" Precision="3" Nullable="false" />
         </EntityType>
         <EntityType Name="T_GUQ_SOLICITUD_UCI">
           <Key>
@@ -1285,10 +1291,6 @@
           <End Type="TP2Model.T_GG_INMUEBLE" Role="T_GG_INMUEBLE" Multiplicity="*" />
           <End Type="TP2Model.T_GUQ_TIPO_OPERACIÓN" Role="T_GUQ_TIPO_OPERACIÓN" Multiplicity="*" />
         </Association>
-        <Association Name="T_GUQ_PRESUPUESTO_PARTIDA">
-          <End Type="TP2Model.T_GUQ_PRESUPUESTO" Role="T_GUQ_PRESUPUESTO" Multiplicity="*" />
-          <End Type="TP2Model.T_GUQ_PARTIDA" Role="T_GUQ_PARTIDA" Multiplicity="*" />
-        </Association>
         <Association Name="FK_Especialidad__Medica_idOperacion">
           <End Type="TP2Model.T_GUQ_TIPO_OPERACIÓN" Role="T_GUQ_TIPO_OPERACIÓN" Multiplicity="1" />
           <End Type="TP2Model.T_GDA_ESPECIALIDAD__MEDICA" Role="T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="*" />
@@ -1298,6 +1300,41 @@
             </Principal>
             <Dependent Role="T_GDA_ESPECIALIDAD__MEDICA">
               <PropertyRef Name="idOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="T_GUQ_PRESUPUESTO_PARTIDA">
+          <Key>
+            <PropertyRef Name="idPresupuestoPartida" />
+          </Key>
+          <Property Name="idPresupuestoPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPresupuesto" Type="Int32" Nullable="false" />
+          <Property Name="idPartida" Type="Int32" Nullable="false" />
+          <Property Name="montoPartida" Type="Double" Nullable="false" />
+          <NavigationProperty Name="T_GUQ_PARTIDA" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA" FromRole="T_GUQ_PRESUPUESTO_PARTIDA" ToRole="T_GUQ_PARTIDA" />
+          <NavigationProperty Name="T_GUQ_PRESUPUESTO" Relationship="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO" FromRole="T_GUQ_PRESUPUESTO_PARTIDA" ToRole="T_GUQ_PRESUPUESTO" />
+        </EntityType>
+        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA">
+          <End Type="TP2Model.T_GUQ_PARTIDA" Role="T_GUQ_PARTIDA" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" Role="T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_PARTIDA">
+              <PropertyRef Name="idPartida" />
+            </Principal>
+            <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
+              <PropertyRef Name="idPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO">
+          <End Type="TP2Model.T_GUQ_PRESUPUESTO" Role="T_GUQ_PRESUPUESTO" Multiplicity="1" />
+          <End Type="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" Role="T_GUQ_PRESUPUESTO_PARTIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_GUQ_PRESUPUESTO">
+              <PropertyRef Name="idPresupuesto" />
+            </Principal>
+            <Dependent Role="T_GUQ_PRESUPUESTO_PARTIDA">
+              <PropertyRef Name="idPresupuesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1549,14 +1586,16 @@
               <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="T_GUQ_PRESUPUESTO_PARTIDA" TypeName="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" StoreEntitySet="T_GUQ_PRESUPUESTO_PARTIDA">
-            <EndProperty Name="T_GUQ_PARTIDA">
-              <ScalarProperty Name="idPartida" ColumnName="idPartida" />
-            </EndProperty>
-            <EndProperty Name="T_GUQ_PRESUPUESTO">
-              <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="T_GUQ_PRESUPUESTO_PARTIDA">
+            <EntityTypeMapping TypeName="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA">
+              <MappingFragment StoreEntitySet="T_GUQ_PRESUPUESTO_PARTIDA">
+                <ScalarProperty Name="montoPartida" ColumnName="montoPartida" />
+                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+                <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
+                <ScalarProperty Name="idPresupuestoPartida" ColumnName="idPresupuestoPartida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

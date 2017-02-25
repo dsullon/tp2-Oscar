@@ -51,7 +51,7 @@
         
 
         $("#btnAgregarPartida").on("click", function () {
-            EliminarFilas();
+           
             var anio = $("#anio").val();
             var partida = $('#partida').val();
             var idArea = $('#idArea').val();
@@ -63,30 +63,35 @@
                 },
                 success: function (data) {
                     
-                    
-                    for (var i = 0;i < data.length; i++) {
-                        var tds =  tds += '<tr class = "filas">';
-                        tds += '<td>' + data[i].idPartida + '</td>';
-                        tds += '<td>' + data[i].descripcion + '</td>';
-                        tds += '<td>' + data[i].monto + '</td>';
-                        tds += '<td><button   class = "EditarPartida" > Editar </button> </td>';
-                        tds += '<td><button  class = "EliminarPartida" > Eliminar </button> </td>';
-                        tds += '</tr>';
-                        
-                    }
-                    $("#tblPartida").append(tds);
-                   
-                    $(".EditarPartida").off("click");
-                    $(".EditarPartida").on("click", function () {
-                        var id = $(this).parents("tr").find("td").eq(0).html();
-                        EditarPartidaGet(id);
-                    });
+                    if (data == "Error") {
+                        alert("Usted ya agrego esa  partida");
+                    } else {
+                        EliminarFilas();
+                        for (var i = 0; i < data.length; i++) {
+                            var tds = tds += '<tr class = "filas">';
+                            tds += '<td>' + data[i].idPartida + '</td>';
+                            tds += '<td>' + data[i].descripcion + '</td>';
+                            tds += '<td>' + data[i].monto + '</td>';
+                            tds += '<td><button   class = "EditarPartida" > Editar </button> </td>';
+                            tds += '<td><button  class = "EliminarPartida" > Eliminar </button> </td>';
+                            tds += '</tr>';
 
-                    $(".EliminarPartida").off("click");
-                    $(".EliminarPartida").on("click", function () {
-                        var id = $(this).parents("tr").find("td").eq(0).html();
-                        EliminarPartidas(id);
-                    });
+                        }
+                        $("#tblPartida").append(tds);
+
+                        $(".EditarPartida").off("click");
+                        $(".EditarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EditarPartidaGet(id);
+                        });
+
+                        $(".EliminarPartida").off("click");
+                        $(".EliminarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EliminarPartidas(id);
+                        });
+                    }
+                    
                    
                 },
                 error: function (error) {
@@ -299,15 +304,17 @@
                     <input type="button" value="Agregar Partida" class="btn btn-default" id="btnAgregarPartida" />
                 </div>
             </div>
-        </div>
 
-        <div class="row" style="margin-top:10px;">
-            <div class="col-sm-6">
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <input type="button" value="Grabar" class="btn btn-default" id="btnCrear" />
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <input type="button" value="Grabar" class="btn btn-default" id="btnCrear" />
+                    </div>
                 </div>
             </div>
         </div>
+
+        
     </div>
 
 <div class="row" id="Partidas">

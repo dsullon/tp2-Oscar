@@ -12,16 +12,14 @@ namespace TP2.Entidades.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class T_GUQ_ESTADÍSTICA_RECURSOS
+    public partial class T_GUQ_PRESUPUESTO_PARTIDA
     {
-        public int idEstadisticaRecurso { get; set; }
-        public int mes { get; set; }
-        public int anio { get; set; }
-        public int idArea { get; set; }
-        public double montoHistórico { get; set; }
+        public int idPresupuestoPartida { get; set; }
+        public int idPresupuesto { get; set; }
         public int idPartida { get; set; }
+        public double montoPartida { get; set; }
     
-        public virtual T_GUQ_AREA T_GUQ_AREA { get; set; }
         public virtual T_GUQ_PARTIDA T_GUQ_PARTIDA { get; set; }
+        public virtual T_GUQ_PRESUPUESTO T_GUQ_PRESUPUESTO { get; set; }
     }
 }

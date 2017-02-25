@@ -44,7 +44,8 @@ namespace TP2.Web.Controllers
         {
             string mensaje = "Error al grabar los datos";
             List<T_GUQ_PARTIDA> lisPartidas = new List<T_GUQ_PARTIDA>();
-            T_GUQ_PARTIDA oPartida ; 
+            T_GUQ_PARTIDA oPartida ;
+            List<double> listaMontos = new List<double>();
             double montoTotal = 0;
             for (int i = 0; i < listaPartidas.Count(); i++)
             {
@@ -53,10 +54,11 @@ namespace TP2.Web.Controllers
                 oPartida.idPartida = listaPartidas[i].idPartida;
                 oPartida.dscPartida = listaPartidas[i].descripcion;
                 lisPartidas.Add(oPartida);
+                listaMontos.Add(listaPartidas[i].monto);
             }
 
 
-            bool exito = TGUQPresupuesto.Crear(presupuesto, lisPartidas, montoTotal);
+            bool exito = TGUQPresupuesto.Crear(presupuesto, lisPartidas, listaMontos);
             if (exito)
                 mensaje = "Los datos se grabaron con exito";
             return mensaje;
@@ -66,31 +68,88 @@ namespace TP2.Web.Controllers
         {
 
             var presupuesto = TGUQPresupuesto.Obtener(id);
+
             var partidaList = TGUQPartida.ListarTodos();
-            var idPartida =  presupuesto.T_GUQ_PARTIDA.ToList()[0].idPartida;
-            ViewBag.PartidaList = new SelectList(partidaList, "idPartida", "dscPartida", idPartida);
+            ViewBag.PartidaList = new SelectList(partidaList, "idPartida", "dscPartida");
 
             var areaList = TGUQArea.ListarTodos();
-            ViewBag.AreaList = areaList;
-
+            ViewBag.AreaList = new SelectList(areaList, "idArea", "descripcion", presupuesto.idArea);
+            
             return View(presupuesto);
+            //return Json(listaPartidas, JsonRequestBehavior.AllowGet);  
+        }
+
+         [HttpPost]
+        public string Edit(T_GUQ_PRESUPUESTO presupuesto)
+        {
+            string mensaje = "Error al grabar los datos";
+            T_GUQ_PRESUPUESTO oPresupuesto = TGUQPresupuesto.Obtener(presupuesto.idPresupuesto);
+            List<T_GUQ_PARTIDA> lisPartidas = new List<T_GUQ_PARTIDA>();
+            T_GUQ_PARTIDA oPartida;
+            List<double> listaMontos = new List<double>();
+            double montoTotal = 0;
+
+            for (int i = 0; i < listaPartidas.Count(); i++)
+            {
+                montoTotal = montoTotal + listaPartidas[i].monto;
+                oPartida = new T_GUQ_PARTIDA();
+                oPartida.idPartida = listaPartidas[i].idPartida;
+                oPartida.dscPartida = listaPartidas[i].descripcion;
+                lisPartidas.Add(oPartida);
+                listaMontos.Add(listaPartidas[i].monto);
+            }
+
+            bool exito = TGUQPresupuesto.Editar(oPresupuesto, lisPartidas, listaMontos);
+      
+            if (exito)
+                mensaje = "Los datos se grabaron con exito";
+            return mensaje;
         }
 
 
         [HttpPost]
-        public string Edit(T_GUQ_PRESUPUESTO presupuesto, int partida)
+        public ActionResult ListarPartidas(int IdPresupuesto)
         {
-            string mensaje = "Error al grabar los datos";
-            bool exito = TGUQPresupuesto.Editar(presupuesto, partida);
-            if (exito)
-                mensaje = "Los datos se actualizaron con exito";
-            return mensaje;
+
+            listaPartidas.Clear();
+            var presupuesto = TGUQPresupuesto.Obtener(IdPresupuesto);
+
+            if (presupuesto.estado == "Generado")
+            {
+                Partida partida;
+
+                foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
+                {
+                    var oPartida = TGUQPartida.Obtener(item.idPartida);
+                    partida = new Partida();
+                    partida.idPartida = item.idPartida;
+                    partida.monto = item.montoPartida;
+                    partida.descripcion = oPartida.dscPartida;
+                    listaPartidas.Add(partida);
+                }
+
+                return Json(listaPartidas, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+          
         }
 
 
         [HttpPost]
         public ActionResult AgregarPartida(T_GUQ_PRESUPUESTO presupuesto, int partida)
         {
+            foreach (var item in listaPartidas)
+            {
+                if (item.idPartida == partida)
+                {
+                  
+                    return Json("Error", JsonRequestBehavior.AllowGet); 
+                }
+            }
+
             double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, partida, presupuesto.idArea);
             var Partida = TGUQPartida.Obtener(partida);
             Partida oPartida = new Partida();
@@ -122,7 +181,7 @@ namespace TP2.Web.Controllers
             for (int i = 0; i < listaPartidas.Count(); i++)
             {
                 if (listaPartidas[i].idPartida == idPartida)
-                {
+                { 
                     var Partida = TGUQPartida.Obtener(idPartida);
                     Partida oPartida = new Partida();
                     oPartida.monto = monto;

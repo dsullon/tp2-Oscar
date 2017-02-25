@@ -103,6 +103,9 @@
     <Compile Include="T_GUQ_PRESUPUESTO.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_GUQ_PRESUPUESTO_PARTIDA.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_GUQ_RESERVA_SALA_OPERACIÓN.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>

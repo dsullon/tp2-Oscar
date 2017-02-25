@@ -20,21 +20,24 @@ namespace TP2.Negocio
             return db.T_GUQ_PRESUPUESTO.ToList();
         }
 
-        public static bool Crear(T_GUQ_PRESUPUESTO presupuesto, List<T_GUQ_PARTIDA> listaPartidas,double monto)
+        public static bool Crear(T_GUQ_PRESUPUESTO presupuesto, List<T_GUQ_PARTIDA> listaPartidas,List<double> listaMontos)
         {
             bool exito = false;
 
             try
             {
                 RicardoPalmaEntities db = new RicardoPalmaEntities();
-               // double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, idPartida, presupuesto.idArea);
-                //var partida = new T_GUQ_PARTIDA();
-               // partida.idPartida = idPartida;
-                presupuesto.monto = monto;
+                T_GUQ_PRESUPUESTO_PARTIDA PresupuestoPartida ;
+             
+                
                 presupuesto.estado = "Generado";
                 for (int i = 0; i < listaPartidas.Count(); i++)
                 {
-                    presupuesto.T_GUQ_PARTIDA.Add(listaPartidas[i]);
+                    PresupuestoPartida = new T_GUQ_PRESUPUESTO_PARTIDA();
+                    PresupuestoPartida.idPartida = listaPartidas[i].idPartida;
+                    PresupuestoPartida.montoPartida = listaMontos[i]; 
+                    presupuesto.monto =  presupuesto.monto + listaMontos[i];
+                    presupuesto.T_GUQ_PRESUPUESTO_PARTIDA.Add(PresupuestoPartida);
                 }
                    
                 db.Entry(presupuesto).State = EntityState.Added;
@@ -65,32 +68,57 @@ namespace TP2.Negocio
             return exito;
         }
 
-        public static bool Editar(T_GUQ_PRESUPUESTO presupuesto, int idPartida)
+        public static bool Editar(T_GUQ_PRESUPUESTO presupuesto, List<T_GUQ_PARTIDA> listaPartidas, List<double> listaMontos)
         {
             bool exito = false;
 
             try
             {
                 RicardoPalmaEntities db = new RicardoPalmaEntities();
-                double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, idPartida, presupuesto.idArea);
-                var partida = new T_GUQ_PARTIDA();
-                partida.idPartida = idPartida;
+                T_GUQ_PRESUPUESTO_PARTIDA PresupuestoPartida;
+
+                
+                db.Database.ExecuteSqlCommand(
+                    "DELETE FROM  T_GUQ_PRESUPUESTO_PARTIDA  WHERE idPresupuesto = @idPer",
+                    new SqlParameter[]
+                       {
+                           new SqlParameter ("idPer", presupuesto.idPresupuesto)
+                       }
+              );
+
+                presupuesto.estado = "Generado";
+                for (int i = 0; i < listaPartidas.Count(); i++)
+                {
+                    PresupuestoPartida = new T_GUQ_PRESUPUESTO_PARTIDA();
+                    PresupuestoPartida.idPartida = listaPartidas[i].idPartida;
+                    PresupuestoPartida.idPresupuesto = presupuesto.idPresupuesto;
+                    PresupuestoPartida.montoPartida = listaMontos[i];
+                    presupuesto.idPresupuesto = presupuesto.idPresupuesto;
+                    presupuesto.monto = presupuesto.monto + listaMontos[i];
+
+                    db.Database.ExecuteSqlCommand(
+                  "InSERT INTO  T_GUQ_PRESUPUESTO_PARTIDA VALUES(@P1,@P2,@P3)",
+                  new SqlParameter[]
+                       {
+                           new SqlParameter ("P1",PresupuestoPartida.idPresupuesto),
+                            new SqlParameter ("P2",PresupuestoPartida.idPartida),
+                             new SqlParameter ("P3",PresupuestoPartida.montoPartida)
+                       }
+            );
+            }
 
                 db.Database.ExecuteSqlCommand(
-                     "update  T_GUQ_PRESUPUESTO_PARTIDA set idPartida = @idPar where idPresupuesto = @idPer",
-                     new SqlParameter[]
-                     {
-                         new SqlParameter ("idPar", idPartida),
-                         new SqlParameter ("idPer", presupuesto.idPresupuesto)
-                     }
-                    
-                 );
-
-                presupuesto.monto = monto;
-                presupuesto.estado = "Generado";
-               
-                db.Entry(presupuesto).State = EntityState.Modified;
-               
+                "UPDATE   T_GUQ_PRESUPUESTO SET idArea = @p1, monto = @p2 , monto = @p3 WHERE idPresupuesto = @p4",
+                new SqlParameter[]
+                       {
+                           new SqlParameter ("P1",presupuesto.idArea),
+                            new SqlParameter ("P2",presupuesto.monto),
+                             new SqlParameter ("P3",presupuesto.monto),
+                              new SqlParameter ("P4",presupuesto.idPresupuesto)
+                          
+                       }
+          );
+                 
                 db.SaveChanges();
                
                 exito = true;

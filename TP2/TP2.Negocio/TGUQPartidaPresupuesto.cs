@@ -10,16 +10,14 @@ namespace TP2.Negocio
 {
     public class TGUQPartidaPresupuesto
     {
-        public static bool Crear(T_GUQ_PRESUPUESTO presupuesto, int idPartida)
+        public static bool Crear(T_GUQ_PRESUPUESTO_PARTIDA presupuestoPartida)
         {
             bool exito = false;
             try
             {
                 RicardoPalmaEntities db = new RicardoPalmaEntities();
-                double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, idPartida, presupuesto.idArea);
-                presupuesto.monto = monto;
-                presupuesto.estado = "Generado";
-                db.T_GUQ_PRESUPUESTO.Add(presupuesto);
+
+                db.T_GUQ_PRESUPUESTO_PARTIDA.Add(presupuestoPartida);
                 db.SaveChanges();
                 exito = true;
             }
