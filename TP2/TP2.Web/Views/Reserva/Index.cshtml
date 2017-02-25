@@ -35,10 +35,10 @@
             @Html.DisplayFor(modelItem => item.T_GDA_PACIENTE.nomPaciente)
         </td>
         <td>
-            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.fecha))
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.fechaInicio))
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.horaInicio)
+            @Convert.ToString(string.Format("{0:HH:mm}", item.fechaInicio))
         </td>
         <td>
             @Html.ActionLink("Ver", "Details", new { /* id=item.PrimaryKey */ })

@@ -17,7 +17,7 @@ namespace TP2.Negocio
             return db.T_GUQ_RESERVA_SALA_OPERACIÓN.ToList();
         }
 
-        public static List<string> ListarHorarios(string fecha, int inmueble)
+        public static List<string> ListarHorarios(string fecha, int inmueble, int tipo)
         {
             List<String> horario = new List<string>();
             TimeSpan result;
@@ -29,16 +29,21 @@ namespace TP2.Negocio
             try
             {
                 RicardoPalmaEntities db = new RicardoPalmaEntities();
-                T_GUQ_RESERVA_SALA_OPERACIÓN reserva = null;
-                var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(nuevaFecha) == 0 &&
-                 x.idInmueble == inmueble).ToList();
+                var tipoOperacion = db.T_GUQ_TIPO_OPERACIÓN.Find(tipo);
+                if (tipoOperacion == null)
+                    return horario;
+                List<T_GUQ_RESERVA_SALA_OPERACIÓN> reservas = new List<T_GUQ_RESERVA_SALA_OPERACIÓN>(); ;
+                DateTime fechaInicio;
+                DateTime fechaFin;
                 for (int i = 0; i < 24; i++)
                 {
-                    reserva = reservas.Where(x => x.horaInicio.Hours == i).FirstOrDefault();
+                    fechaInicio = nuevaFecha.AddHours(i);
+                    fechaInicio = fechaInicio.AddHours((Convert.ToInt32(tipoOperacion.duracion) - 1) * -1);
+                    fechaFin = nuevaFecha.AddHours(i);
+                    fechaFin = fechaFin.AddHours(Convert.ToInt32(tipoOperacion.duracion) - 1);
+                    reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.idInmueble == inmueble && x.fechaInicio >= fechaInicio && x.fechaInicio <= fechaFin).ToList();
 
-                    if (reserva != null)
-                        i += (reserva.duración - 1);
-                    else
+                    if (reservas == null || reservas.Count == 0)
                     {
                         result = TimeSpan.FromHours(i);
                         timeString = result.ToString("hh':'mm");
@@ -50,7 +55,7 @@ namespace TP2.Negocio
             {
                 log.Error("Error al consultar los horarios", ex);
             }
-            
+
             return horario;
         }
 
@@ -64,11 +69,18 @@ namespace TP2.Negocio
             {
                 RicardoPalmaEntities db = new RicardoPalmaEntities();
                 var tipo = db.T_GUQ_TIPO_OPERACIÓN.Find(tipoOperacion);
+                DateTime fechaInicio;
+                DateTime fechaFin;
+                fechaInicio = fecha.AddHours(hora);
+                fechaInicio = fechaInicio.AddHours((Convert.ToInt32(tipo.duracion) - 1) * -1);
+                fechaFin = nuevaFecha.AddHours(hora);
+                fechaFin = fechaFin.AddHours(Convert.ToInt32(tipo.duracion) - 1);
+
                 var listaEspecialidad = db.T_GDA_ESPECIALIDAD__MEDICA.Where(x => x.idOperacion == tipoOperacion).ToList();
                 var listaEmpleados = db.T_GG_EMPLEADO.ToList();
                 listaEmpleados = listaEmpleados.Where(x => listaEspecialidad.Any(y => y.idEspecialidad == x.idEspecialidad)).ToList();
 
-                var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fecha.CompareTo(fecha) == 0 && (x.horaInicio.Hours <= hora && (x.horaInicio.Hours + x.duración) > hora)).ToList();
+                var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fechaInicio >= fechaInicio && x.fechaInicio <= fechaFin).ToList();
 
                 lista = listaEmpleados.Where(x => !reservas.Any(y => y.idEmpleado == x.idEmpleado)).ToList();
             }
@@ -76,7 +88,7 @@ namespace TP2.Negocio
             {
                 log.Error("Error al consultar los médicos", ex);
             }
-            
+
             return lista;
         }
 

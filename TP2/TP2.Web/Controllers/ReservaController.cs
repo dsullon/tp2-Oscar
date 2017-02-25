@@ -37,9 +37,9 @@ namespace TP2.Web.Controllers
             return PartialView("_ReservaMedico", empleadoList);
         }
 
-        public ActionResult HorarioPartial(string fecha, int inmueble)
+        public ActionResult HorarioPartial(string fecha, int inmueble, int tipo)
         {
-            var salaList = TGUQReservaSalaOperacion.ListarHorarios(fecha, inmueble);
+            var salaList = TGUQReservaSalaOperacion.ListarHorarios(fecha, inmueble, tipo);
             return PartialView("_ReservaSala", salaList);
         }
 
@@ -61,8 +61,13 @@ namespace TP2.Web.Controllers
         }
 
         [HttpPost]
-        public string Create(T_GUQ_RESERVA_SALA_OPERACIÓN reserva)
+        public string Create(T_GUQ_RESERVA_SALA_OPERACIÓN reserva, string horaInicio)
         {
+            horaInicio = horaInicio.Substring(0, 2);
+            var nuevaHora = int.Parse(horaInicio);
+            reserva.fechaInicio = reserva.fechaInicio.AddHours(nuevaHora);
+            reserva.fechaFin = reserva.fechaInicio.AddHours(reserva.duración);
+            
             string mensaje = "Error al grabar los datos";
             bool exito = TGUQReservaSalaOperacion.Crear(reserva);
             if (exito)
