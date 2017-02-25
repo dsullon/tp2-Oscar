@@ -20,22 +20,31 @@ namespace TP2.Negocio
             return db.T_GUQ_PRESUPUESTO.ToList();
         }
 
-        public static bool Crear(T_GUQ_PRESUPUESTO presupuesto, int idPartida)
+        public static bool Crear(T_GUQ_PRESUPUESTO presupuesto, List<T_GUQ_PARTIDA> listaPartidas,double monto)
         {
             bool exito = false;
 
             try
             {
                 RicardoPalmaEntities db = new RicardoPalmaEntities();
-                double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, idPartida, presupuesto.idArea);
-                var partida = new T_GUQ_PARTIDA();
-                partida.idPartida = idPartida;
+               // double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, idPartida, presupuesto.idArea);
+                //var partida = new T_GUQ_PARTIDA();
+               // partida.idPartida = idPartida;
                 presupuesto.monto = monto;
                 presupuesto.estado = "Generado";
-                presupuesto.T_GUQ_PARTIDA.Add(partida);
+                for (int i = 0; i < listaPartidas.Count(); i++)
+                {
+                    presupuesto.T_GUQ_PARTIDA.Add(listaPartidas[i]);
+                }
+                   
                 db.Entry(presupuesto).State = EntityState.Added;
               //  db.T_GUQ_PRESUPUESTO.Add(presupuesto);
-                db.Entry(partida).State = EntityState.Unchanged;
+
+                for (int i = 0; i < listaPartidas.Count(); i++)
+                {
+                    db.Entry(listaPartidas[i]).State = EntityState.Unchanged;
+                }
+               
                 db.SaveChanges();
                 exito = true;
             }
