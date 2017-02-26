@@ -92,6 +92,36 @@ namespace TP2.Negocio
             return lista;
         }
 
+        public static List<T_GDA_PACIENTE> ListarPacientes(int tipoOperacion, DateTime fecha, int hora)
+        {
+            List<T_GDA_PACIENTE> lista = new List<T_GDA_PACIENTE>();
+            DateTime nuevaFecha = Convert.ToDateTime(fecha);
+            if (nuevaFecha.CompareTo(new DateTime(1900, 1, 1)) == 0)
+                return lista;
+            try
+            {
+                RicardoPalmaEntities db = new RicardoPalmaEntities();
+                var tipo = db.T_GUQ_TIPO_OPERACIÓN.Find(tipoOperacion);
+                DateTime fechaInicio;
+                DateTime fechaFin;
+                fechaInicio = fecha.AddHours(hora);
+                fechaInicio = fechaInicio.AddHours((Convert.ToInt32(tipo.duracion) - 1) * -1);
+                fechaFin = nuevaFecha.AddHours(hora);
+                fechaFin = fechaFin.AddHours(Convert.ToInt32(tipo.duracion) - 1);
+
+                var listaEmpleados = db.T_GDA_PACIENTE.ToList();
+                var reservas = db.T_GUQ_RESERVA_SALA_OPERACIÓN.Where(x => x.fechaInicio >= fechaInicio && x.fechaInicio <= fechaFin).ToList();
+
+                lista = listaEmpleados.Where(x => !reservas.Any(y => y.idPaciente == x.idPaciente)).ToList();
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error al consultar los pacientes", ex);
+            }
+
+            return lista;
+        }
+
         public static bool Crear(T_GUQ_RESERVA_SALA_OPERACIÓN reserva)
         {
             bool exito = false;

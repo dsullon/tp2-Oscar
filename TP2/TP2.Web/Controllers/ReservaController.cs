@@ -43,6 +43,16 @@ namespace TP2.Web.Controllers
             return PartialView("_ReservaSala", salaList);
         }
 
+        public ActionResult PacientePartial(int tipo, string fecha, string hora)
+        {
+            hora = hora.Substring(0, 2);
+            var nuevaHora = int.Parse(hora);
+            var nuevaFecha = DateTime.Parse(fecha);
+            var pacienteList = TGUQReservaSalaOperacion.ListarPacientes(tipo, nuevaFecha, nuevaHora);
+            ViewBag.PacienteList = pacienteList;
+            return PartialView("_Paciente", pacienteList);
+        }
+
         public ActionResult ObtenerSalas(int tipo)
         {
             var lista = TGGInmueble.ListarDisponibles(tipo).Select(p => new { Id = p.idInmueble, Nombre = p.dscTipoInmueble }).ToList();
@@ -52,7 +62,7 @@ namespace TP2.Web.Controllers
 
         public int ObtenerDuracion(int tipo)
         {
-            int duracion=0;
+            int duracion = 0;
             var tipoOperacion = TGUQTipoOperacion.Obtener(tipo);
             if (tipoOperacion != null && tipoOperacion.duracion.HasValue)
                 duracion = tipoOperacion.duracion.Value;
@@ -67,7 +77,7 @@ namespace TP2.Web.Controllers
             var nuevaHora = int.Parse(horaInicio);
             reserva.fechaInicio = reserva.fechaInicio.AddHours(nuevaHora);
             reserva.fechaFin = reserva.fechaInicio.AddHours(reserva.duración);
-            
+
             string mensaje = "Error al grabar los datos";
             bool exito = TGUQReservaSalaOperacion.Crear(reserva);
             if (exito)

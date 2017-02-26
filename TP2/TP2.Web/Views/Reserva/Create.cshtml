@@ -49,6 +49,19 @@
                 obtenerHorarios(fecha, sala, tipo);
             });
 
+            $('#jaButton').click(function () {
+                var tipo = $("#tipo").val();
+                var fecha = $('#fecha').val();
+                var hora = $('input[name="rbHorario"]:checked').val();
+                $.ajax({
+                    url: '@Url.Action("PacientePartial", "Reserva")',
+                    type: 'GET',
+                    data: { tipo: tipo, fecha: fecha, hora: hora }
+                }).success(function (data) {
+                    $(".modal-body").html(data);
+                });
+            });
+
             $("#btnAceptar").click(function () {
                 var idPaciente = $('input[name="rbPaciente"]:checked').val();
                 var nombre = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
@@ -72,7 +85,6 @@
                 var medico = $('input[name="rbMedico"]:checked').val();
                 var paciente = $('#hfIdPaciente').val();
                 var inmueble = $("#cboSala").val();
-                console.log(medico);
                 $.ajax({
                     url: "/Reserva/Create",
                     type: 'POST',
@@ -109,6 +121,14 @@
                 error: function (error) {
                     alert("Error: No se pudo obtener datos de los médicos.");
                 }
+            });
+
+            $.ajax({
+                url: '@Url.Action("PacientePartial", "Reserva")',
+                type: 'GET',
+                data: { tipo: tipo, fecha: fecha, hora: hora }
+            }).success(function (data) {
+                $(".modal-body").html(data);
             });
         }
 
@@ -150,7 +170,7 @@
             $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
             $("#medico").load('@Url.Action("MedicoPartial", "Reserva")' + '?tipo=0&fecha=01/01/1900&hora=00:00')
         }
-</script>
+    </script>
 }
 
 <h2>Nueva Reserva</h2>
@@ -224,7 +244,6 @@
         </div>
     </div>
 </div>
-
 <div id="modalbox" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -232,49 +251,11 @@
                 <h1>Paciente</h1>
             </div>
             <div class="modal-body">
-                <table class="table table-condensed table-striped table-bordered" id="tblPaciente">
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Direcci&oacute;n</td>
-                        <td></td>
-                    </tr>
-                    @foreach (var item in ViewBag.PacienteList)
-                    {
-                        <tr>
-                            <td>@item.nomPaciente</td>
-                            <td>@item.numDNI</td>
-                            <td>
-                                <input type="radio" value="@item.idPaciente" id="optPaciente" name="rbPaciente">
-                            </td>
-                        </tr>
-                    }
-                </table>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="btnAceptar" data-bind="click:save">Ok</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" id="btnAceptar" data-bind="click:save">Aceptar</button>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div id="modalEditarPartida" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
     </div>
 </div>

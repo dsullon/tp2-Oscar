@@ -290,6 +290,7 @@
     <Content Include="Views\Presupuesto\Index.cshtml" />
     <Content Include="Views\Presupuesto\Create.cshtml" />
     <Content Include="Views\Presupuesto\Edit.cshtml" />
+    <Content Include="Views\Shared\_Paciente.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
