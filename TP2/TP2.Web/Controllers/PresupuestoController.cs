@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TP2.Entidades.EF;
 using TP2.Negocio;
 
@@ -238,6 +241,48 @@ namespace TP2.Web.Controllers
             listaPartidas.RemoveAll(x => x.idPartida == idPartida);
             return Json(listaPartidas, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public ActionResult ExportToExcel(int id)
+        {
+            var presupuesto = TGUQPresupuesto.Obtener(id);
+            Partida partida;
+            listaPartidas.Clear();
+           
+
+            var dt = new System.Data.DataTable("presupuesto");
+            dt.Columns.Add("Año", typeof(int));
+            dt.Columns.Add("Area", typeof(string));
+            dt.Columns.Add("Partida", typeof(string));
+            dt.Columns.Add("Monto", typeof(string));
+
+            foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
+            {
+                var oPartida = TGUQPartida.Obtener(item.idPartida);
+                dt.Rows.Add(presupuesto.anio, presupuesto.T_GUQ_AREA.descripcion,oPartida.dscPartida,item.montoPartida);
+               
+            }
+
+            var grid = new GridView();
+            grid.DataSource = dt;
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=Presupuesto_"+presupuesto.anio+"_"+presupuesto.idArea+".xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return Json("Datos exportados correctamente", JsonRequestBehavior.AllowGet);
         }
 	}
 
