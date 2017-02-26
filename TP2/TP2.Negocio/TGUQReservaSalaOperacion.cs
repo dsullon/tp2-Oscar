@@ -135,7 +135,7 @@ namespace TP2.Negocio
             catch (Exception ex)
             {
                 exito = false;
-                log.Error("Error al crear la reserva", ex);
+                Bitacora.CrearLog("Error al crear la reserva", TipoLog.Error, ex);
             }
             return exito;
         }

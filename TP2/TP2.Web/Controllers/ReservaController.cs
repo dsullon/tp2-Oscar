@@ -49,7 +49,7 @@ namespace TP2.Web.Controllers
             var nuevaHora = int.Parse(hora);
             var nuevaFecha = DateTime.Parse(fecha);
             var pacienteList = TGUQReservaSalaOperacion.ListarPacientes(tipo, nuevaFecha, nuevaHora);
-            ViewBag.PacienteList = pacienteList;
+
             return PartialView("_Paciente", pacienteList);
         }
 
