@@ -52,18 +52,11 @@ namespace TP2.Negocio
                 exito = true;
             }
            
-            catch (DbEntityValidationException dbEx)
+            catch (Exception ex)
             {
                 exito = false;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation("Property: {0} Error: {1}",
-                                                validationError.PropertyName,
-                                                validationError.ErrorMessage);
-                    }
-                }
+                Bitacora.CrearLog("Error al crear el presupuesto", TipoLog.Error, ex);
+               
             }
             return exito;
         }
@@ -125,6 +118,7 @@ namespace TP2.Negocio
             catch (Exception ex)
             {
                 exito = false;
+                Bitacora.CrearLog("Error al editar el presupuesto", TipoLog.Error, ex);
             }
             return exito;
         }

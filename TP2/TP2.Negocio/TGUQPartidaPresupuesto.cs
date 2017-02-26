@@ -24,6 +24,7 @@ namespace TP2.Negocio
             catch (Exception ex)
             {
                 exito = false;
+                Bitacora.CrearLog("Error al crear el presupuesto", TipoLog.Error, ex);
             }
             return exito;
         }
