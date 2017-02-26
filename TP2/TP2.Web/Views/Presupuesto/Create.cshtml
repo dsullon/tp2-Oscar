@@ -55,11 +55,12 @@
             var anio = $("#anio").val();
             var partida = $('#partida').val();
             var idArea = $('#idArea').val();
+            var monto = $('#monto').val();
             $.ajax({
                 url: "/Presupuesto/AgregarPartida",
                 type: 'POST',
                 data: {
-                    anio: anio, partida: partida, idArea: idArea
+                    anio: anio, partida: partida, idArea: idArea, monto:monto
                 },
                 success: function (data) {
                     
@@ -67,16 +68,21 @@
                         alert("Usted ya agrego esa  partida");
                     } else {
                         EliminarFilas();
+                        var montoTotal = 0.0;
                         for (var i = 0; i < data.length; i++) {
                             var tds = tds += '<tr class = "filas">';
                             tds += '<td>' + data[i].idPartida + '</td>';
                             tds += '<td>' + data[i].descripcion + '</td>';
                             tds += '<td>' + data[i].monto + '</td>';
-                            tds += '<td><button   class = "EditarPartida" > Editar </button> </td>';
-                            tds += '<td><button  class = "EliminarPartida" > Eliminar </button> </td>';
+                            tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                            tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
                             tds += '</tr>';
 
+                            montoTotal = montoTotal + data[i].monto;
+
                         }
+                        $("#txtMontoTotal").empty(montoTotal);
+                        $("#txtMontoTotal").text(montoTotal);
                         $("#tblPartida").append(tds);
 
                         $(".EditarPartida").off("click");
@@ -135,16 +141,21 @@
                 },
                 success: function (data) {
                     EliminarFilas();
+                    var montoTotal = 0.0;
                     for (var i = 0; i < data.length; i++) {
                         var tds = tds += '<tr class = "filas">';
                         tds += '<td>' + data[i].idPartida + '</td>';
                         tds += '<td>' + data[i].descripcion + '</td>';
                         tds += '<td>' + data[i].monto + '</td>';
-                        tds += '<td><button   class = "EditarPartida" > Editar </button> </td>';
-                        tds += '<td><button  class = "EliminarPartida" > Eliminar </button> </td>';
+                        tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                        tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
                         tds += '</tr>';
+                        montoTotal = montoTotal + data[i].monto;
 
                     }
+
+                    $("#txtMontoTotal").empty(montoTotal);
+                    $("#txtMontoTotal").text(montoTotal);
                     $("#tblPartida").append(tds);
 
                     $(".EditarPartida").off("click");
@@ -167,7 +178,30 @@
             });
         });
         
-   
+       
+        $('.input_numerico').keypress(function (tecla) {
+
+            if ((tecla.charCode < 48 || tecla.charCode > 57) && (tecla.charCode != 46) && (tecla.charCode != 8)) {
+                return false;
+            } else {
+                var len = $('.input_numerico').val().length;
+                var index = $('.input_numerico').val().indexOf('.');
+
+                if (index > 0 && tecla.charCode == 46) {
+                    return false;
+                }
+
+                if (index > 0) {
+                    var CharAfterdot = (len + 1) - index;
+                    if (CharAfterdot > 3) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        });
+       
 
     });
 
@@ -200,7 +234,7 @@
     }
 
     function EliminarPartidas(id) {
-        if (confirm("¿Esta seguro de eliminar el registro?")) {
+        
             $.ajax({
                 url: "/Presupuesto/EliminarPartida",
                 type: 'POST',
@@ -210,16 +244,20 @@
                 success: function (data) {
 
                     EliminarFilas();
+                    var montoTotal = 0.0;
                     for (var i = 0; i < data.length; i++) {
                         var tds = tds += '<tr class = "filas">';
                         tds += '<td>' + data[i].idPartida + '</td>';
                         tds += '<td>' + data[i].descripcion + '</td>';
                         tds += '<td>' + data[i].monto + '</td>';
-                        tds += '<td><button   class = "EditarPartida" > Editar </button> </td>';
-                        tds += '<td><button  class = "EliminarPartida" > Eliminar </button> </td>';
+                        tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                        tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
                         tds += '</tr>';
+                        montoTotal = montoTotal + data[i].monto;
 
                     }
+                    $("#txtMontoTotal").empty(montoTotal);
+                    $("#txtMontoTotal").text(montoTotal);
                     $("#tblPartida").append(tds);
 
                     $(".EditarPartida").off("click");
@@ -234,12 +272,14 @@
                         EliminarPartidas(id);
                     });
 
+                    alert("La partida se elimino");
+
                 },
                 error: function (error) {
                     alert("Error: Intente de nuevo.");
                 }
             });
-        }
+        
       
     }
 
@@ -266,15 +306,23 @@
                 <label class="mr-sm-2" for="fecha">Fecha:</label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
-                    @Html.TextBox("anio", null, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label class="mr-sm-2" for="TipoOperacionList">Partida:</label>
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
-                    @Html.DropDownList("partida", new SelectList(ViewBag.PartidaList, "idPartida", "dscPartida"), "--Seleccione una partida--", new { @class = "form-control" })
+                    <select id="anio" name="anio" class="form-control" >
+                        <option value="0" >--Seleccione un año--</option>
+                        <option value="2017" >2017</option>
+                        <option value="2018" >2018</option>
+                        <option value="2019" >2019</option>
+                        <option value="2020" >2020</option>
+                        <option value="2021" >2021</option>
+                        <option value="2022" >2022</option>
+                        <option value="2023" >2023</option>
+                        <option value="2024"  >2024</option>
+                        <option value="2025" >2025</option>
+                        <option value="2026" >2026</option>
+                        <option value="2027" >2027</option>
+                        <option value="2028" >2028</option>
+                        <option value="2029" >2029</option>
+                        <option value="2030" >2030</option>
+                    </select>
                 </div>
             </div>
 
@@ -287,16 +335,24 @@
             </div>
 
             <div class="col-sm-6">
+                <label class="mr-sm-2" for="TipoOperacionList">Partida:</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                    @Html.DropDownList("partida", new SelectList(ViewBag.PartidaList, "idPartida", "dscPartida"), "--Seleccione una partida--", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-sm-6">
                 <label class="mr-sm-2" for="fecha">Monto:</label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
-                    @Html.TextBox("monto", null, new { @class = "form-control", @readonly = "true" })
+                    @Html.TextBox("monto", null, new { @class = "form-control input_numerico"})
                 </div>
             </div>
 
         </div>
         <br />
-        <br />
+   
 
         <div class="row" style="margin-top:10px;">
             <div class="col-sm-6">
@@ -304,22 +360,16 @@
                     <input type="button" value="Agregar Partida" class="btn btn-default" id="btnAgregarPartida" />
                 </div>
             </div>
-
-            <div class="row" style="margin-top:10px;">
-                <div class="col-sm-6">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <input type="button" value="Grabar" class="btn btn-default" id="btnCrear" />
-                    </div>
-                </div>
-            </div>
         </div>
-
-        
     </div>
+
+<br />
+
+
 
 <div class="row" id="Partidas">
     <div class="col-md-12">
-        <table class="table table-bordered" id="tblPartida">
+        <table class="table table-striped small" id="tblPartida">
             <thead>
                 <tr>
                     <th>Codigo</th>
@@ -332,6 +382,17 @@
             <tbody></tbody>
             
         </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>Monto Total : <span id="txtMontoTotal">0.0</span></h4>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <input type="button" value="Generar Presupuesto" class="btn btn-success" id="btnCrear" />
+        </div>
     </div>
 </div>
 
@@ -356,22 +417,22 @@
                 <form>
                     <div class="form-group">
                         <label for="id">Id:</label>
-                        <input type="text" class="form-control" id="id">
+                        <input type="text" class="form-control" id="id" readonly  >
                     </div>
                     <div class="form-group">
                         <label for="pwd">Descripción:</label>
-                        <input type="text" class="form-control" id="desc">
+                        <input type="text" class="form-control" id="desc" readonly >
                     </div>
                     <div class="form-group">
                         <label for="pwd">Monto:</label>
-                        <input type="text" class="form-control" id="mont">
+                        <input type="number" step="0.01" class="form-control" id="mont">
                     </div>
                     
                     <button type="button" class="btn btn-default" id="btnActualizar">Actualizar</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
             </div>
         </div>
 

@@ -30,6 +30,7 @@ namespace TP2.Web.Controllers
 
         public ActionResult Create()
         {
+            listaPartidas.Clear();
             var partidaList = TGUQPartida.ListarTodos();
             ViewBag.PartidaList = partidaList;
 
@@ -43,6 +44,29 @@ namespace TP2.Web.Controllers
         public string Create(T_GUQ_PRESUPUESTO presupuesto)
         {
             string mensaje = "Error al grabar los datos";
+
+            if (DateTime.Now.Year != presupuesto.anio)
+            {
+                mensaje = "Error : No puede grabar presupuesto en ese año: " + presupuesto.anio;
+                return mensaje;
+            }
+
+            if (listaPartidas.Count() == 0)
+            {
+                mensaje = "Error : No puede grabar presupuesto sin partida";
+                return mensaje;
+            }
+
+          
+            foreach (var item in TGUQPresupuesto.ListarTodos())
+            {
+                if(item.anio == presupuesto.anio && item.idArea == presupuesto.idArea){
+                    mensaje = "Error : Ya existe presupuesto para este año y esa área";
+                    return mensaje;
+                }
+            }
+
+            
             List<T_GUQ_PARTIDA> lisPartidas = new List<T_GUQ_PARTIDA>();
             T_GUQ_PARTIDA oPartida ;
             List<double> listaMontos = new List<double>();
@@ -83,6 +107,13 @@ namespace TP2.Web.Controllers
         public string Edit(T_GUQ_PRESUPUESTO presupuesto)
         {
             string mensaje = "Error al grabar los datos";
+
+            if (listaPartidas.Count() == 0)
+            {
+                mensaje = "Error : No puede grabar presupuesto sin partida";
+                return mensaje;
+            }
+
             T_GUQ_PRESUPUESTO oPresupuesto = TGUQPresupuesto.Obtener(presupuesto.idPresupuesto);
             List<T_GUQ_PARTIDA> lisPartidas = new List<T_GUQ_PARTIDA>();
             T_GUQ_PARTIDA oPartida;
@@ -114,6 +145,11 @@ namespace TP2.Web.Controllers
             listaPartidas.Clear();
             var presupuesto = TGUQPresupuesto.Obtener(IdPresupuesto);
 
+            if (presupuesto.anio != DateTime.Now.Year)
+            {
+                return Json("1", JsonRequestBehavior.AllowGet);
+            }
+
             if (presupuesto.estado == "Generado")
             {
                 Partida partida;
@@ -132,7 +168,7 @@ namespace TP2.Web.Controllers
             }
             else
             {
-                return Json("Error", JsonRequestBehavior.AllowGet);
+                return Json("2", JsonRequestBehavior.AllowGet);
             }
           
         }
@@ -150,10 +186,10 @@ namespace TP2.Web.Controllers
                 }
             }
 
-            double monto = TGUQEstadisticaRecursos.ObtenerPromedio(presupuesto.anio, partida, presupuesto.idArea);
+            double monto = presupuesto.monto;
             var Partida = TGUQPartida.Obtener(partida);
             Partida oPartida = new Partida();
-            oPartida.monto = monto;
+            oPartida.monto = Math.Round(monto,2);
             oPartida.idPartida = partida;
             oPartida.descripcion = Partida.dscPartida;
             listaPartidas.Add(oPartida);

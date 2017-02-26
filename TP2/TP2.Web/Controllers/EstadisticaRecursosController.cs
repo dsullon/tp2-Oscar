@@ -12,9 +12,9 @@ namespace TP2.Web.Controllers
         //
         // GET: /EstadisticaRecursos/
         [HttpPost]
-        public string Index(int anio, int partida,int idArea)
+        public string Index(string anio, int partida,int idArea)
         {
-            double valor = TGUQEstadisticaRecursos.ObtenerPromedio(anio, partida, idArea);
+            double valor = TGUQEstadisticaRecursos.ObtenerPromedio(int.Parse(anio), partida, idArea);
             return string.Format("{0:0.00}", valor);
         }
 	}

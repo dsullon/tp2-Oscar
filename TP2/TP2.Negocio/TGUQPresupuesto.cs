@@ -87,6 +87,7 @@ namespace TP2.Negocio
               );
 
                 presupuesto.estado = "Generado";
+                presupuesto.monto = 0;
                 for (int i = 0; i < listaPartidas.Count(); i++)
                 {
                     PresupuestoPartida = new T_GUQ_PRESUPUESTO_PARTIDA();
@@ -108,13 +109,11 @@ namespace TP2.Negocio
             }
 
                 db.Database.ExecuteSqlCommand(
-                "UPDATE   T_GUQ_PRESUPUESTO SET idArea = @p1, monto = @p2 , monto = @p3 WHERE idPresupuesto = @p4",
+                "UPDATE   T_GUQ_PRESUPUESTO SET monto = @p1  WHERE idPresupuesto = @p2",
                 new SqlParameter[]
                        {
-                           new SqlParameter ("P1",presupuesto.idArea),
-                            new SqlParameter ("P2",presupuesto.monto),
-                             new SqlParameter ("P3",presupuesto.monto),
-                              new SqlParameter ("P4",presupuesto.idPresupuesto)
+                           new SqlParameter ("P1",presupuesto.monto),
+                              new SqlParameter ("P2",presupuesto.idPresupuesto)
                           
                        }
           );
