@@ -278,6 +278,7 @@ namespace TP2.Web.Controllers
                 sheet.Cells[3, col++].Value = "Monto";
                 rowindex = 4;
 
+                var montoTotal = 0.0;
                 //Recorro los recibos y los ponemos en el Excel
                 foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
                 {
@@ -287,16 +288,23 @@ namespace TP2.Web.Controllers
                     sheet.Cells[rowindex, col++].Value = item.T_GUQ_PRESUPUESTO.T_GUQ_AREA.descripcion;
                     sheet.Cells[rowindex, col++].Value = item.T_GUQ_PARTIDA.dscPartida;
                     sheet.Cells[rowindex, col++].Value = item.montoPartida;
+                    montoTotal = montoTotal + item.montoPartida;
                     rowindex++;
                 }
 
+
+                col = 1;
+                sheet.Cells[rowindex, col++].Value = "";
+                sheet.Cells[rowindex, col++].Value = "";
+                sheet.Cells[rowindex, col++].Value = "Monto Total: ";
+                sheet.Cells[rowindex, col++].Value = montoTotal;
                 // Ancho de celdas
                 sheet.Cells.AutoFitColumns();
 
                 //Establezco diseño al excel utilizando un diseño predefinido
                var range = sheet.Cells[3, 1, rowindex, 4];
                var table = sheet.Tables.Add(range, "tabla");
-               table.TableStyle = TableStyles.Dark9;
+               table.TableStyle = TableStyles.Light10;
  
                 //Ya lo tengo ahora lo devuelvo utilizo el Response porque es Web, sino puedes guardarlo directamente
                 Response.ClearContent();
@@ -345,86 +353,6 @@ namespace TP2.Web.Controllers
             return Json("Datos exportados correctamente", JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult ExportPDF(int id)
-        //{
-        //    // Creamos el documento con el tamaño de página tradicional
-        //    Document doc = new Document(PageSize.LETTER);
-        //    // Indicamos donde vamos a guardar el documento
-        //     MemoryStream memStream = new MemoryStream();
-        //    PdfWriter writer = PdfWriter.GetInstance(doc, memStream);
-        //    writer.CloseStream = false;
-         
-
-        //    // Le colocamos el título y el autor
-        //    // **Nota: Esto no será visible en el documento
-        //    doc.AddTitle("Mi primer PDF");
-        //    doc.AddCreator("Roberto Torres");
-
-        //    // Abrimos el archivo
-        //    doc.Open();
-
-        //    // Creamos el tipo de Font que vamos utilizar
-        //    iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-
-        //    // Escribimos el encabezamiento en el documento
-        //    doc.Add(new Paragraph("Mi primer documento PDF"));
-        //    doc.Add(Chunk.NEWLINE);
-
-        //    // Creamos una tabla que contendrá el nombre, apellido y país
-        //    // de nuestros visitante.
-        //    PdfPTable tblPrueba = new PdfPTable(3);
-        //    tblPrueba.WidthPercentage = 100;
-
-        //    // Configuramos el título de las columnas de la tabla
-        //    PdfPCell clNombre = new PdfPCell(new Phrase("Nombre", _standardFont));
-        //    clNombre.BorderWidth = 0;
-        //    clNombre.BorderWidthBottom = 0.75f;
-
-        //    PdfPCell clApellido = new PdfPCell(new Phrase("Apellido", _standardFont));
-        //    clApellido.BorderWidth = 0;
-        //    clApellido.BorderWidthBottom = 0.75f;
-
-        //    PdfPCell clPais = new PdfPCell(new Phrase("País", _standardFont));
-        //    clPais.BorderWidth = 0;
-        //    clPais.BorderWidthBottom = 0.75f;
-
-        //    // Añadimos las celdas a la tabla
-        //    tblPrueba.AddCell(clNombre);
-        //    tblPrueba.AddCell(clApellido);
-        //    tblPrueba.AddCell(clPais);
-
-        //    // Llenamos la tabla con información
-        //    clNombre = new PdfPCell(new Phrase("Roberto", _standardFont));
-        //    clNombre.BorderWidth = 0;
-
-        //    clApellido = new PdfPCell(new Phrase("Torres", _standardFont));
-        //    clApellido.BorderWidth = 0;
-
-        //    clPais = new PdfPCell(new Phrase("Puerto Rico", _standardFont));
-        //    clPais.BorderWidth = 0;
-
-        //    // Añadimos las celdas a la tabla
-        //    tblPrueba.AddCell(clNombre);
-        //    tblPrueba.AddCell(clApellido);
-        //    tblPrueba.AddCell(clPais);
-
-        //    doc.Add(tblPrueba);
-
-        //    doc.Close();
-        //    writer.Close();
-
-         
-        //    byte[] buf = new byte[memStream.Position];
-        //    memStream.Position = 0;
-        //    memStream.Read(buf, 0, buf.Length);
-
-        //    // Send the binary data to the browser.
-        //    return new BinaryContentResult(buf, "application/pdf");
-            
-
-
-        //}
-
         public ActionResult ExportPDF(int id)
         {
             var presupuesto = TGUQPresupuesto.Obtener(id);
@@ -445,8 +373,7 @@ namespace TP2.Web.Controllers
                         doc.Add(new Paragraph("PRESUPUESTO : " + presupuesto.anio +" AREA: "+ presupuesto.T_GUQ_AREA.descripcion));
                         doc.Add(Chunk.NEWLINE);
 
-                        // Creamos una tabla que contendrá el nombre, apellido y país
-                        // de nuestros visitante.
+                        // Creamos una tabla que contendrá las partidas
                         PdfPTable tblPrueba = new PdfPTable(4);
                         tblPrueba.WidthPercentage = 100;
 
