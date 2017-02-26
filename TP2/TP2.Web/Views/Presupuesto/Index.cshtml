@@ -28,6 +28,7 @@
         </th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -50,6 +51,9 @@
         </td>
         <td>
             @Html.ActionLink("Excel", "ExportToExcel", new { id = item.idPresupuesto })
+        </td>
+        <td>
+            @Html.ActionLink("PDF", "ExportPDF", new { id = item.idPresupuesto })
         </td>
     </tr>
 }

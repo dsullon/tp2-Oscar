@@ -26,7 +26,7 @@ namespace TP2.Negocio
                 {
                     monto = monto + listaMontos[i];
                 }
-                promedio = monto / listaMontos.Count;
+                promedio = monto / 3;
             }
 
            

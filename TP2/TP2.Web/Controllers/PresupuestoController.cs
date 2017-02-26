@@ -1,4 +1,9 @@
-﻿using System;
+﻿
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using OfficeOpenXml;
+using OfficeOpenXml.Table;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -246,45 +251,290 @@ namespace TP2.Web.Controllers
         public ActionResult ExportToExcel(int id)
         {
             var presupuesto = TGUQPresupuesto.Obtener(id);
-            Partida partida;
-            listaPartidas.Clear();
            
+           
+            using(var excelPackage = new ExcelPackage()){
+                 //Propiedades del archivo
+                 excelPackage.Workbook.Properties.Author = "Yovanny Zeballos ";
+                 excelPackage.Workbook.Properties.Title = " Exportación de Presupuestos";
 
-            var dt = new System.Data.DataTable("presupuesto");
-            dt.Columns.Add("Año", typeof(int));
-            dt.Columns.Add("Area", typeof(string));
-            dt.Columns.Add("Partida", typeof(string));
-            dt.Columns.Add("Monto", typeof(string));
+                 //Propiedades Hoja de excel
+                 var sheet = excelPackage.Workbook.Worksheets.Add("Presupuestos");
+                 sheet.Name = "Presupuestos";
 
-            foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
-            {
-                var oPartida = TGUQPartida.Obtener(item.idPartida);
-                dt.Rows.Add(presupuesto.anio, presupuesto.T_GUQ_AREA.descripcion,oPartida.dscPartida,item.montoPartida);
-               
+                //Empezamos a escribir sobre ella.
+                var rowindex=1 ;
+
+                //Hago un Merge de primeras 4 columnas para poner el titulo.
+               sheet.Cells[1, 1].Value = "PRESUPUESTO : " + presupuesto.anio +" AREA: "+ presupuesto.T_GUQ_AREA.descripcion;
+               sheet.Cells[1, 1, 1, 4].Merge = true;
+
+
+                //Pongo los encabezados del excel
+                var col = 1;
+                sheet.Cells[3, col++].Value = "Año";
+                sheet.Cells[3,col++].Value= "Area";
+                sheet.Cells[3, col++].Value = "Partida";
+                sheet.Cells[3, col++].Value = "Monto";
+                rowindex = 4;
+
+                //Recorro los recibos y los ponemos en el Excel
+                foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
+                {
+                    var oPartida = TGUQPartida.Obtener(item.idPartida);
+                    col = 1;
+                    sheet.Cells[rowindex, col++].Value = item.T_GUQ_PRESUPUESTO.anio;
+                    sheet.Cells[rowindex, col++].Value = item.T_GUQ_PRESUPUESTO.T_GUQ_AREA.descripcion;
+                    sheet.Cells[rowindex, col++].Value = item.T_GUQ_PARTIDA.dscPartida;
+                    sheet.Cells[rowindex, col++].Value = item.montoPartida;
+                    rowindex++;
+                }
+
+                // Ancho de celdas
+                sheet.Cells.AutoFitColumns();
+
+                //Establezco diseño al excel utilizando un diseño predefinido
+               var range = sheet.Cells[3, 1, rowindex, 4];
+               var table = sheet.Tables.Add(range, "tabla");
+               table.TableStyle = TableStyles.Dark9;
+ 
+                //Ya lo tengo ahora lo devuelvo utilizo el Response porque es Web, sino puedes guardarlo directamente
+                Response.ClearContent();
+                Response.BinaryWrite(excelPackage.GetAsByteArray());
+                Response.AddHeader("content-disposition", "attachment;filename=Presupuesto_"+presupuesto.anio+"_"+presupuesto.idArea+".xlsx");
+                Response.ContentType = "application/excel";
+                Response.Flush();
+                Response.End();
             }
 
-            var grid = new GridView();
-            grid.DataSource = dt;
-            grid.DataBind();
+            //var dt = new System.Data.DataTable("presupuesto");
+            //dt.Columns.Add("Año", typeof(int));
+            //dt.Columns.Add("Area", typeof(string));
+            //dt.Columns.Add("Partida", typeof(string));
+            //dt.Columns.Add("Monto", typeof(string));
 
-            Response.ClearContent();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment; filename=Presupuesto_"+presupuesto.anio+"_"+presupuesto.idArea+".xls");
-            Response.ContentType = "application/ms-excel";
+ 
+            //foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
+            //{
+            //    var oPartida = TGUQPartida.Obtener(item.idPartida);
+            //    dt.Rows.Add(presupuesto.anio, presupuesto.T_GUQ_AREA.descripcion,oPartida.dscPartida,item.montoPartida);
+               
+            //}
 
-            Response.Charset = "";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
 
-            grid.RenderControl(htw);
 
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
+            //var grid = new GridView();
+            //grid.DataSource = dt;
+            //grid.DataBind();
+
+            //Response.ClearContent();
+            //Response.Buffer = true;
+            //Response.AddHeader("content-disposition", "attachment; filename=Presupuesto_"+presupuesto.anio+"_"+presupuesto.idArea+".xls");
+            //Response.ContentType = "application/ms-excel";
+
+            //Response.Charset = "";
+            //StringWriter sw = new StringWriter();
+            //HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            //grid.RenderControl(htw);
+
+            //Response.Output.Write(sw.ToString());
+            //Response.Flush();
+            //Response.End();
 
             return Json("Datos exportados correctamente", JsonRequestBehavior.AllowGet);
         }
-	}
 
+        //public ActionResult ExportPDF(int id)
+        //{
+        //    // Creamos el documento con el tamaño de página tradicional
+        //    Document doc = new Document(PageSize.LETTER);
+        //    // Indicamos donde vamos a guardar el documento
+        //     MemoryStream memStream = new MemoryStream();
+        //    PdfWriter writer = PdfWriter.GetInstance(doc, memStream);
+        //    writer.CloseStream = false;
+         
+
+        //    // Le colocamos el título y el autor
+        //    // **Nota: Esto no será visible en el documento
+        //    doc.AddTitle("Mi primer PDF");
+        //    doc.AddCreator("Roberto Torres");
+
+        //    // Abrimos el archivo
+        //    doc.Open();
+
+        //    // Creamos el tipo de Font que vamos utilizar
+        //    iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+        //    // Escribimos el encabezamiento en el documento
+        //    doc.Add(new Paragraph("Mi primer documento PDF"));
+        //    doc.Add(Chunk.NEWLINE);
+
+        //    // Creamos una tabla que contendrá el nombre, apellido y país
+        //    // de nuestros visitante.
+        //    PdfPTable tblPrueba = new PdfPTable(3);
+        //    tblPrueba.WidthPercentage = 100;
+
+        //    // Configuramos el título de las columnas de la tabla
+        //    PdfPCell clNombre = new PdfPCell(new Phrase("Nombre", _standardFont));
+        //    clNombre.BorderWidth = 0;
+        //    clNombre.BorderWidthBottom = 0.75f;
+
+        //    PdfPCell clApellido = new PdfPCell(new Phrase("Apellido", _standardFont));
+        //    clApellido.BorderWidth = 0;
+        //    clApellido.BorderWidthBottom = 0.75f;
+
+        //    PdfPCell clPais = new PdfPCell(new Phrase("País", _standardFont));
+        //    clPais.BorderWidth = 0;
+        //    clPais.BorderWidthBottom = 0.75f;
+
+        //    // Añadimos las celdas a la tabla
+        //    tblPrueba.AddCell(clNombre);
+        //    tblPrueba.AddCell(clApellido);
+        //    tblPrueba.AddCell(clPais);
+
+        //    // Llenamos la tabla con información
+        //    clNombre = new PdfPCell(new Phrase("Roberto", _standardFont));
+        //    clNombre.BorderWidth = 0;
+
+        //    clApellido = new PdfPCell(new Phrase("Torres", _standardFont));
+        //    clApellido.BorderWidth = 0;
+
+        //    clPais = new PdfPCell(new Phrase("Puerto Rico", _standardFont));
+        //    clPais.BorderWidth = 0;
+
+        //    // Añadimos las celdas a la tabla
+        //    tblPrueba.AddCell(clNombre);
+        //    tblPrueba.AddCell(clApellido);
+        //    tblPrueba.AddCell(clPais);
+
+        //    doc.Add(tblPrueba);
+
+        //    doc.Close();
+        //    writer.Close();
+
+         
+        //    byte[] buf = new byte[memStream.Position];
+        //    memStream.Position = 0;
+        //    memStream.Read(buf, 0, buf.Length);
+
+        //    // Send the binary data to the browser.
+        //    return new BinaryContentResult(buf, "application/pdf");
+            
+
+
+        //}
+
+        public ActionResult ExportPDF(int id)
+        {
+            var presupuesto = TGUQPresupuesto.Obtener(id);
+           
+            Byte[] bytes;
+            using (var ms = new MemoryStream())
+            {
+                using (var doc = new Document())
+                {
+                   
+                     var writer = PdfWriter.GetInstance(doc, ms);
+                    
+                        doc.Open();
+                        // Creamos el tipo de Font que vamos utilizar
+                        iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+                        // Escribimos el encabezamiento en el documento
+                        doc.Add(new Paragraph("PRESUPUESTO : " + presupuesto.anio +" AREA: "+ presupuesto.T_GUQ_AREA.descripcion));
+                        doc.Add(Chunk.NEWLINE);
+
+                        // Creamos una tabla que contendrá el nombre, apellido y país
+                        // de nuestros visitante.
+                        PdfPTable tblPrueba = new PdfPTable(4);
+                        tblPrueba.WidthPercentage = 100;
+
+                        // Configuramos el título de las columnas de la tabla
+                        PdfPCell clAnio = new PdfPCell(new Phrase("Año", _standardFont));
+                        clAnio.BorderWidth = 0;
+                        clAnio.BorderWidthBottom = 0.30f;
+
+                        PdfPCell clArea = new PdfPCell(new Phrase("Area", _standardFont));
+                        clArea.BorderWidth = 0;
+                        clArea.BorderWidthBottom = 0.30f;
+
+                        PdfPCell clPartida = new PdfPCell(new Phrase("Partida", _standardFont));
+                        clPartida.BorderWidth = 0;
+                        clPartida.BorderWidthBottom = 0.30f;
+
+                        PdfPCell clMonto = new PdfPCell(new Phrase("Monto", _standardFont));
+                        clMonto.BorderWidth = 0;
+                        clMonto.BorderWidthBottom = 0.30f;
+
+                        // Añadimos las celdas a la tabla
+                        tblPrueba.AddCell(clAnio);
+                        tblPrueba.AddCell(clArea);
+                        tblPrueba.AddCell(clPartida);
+                        tblPrueba.AddCell(clMonto);
+
+                    var montoTotal = 0.0;
+                        foreach (var item in presupuesto.T_GUQ_PRESUPUESTO_PARTIDA)
+                        {
+                            var oPartida = TGUQPartida.Obtener(item.idPartida);
+
+                            clAnio = new PdfPCell(new Phrase(item.T_GUQ_PRESUPUESTO.anio.ToString(), _standardFont));
+                            clAnio.BorderWidth = 0;
+
+                            clArea = new PdfPCell(new Phrase(item.T_GUQ_PRESUPUESTO.T_GUQ_AREA.descripcion, _standardFont));
+                            clArea.BorderWidth = 0;
+
+                            clPartida = new PdfPCell(new Phrase(item.T_GUQ_PARTIDA.dscPartida, _standardFont));
+                            clPartida.BorderWidth = 0;
+
+                            clMonto = new PdfPCell(new Phrase(item.montoPartida.ToString(), _standardFont));
+                            clMonto.BorderWidth = 0;
+
+                            montoTotal = montoTotal + item.montoPartida;
+
+                            // Añadimos las celdas a la tabla
+                            tblPrueba.AddCell(clAnio);
+                            tblPrueba.AddCell(clArea);
+                            tblPrueba.AddCell(clPartida);
+                            tblPrueba.AddCell(clMonto);
+
+                        }
+                        doc.Add(Chunk.NEWLINE);
+
+                        clAnio = new PdfPCell(new Phrase("", _standardFont));
+                        clAnio.BorderWidth = 0;
+
+                        clArea = new PdfPCell(new Phrase("", _standardFont));
+                        clArea.BorderWidth = 0;
+
+                        clPartida = new PdfPCell(new Phrase("MontoTotal:", _standardFont));
+                        clPartida.BorderWidth = 0;
+
+                        clMonto = new PdfPCell(new Phrase(montoTotal.ToString(), _standardFont));
+                        clMonto.BorderWidth = 0;
+
+                        // Añadimos las celdas a la tabla
+                        tblPrueba.AddCell(clAnio);
+                        tblPrueba.AddCell(clArea);
+                        tblPrueba.AddCell(clPartida);
+                        tblPrueba.AddCell(clMonto);
+                        doc.Add(tblPrueba);
+                       
+                    
+                }
+                bytes = ms.ToArray();
+
+                Response.ClearContent();
+                Response.BinaryWrite(bytes);
+                Response.AddHeader("content-disposition", "attachment;filename=Presupuesto_" + presupuesto.anio + "_" + presupuesto.idArea + ".pdf");
+                Response.ContentType = "application/pdf";
+                Response.Flush();
+                Response.End();
+            }
+
+            return Json("Datos exportados correctamente", JsonRequestBehavior.AllowGet);
+        }
+
+	}
 
 }
